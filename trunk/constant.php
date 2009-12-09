@@ -59,7 +59,9 @@
 	
 	define('PLURK_GET_CLIQUES','http://www.plurk.com/API/Cliques/get_cliques');
 	define('PLURK_GET_CLIQUE','http://www.plurk.com/API/Cliques/get_clique');
-	define('PLURK_CREATE_CLIQUES','http://www.plurk.com/API/Cliques/create_clique');
-	define('PLURK_RENAME_CLIQUE', 'http://www.plurk.com/API/Cliques/rename_clique'); 	
+	define('PLURK_CREATE_CLIQUE','http://www.plurk.com/API/Cliques/create_clique');
+  define('PLURK_RENAME_CLIQUE', 'http://www.plurk.com/API/Cliques/rename_clique'); 	
+	define('PLURK_DELETE_CLIQUE', 'http://www.plurk.com/API/Cliques/delete_clique'); 	
+
 	
 ?>
