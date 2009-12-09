@@ -698,8 +698,9 @@ Class plurk_api Extends common_dbi {
 		);
 
 		$result =  $this->plurk(PLURK_CREATE_CLIQUE, $array);
-		if($result->success_text == "ok") return true;
-		return false;
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
+
 	}
 
 	/**
@@ -720,9 +721,10 @@ Class plurk_api Extends common_dbi {
 		);
 
 		$result = $this->plurk(PLURK_DELETE_CLIQUE, $array);
-		if($result->success_text == "ok") return true;
-		return false;
-  }
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
+
+	}
 
 	/**
 	 * function rename_clique()
@@ -743,8 +745,8 @@ Class plurk_api Extends common_dbi {
 		);
 
 		$result = $this->plurk(PLURK_RENAME_CLIQUE, $array);
-		if($result->success_text == "ok") return true;
-		return false;
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
 	/**
