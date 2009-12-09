@@ -5,9 +5,9 @@
 
 	$plurk = new plurk_api();
 
-	$api_key = 'vNHmWbxiEac28PrGnwwBgnVou3wxF7Mt';
-	$user_name = 'whatup1981';
-	$password = '1234qwer';
+	$api_key = '';
+	$user_name = '';
+	$password = '';
 
 	$plurk->login($user_name, $password, $api_key);
 
