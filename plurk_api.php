@@ -1,100 +1,96 @@
 <?php
 
 /**
- * 
- * Dependencies on DBI, Constants, Misc.
+ *
+ * load dependencies.
  */
 require('config.php');
 require('constant.php');
-require('common_dbi.php');
-	
+require('common.php');
+
 /**
  * This is an PHP Plurk API.
  *
- * @author roga <roga@roga.tw>
  * @category  API
- * @package   roga-plurk-api
+ * @package   php-plurk-api
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
- * @link      http://code.google.com/p/roga-plurk-api
+ * @link      http://code.google.com/p/php-plurk-api
  *
  */
 Class plurk_api Extends common_dbi {
-	
+
 	/**
 	 * 帳號
 	 * @var string $username
 	 */
 	protected $username;
-	
+
 	/**
 	 * 密碼
 	 * @var string $password
 	 */
 	protected $password;
-	
+
 	/**
 	 * API KEY
 	 * @var $api_key
 	 */
 	protected $api_key;
-	
+
 	/**
 	 * 判斷是否登入
 	 * @var bool $is_login
 	 */
-	protected $is_login;
-	
+	protected $is_login = 'VIVIEN';
+
 	/**
 	 * Current HTTP Status Code
 	 * @var int $http_status
 	 */
 	protected $http_status;
-	
+
 	/**
 	 * 使用者的資料
 	 * @var object $user_info
-	 */	
+	 */
 	protected $user_info;
-	
+
 	/**
 	 * fans 數目
 	 * @var int $fans_count
 	 */
 	protected $fans_count;
-	
+
 	/**
 	 * 通知數目
 	 * @var int $alerts_count
 	 */
 	protected $alerts_count;
-	
+
 	/**
 	 * 好友數目
 	 * @var int $friends_count
-	 */	
+	 */
 	protected $friends_count;
-	
+
 	/**
 	 * 是否公開河道
-	 * @var boolean $privacy 
+	 * @var boolean $privacy
 	 */
 	protected $privacy;
 
-	function __construct()
-	{
-		/* nothing here*/
-	}	
+	function __construct() {}
 
 	/**
 	 * function plurk
 	 * 每次連接到 Plurk Server 都透過這個 method
-	 * 
+	 *
 	 * @param $url
 	 * @param $array
 	 * @return object
 	 */
 	function plurk($url, $array)
-	{		
+	{
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -102,28 +98,39 @@ Class plurk_api Extends common_dbi {
 		curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_USERAGENT, "roga-plurk-api v0.1");
+		curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api v0.1");
 
 		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
-								
+
 		$response = curl_exec($ch);
-		
+
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		  
+
 		curl_close($ch);
-					
+
 		return json_decode($response);
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Users/register
+	 */
+	function register()
+	{
+
 	}
 
 	/**
 	 * function login
 	 * 登入 Plurk 用 method
-	 *  
+	 *
 	 * @param $username
 	 * @param $password
 	 * @param $api_key
 	 * @return boolean
+	 * @see /API/Users/login
 	 */
 	function login($username, $password, $api_key)
 	{
@@ -139,7 +146,7 @@ Class plurk_api Extends common_dbi {
 		);
 
 		$result = $this->plurk(PLURK_LOGIN, $array);
-						 
+
 		($this->http_status == '200') ? $this->is_login = TRUE : $this->is_login = FALSE;
 
 		if($this->is_login)
@@ -155,74 +162,64 @@ Class plurk_api Extends common_dbi {
 		{
 			$this->log('Login Failed!');
 		}
-		
+
 		return $this->is_login;
-		
+
 	}
 
 	/**
-	 * function add_Plurk
-	 * 
-	 * no_comments:
-	 * 如果是 0, 允許回應  
-	 * 如果是 1, 不允許回應
-	 * 如果是 2, 只有好友能夠回應	 
-	 * @return object
-	 * 
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Users/updatePicture
 	 */
-	function add_Plurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
+	function update_picture()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-				
-		if (mb_strlen($content) > 140)
-		{
-			$this->log('這個噗訊息太長了');	
-		}
-   					
-		$array = array(
-			'api_key'	   => $this->api_key,
-			'qualifier'	 => 'likes',
-			'content'	   => urlencode($content),
-			'lang'			=> $lang 
-		);
-		
-		if ($limited_to != NULL)
-		{						
-			// need to comfirm
-			$array['limited_to'] = json_encode($limited_to);		
-		}
-		
-		if ($no_comments != 0)
-		{
-			$array['no_comments'] = $no_comments;
-		}									
-		
-		return $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
+
 	}
-	
+
 	/**
-	 * function get_plurks 
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Users/update
+	 */
+	function update()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Polling/getPlurks
+	 */
+	function get_plurks_polling()
+	{
+
+	}
+
+	/**
+	 * function get_plurks
 	 * 取回某一個特定的噗
-	 * 
+	 *
 	 * @param $plurk_id
 	 * @return object
-	 */	
+	 * @see /API/Timeline/getPlurk
+	 */
 	function get_plurk($plurk_id = '')
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
 		$array = array(
 			'api_key'	   => $this->api_key,
-			'plurk_id'	  => $plurk_id, 
+			'plurk_id'	  => $plurk_id,
 		);
-		
+
 		return $this->plurk(PLURK_TIMELINE_GET_PLURK, $array);
 	}
-	
+
 	/**
-	 * function get_plurks 
+	 * function get_plurks
 	 * 取回自己河道上所有的噗
-	 * 
+	 *
 	 * @param $offset
 	 * @param $limit
 	 * @param $only_user
@@ -230,28 +227,199 @@ Class plurk_api Extends common_dbi {
 	 * @param $only_private
 	 * @return object
 	 */
-	function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = FALSE, $only_private = FALSE)		 
+	function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = FALSE, $only_private = FALSE)
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'	   => $this->api_key,
-			'offset'		=> $offset, 
+			'offset'		=> $offset,
 			'limit'		 => $limit,
 			'only_user'	 => $only_user,
 			'only_responded'=> $only_responded,
 			'only_private'  => $only_private
 		);
 
-		return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);		
+		return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Timeline/getUnreadPlurks
+	 */
+	function get_unread_plurks()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Timeline/mutePlurks
+	 */
+	function mute_plurks()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Timeline/unmutePlurks
+	 */
+	function unmute_plurks()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Timeline/markAsRead
+	 */
+	function mark_plurk_as_read()
+	{
+
+	}
+
+	/**
+	 * function add_Plurk
+	 *
+	 * no_comments:
+	 * 如果是 0, 允許回應
+	 * 如果是 1, 不允許回應
+	 * 如果是 2, 只有好友能夠回應
+	 * @return object
+	 * @see /API/Timeline/plurkAdd
+	 */
+	function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
+	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		if (mb_strlen($content) > 140)
+		{
+			$this->log('這個噗訊息太長了');
+		}
+
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'qualifier'	 => 'likes',
+			'content'	   => urlencode($content),
+			'lang'			=> $lang
+		);
+
+		if ($limited_to != NULL)
+		{
+			// need to comfirm
+			$array['limited_to'] = json_encode($limited_to);
+		}
+
+		if ($no_comments != 0)
+		{
+			$array['no_comments'] = $no_comments;
+		}
+
+		return $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Timeline/uploadPicture
+	 */
+	function upload_picture()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Timeline/plurkDelete
+	 */
+	function delete_plurk()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Timeline/plurkEdit
+	 */
+	function edit_plurk()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Responses/get
+	 */
+	function get_responses()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Responses/responseAdd
+	 */
+	function add_response()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Responses/responseDelete
+	 */
+	function delete_response()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Profile/getOwnProfile
+	 */
+	function get_profile()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Profile/getPublicProfile
+	 */
+	function get_public_profile()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see getFriendsByOffset
+	 */
+	function get_friends()
+	{
+
 	}
 
 	/**
 	 * function get_fans
-	 * 取回粉絲列表 
-	 * 
+	 * 取回粉絲列表
+	 *
 	 * @param $offset
 	 * @return object
+	 * @see /API/FriendsFans/getFansByOffset
 	 */
 	function get_fans($offset = 0)
 	{
@@ -263,15 +431,194 @@ Class plurk_api Extends common_dbi {
 			'offset'		=> $offset
 		);
 
-		return $this->plurk(PLURK_GET_FANS, $array);		
+		return $this->plurk(PLURK_GET_FANS, $array);
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/FriendsFans/getFollowingByOffset
+	 */
+	function get_following()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/FriendsFans/becomeFriend
+	 */
+	function become_friend()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/FriendsFans/removeAsFriend
+	 */
+	function remove_Friend()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/FriendsFans/becomeFan
+	 */
+	function become_fan()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/FriendsFans/setFollowing
+	 */
+	function set_following()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/FriendsFans/getCompletion
+	 */
+	function get_completion()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/getActive
+	 */
+	function get_active()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/getHistory
+	 */
+	function get_history()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/addAsFan
+	 */
+	function add_as_fan()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/addAllAsFan
+	 */
+	function add_all_as_fan()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/addAllAsFriends
+	 */
+	function add_all_as_friends()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/addAsFriend
+	 */
+	function add_as_friend()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/denyFriendship
+	 */
+	function deny_friendship()
+	{
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Alerts/removeNotification
+	 */
+	function remove_notification()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/PlurkSearch/search
+	 */
+	function search_plurk()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/UserSearch/search
+	 */
+	function search_user()
+	{
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Emoticons/get
+	 */
+	function get_emoticons()
+	{
+
+	}
+
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Blocks/get
+	 */
+	function get_blocks()
+	{
+
 	}
 
 	/**
 	 * funciton block_user
 	 * 封鎖特定使用者
-	 * 
+	 *
 	 * @param $uid
 	 * @return object
+	 * @see /API/Blocks/block
 	 */
 	function block_user($uid)
 	{
@@ -282,115 +629,123 @@ Class plurk_api Extends common_dbi {
 			'user_id'		=> $uid,
 		);
 
-		return $this->plurk(PLURK_BLOCK, $array);		 
-  }
+		return $this->plurk(PLURK_BLOCK, $array);
+	}
 
-  /**
-   * function get_cliques()
-   * 取得小圈圈
-   * @return array
-   */
-  function get_cliques()
-  {
+	/**
+	 * @param
+	 * @return unknown_type
+	 * @see /API/Blocks/unblock
+	 */
+	function unblock_user()
+	{
+
+	}
+
+	/**
+	 * function get_cliques()
+	 * 取得小圈圈
+	 * @return array
+	 * @see /API/Cliques/get_cliques
+	 */
+	function get_cliques()
+	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'	   => $this->api_key,
 		);
 
-		return $this->plurk(PLURK_GET_CLIQUES, $array);		 
+		return $this->plurk(PLURK_GET_CLIQUES, $array);
+	}
 
-  }
-
-  /**
-   * function get_clique()
-   * 取得單一小圈圈的使用者
-   *
-   * @param $clique_name
-   * @return array
-   */
-  function get_clique($clique_name)
-  {
+	/**
+	 * function get_clique()
+	 * 取得單一小圈圈的使用者
+	 *
+	 * @param $clique_name
+	 * @return array
+	 * @see /API/Cliques/get_clique
+	 */
+	function get_clique($clique_name)
+	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array(
-      'api_key'	   => $this->api_key,
-      'clique_name' => $clique_name
+			'api_key'	   => $this->api_key,
+			'clique_name' => $clique_name
 		);
 
-		return $this->plurk(PLURK_GET_CLIQUE, $array);		 
+		return $this->plurk(PLURK_GET_CLIQUE, $array);
+	}
 
-  }
 
-
-  /**
-   * function create_clique()
-   * create clique
-   *
-   * @param $clique_name
-   * @return boolean
-   */
-  function create_clique($clique_name)
-  {
+	/**
+	 * function create_clique()
+	 * create clique
+	 *
+	 * @param $clique_name
+	 * @return boolean
+	 * @see /API/Cliques/create_clique
+	 */
+	function create_clique($clique_name)
+	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array(
-      'api_key'	   => $this->api_key,
-      'clique_name' => $clique_name
+			'api_key'	   => $this->api_key,
+			'clique_name' => $clique_name
 		);
 
-    $result =  $this->plurk(PLURK_CREATE_CLIQUE, $array);
-    if($result->success_text == "ok") return true;
-    return false;
+		$result =  $this->plurk(PLURK_CREATE_CLIQUE, $array);
+		if($result->success_text == "ok") return true;
+		return false;
+	}
 
-  }
-
-  /**
-   * function delete_clique()
-   * delete clique
-   *
-   * @param $clique_name
-   * @return boolean
-   */
-  function delete_clique($clique_name)
-  {
+	/**
+	 * function delete_clique()
+	 * delete clique
+	 *
+	 * @param $clique_name
+	 * @return boolean
+	 * @see
+	 */
+	function delete_clique($clique_name)
+	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array(
-      'api_key'	   => $this->api_key,
-      'clique_name' => $clique_name,
+			'api_key'	   => $this->api_key,
+			'clique_name' => $clique_name,
 		);
 
-		$result = $this->plurk(PLURK_DELETE_CLIQUE, $array);		 
-    if($result->success_text == "ok") return true;
-    return false;
-
+		$result = $this->plurk(PLURK_DELETE_CLIQUE, $array);
+		if($result->success_text == "ok") return true;
+		return false;
   }
 
-  /**
-   * function rename_clique()
-   * rename clique
-   *
-   * @param $clique_name
-   * @param $new_name
-   * @return boolean
-   */
-  function rename_clique($clique_name,$new_name)
-  {
+	/**
+	 * function rename_clique()
+	 * rename clique
+	 *
+	 * @param $clique_name
+	 * @param $new_name
+	 * @return boolean
+	 * @see /API/Cliques/rename_clique
+	 */
+	function rename_clique($clique_name,$new_name)
+	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
 		$array = array(
-      'api_key'	   => $this->api_key,
-      'clique_name' => $clique_name,
-      'new_name'   => $new_name
+			'api_key'	   => $this->api_key,
+			'clique_name' => $clique_name,
+			'new_name'   => $new_name
 		);
 
-		$result = $this->plurk(PLURK_RENAME_CLIQUE, $array);		 
-    if($result->success_text == "ok") return true;
-    return false;
-
-  }
-
+		$result = $this->plurk(PLURK_RENAME_CLIQUE, $array);
+		if($result->success_text == "ok") return true;
+		return false;
+	}
 
 	/**
 	 * function get_login_status
@@ -411,7 +766,7 @@ Class plurk_api Extends common_dbi {
 	{
 		return $this->http_status;
 	}
-	
+
 	/**
 	 * function get_user_info
 	 * 取得使用者資料
@@ -419,44 +774,6 @@ Class plurk_api Extends common_dbi {
 	 */
 	function get_user_info()
 	{
-		return $this->user_info;	
-	}
-	
-	/**
-	 * function get_permalink
-	 * 把 plurk_id 轉換為 permalink
-	 *
-	 * @param $plurk_id
-	 * @return string.
-	 */
-	function get_permalink($plurk_id)
-	{
-		return "http://www.plurk.com/p/" . base_convert($plurk_id, 10, 36);
-	}
-
-	/**
-	 * function get_permalink
-	 * 把 permalink 轉換為 plurk_id 
-	 *
-	 * @param $permalink
-	 * @return int.
-	 */
-	function permalinkToPlurkID($permalink)
-	{
-		return base_convert(str_replace('http://www.plurk.com/p/', '', $permalink), 36, 10);
-	}
-	
-	/**
-	 * funciton log
-	 * 紀錄操作歷史訊息
-	 * 
-	 * @param $message
-	 *  
-	 */
-	function log($message = '')
-	{
-		$source = file_get_contents(PLURK_LOG_PATH);
-		$source .= date("Y-m-d H:i:s - ") . $message . "\n";
-		file_put_contents(PLURK_LOG_PATH, $source);
+		return $this->user_info;
 	}
 }
