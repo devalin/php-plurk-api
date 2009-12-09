@@ -1,5 +1,5 @@
 <?php
-Class roga_dbi {
+Class common_dbi {
 
 	function __consturct()	{}
 	
