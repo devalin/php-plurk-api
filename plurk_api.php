@@ -283,8 +283,115 @@ Class plurk_api Extends common_dbi {
 		);
 
 		return $this->plurk(PLURK_BLOCK, $array);		 
-	}
-	
+  }
+
+  /**
+   * function get_cliques()
+   * 取得小圈圈
+   * @return array
+   */
+  function get_cliques()
+  {
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		$array = array(
+			'api_key'	   => $this->api_key,
+		);
+
+		return $this->plurk(PLURK_GET_CLIQUES, $array);		 
+
+  }
+
+  /**
+   * function get_clique()
+   * 取得單一小圈圈的使用者
+   *
+   * @param $clique_name
+   * @return array
+   */
+  function get_clique($clique_name)
+  {
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		$array = array(
+      'api_key'	   => $this->api_key,
+      'clique_name' => $clique_name
+		);
+
+		return $this->plurk(PLURK_GET_CLIQUE, $array);		 
+
+  }
+
+
+  /**
+   * function create_clique()
+   * create clique
+   *
+   * @param $clique_name
+   * @return boolean
+   */
+  function create_clique($clique_name)
+  {
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		$array = array(
+      'api_key'	   => $this->api_key,
+      'clique_name' => $clique_name
+		);
+
+    $result =  $this->plurk(PLURK_CREATE_CLIQUE, $array);
+    if($result->success_text == "ok") return true;
+    return false;
+
+  }
+
+  /**
+   * function delete_clique()
+   * delete clique
+   *
+   * @param $clique_name
+   * @return boolean
+   */
+  function delete_clique($clique_name)
+  {
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		$array = array(
+      'api_key'	   => $this->api_key,
+      'clique_name' => $clique_name,
+		);
+
+		$result = $this->plurk(PLURK_DELETE_CLIQUE, $array);		 
+    if($result->success_text == "ok") return true;
+    return false;
+
+  }
+
+  /**
+   * function rename_clique()
+   * rename clique
+   *
+   * @param $clique_name
+   * @param $new_name
+   * @return boolean
+   */
+  function rename_clique($clique_name,$new_name)
+  {
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		$array = array(
+      'api_key'	   => $this->api_key,
+      'clique_name' => $clique_name,
+      'new_name'   => $new_name
+		);
+
+		$result = $this->plurk(PLURK_RENAME_CLIQUE, $array);		 
+    if($result->success_text == "ok") return true;
+    return false;
+
+  }
+
+
 	/**
 	 * function get_login_status
 	 * 取得登入狀態
