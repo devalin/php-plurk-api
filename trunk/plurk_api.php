@@ -6,7 +6,7 @@
  */
 require('config.php');
 require('constant.php');
-require('roga_dbi.php');
+require('common_dbi.php');
 	
 /**
  * This is an PHP Plurk API.
@@ -18,7 +18,7 @@ require('roga_dbi.php');
  * @link      http://code.google.com/p/roga-plurk-api
  *
  */
-Class roga_plurk_api Extends roga_dbi {
+Class plurk_api Extends common_dbi {
 	
 	/**
 	 * 帳號

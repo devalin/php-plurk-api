@@ -1,9 +1,9 @@
 #!/usr/bin/php5
 <?php
 		
-	require('roga_plurk_api.php');
-	
-	$plurk = new roga_plurk_api();
+	require('plurk_api.php');
+
+	$plurk = new plurk_api();
 	
 	$api_key = '';
 	$user_name = '';
