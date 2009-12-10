@@ -335,22 +335,43 @@ Class plurk_api Extends common_dbi {
 
 	/**
 	 * @param
-	 * @return unknown_type
-	 * @see /API/Timeline/plurkDelete
+	 * plurk_id: The id of the plurk.	 
+	 * @return object
+	 * @see /API/Timeline/plurkDelete	 
 	 */
-	function delete_plurk()
+	function delete_plurk($plurk_id = '')
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'plurk_id'	  => $plurk_id
+		);
 
+		return $this->plurk(PLURK_TIMELINE_PLURK_DELETE, $array);
 	}
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * plurk_id: The id of the plurk.
+	 * ontent: The content of plurk.	 
+	 * @return object
 	 * @see /API/Timeline/plurkEdit
 	 */
-	function edit_plurk()
+	function edit_plurk($plurk_id = '', $content = '')
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		if (mb_strlen($content) > 140)
+		{
+			$this->log('這個噗訊息太長了');
+		}
+
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'plurk_id'	  => $plurk_id,
+			'content'	   => urlencode($content)
+		);
+		return $this->plurk(PLURK_TIMELINE_PLURK_EDIT, $array);
 	}
 
 	/**
