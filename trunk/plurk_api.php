@@ -376,32 +376,62 @@ Class plurk_api Extends common_dbi {
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * plurk_id: The plurk that the responses should be added to.
+	 * offset: Only fetch responses from an offset, should be 5, 10 or 15.   	 
+	 * @return object
 	 * @see /API/Responses/get
 	 */
-	function get_responses()
+	function get_responses($plurk_id = '', $offset = 0)
 	{
-
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'offset'		=> $offset
+		);
+		return $this->plurk(PLURK_GET_RESPONSE, $array);
 	}
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * plurk_id: The plurk that the responses should be added to.
+	 * content: The response's text.
+	 * qualifier: The Plurk's qualifier, must be in English. ex: loves, likes, shares, gives, hates, wants, has, will, asks, wishes, was, feels, thinks, says, is, :, freestyle, hopes, needs, wonders     	 
+	 * @return object
 	 * @see /API/Responses/responseAdd
 	 */
-	function add_response()
+	function add_response($plurk_id = '', $content = '', $qualifier = 'says')
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		if (mb_strlen($content) > 140)
+		{
+			$this->log('這個噗訊息太長了');
+		}
+
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'plurk_id'	  => $plurk_id,
+			'content'	   => urlencode($content),
+			'qualifier'  => $qualifier 
+		);
+		return $this->plurk(PLURK_ADD_RESPONSE, $array);
 	}
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * response_id: The plurk that the responses should be added to.
+	 * plurk_id: The plurk that the response belongs to.   	 
+	 * @return object
 	 * @see /API/Responses/responseDelete
 	 */
-	function delete_response()
+	function delete_response($plurk_id = '', $response_id = '')
 	{
-
+    if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		$array = array(
+			'api_key' => $this->api_key,
+			'plurk_id' => $plurk_id,
+			'response_id' => $response_id
+		);
+		return $this->plurk(PLURK_DELERE_RESPONSE, $array);    
 	}
 
 	/**
