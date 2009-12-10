@@ -436,49 +436,68 @@ Class plurk_api Extends common_dbi {
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * @return object
 	 * @see /API/Profile/getOwnProfile
 	 */
-	function get_profile()
+	function get_own_profile()
 	{
-
+    if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		$array = array(
+			'api_key' => $this->api_key
+		);
+		return $this->plurk(PLURK_GET_OWN_PROFILE, $array);     
 	}
 
 	/**
 	 * @param
+	 * user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).	 
 	 * @return unknown_type
 	 * @see /API/Profile/getPublicProfile
 	 */
-	function get_public_profile()
+	function get_public_profile($user_id = '')
 	{
-
+		$user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
+    $array = array(
+			'api_key' => $this->api_key,
+			'user_id' => $user_id
+		);
+		return $this->plurk(PLURK_GET_PUBLIC_PROFILE, $array);  
 	}
 
 	/**
 	 * @param
+	 * user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).	 
+	 * offset: The offset, can be 10, 20, 30 etc.   	 
 	 * @return unknown_type
 	 * @see getFriendsByOffset
 	 */
-	function get_friends()
+	function get_friends($user_id = '', $offset = 0)
 	{
-
+		$user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
+    $array = array(
+			'api_key' => $this->api_key,
+			'user_id' => $user_id,
+			'offset' => $offset
+		);
+		return $this->plurk(PLURK_GET_FRIENDS, $array);  
 	}
 
 	/**
 	 * function get_fans
 	 * 取回粉絲列表
 	 *
-	 * @param $offset
+	 * @param
+	 * user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).	 
+	 * offset: The offset, can be 10, 20, 30 etc.      	 
 	 * @return object
 	 * @see /API/FriendsFans/getFansByOffset
 	 */
-	function get_fans($offset = 0)
+	function get_fans($user_id = '', $offset = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
+    $user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
 		$array = array(
 			'api_key'	   => $this->api_key,
-			'user_id'		=> $this->user_info->uid,
+			'user_id'		=> $user_id,
 			'offset'		=> $offset
 		);
 
