@@ -26,3 +26,7 @@
 5. log 和 cookie 不要 commit 回來。
 
 6. 測試時請將 example.php 複製一份為 run.php (或其他名稱以方便測試, 然後設 svn ignore 不要 commit 回來)。
+
+= 成員 =
+
+如果 Member Role 在 Project Contributors 的朋友請先玩玩看，跑得起來後，如果要幫忙修理測試我會幫您轉換到 Committer 的位置。
