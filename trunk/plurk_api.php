@@ -394,7 +394,7 @@ Class plurk_api Extends common_dbi {
 	 * @param
 	 * plurk_id: The plurk that the responses should be added to.
 	 * content: The response's text.
-	 * qualifier: The Plurk's qualifier, must be in English. ex: loves, likes, shares, gives, hates, wants, has, will, asks, wishes, was, feels, thinks, says, is, :, freestyle, hopes, needs, wonders     	 
+	 * qualifier: The Plurk's qualifier, please see documents/README     	 
 	 * @return object
 	 * @see /API/Responses/responseAdd
 	 */
@@ -504,64 +504,119 @@ Class plurk_api Extends common_dbi {
 		return $this->plurk(PLURK_GET_FANS, $array);
 	}
 
-	/**
+	/**	
 	 * @param
-	 * @return unknown_type
+	 * offset: The offset, can be 10, 20, 30 etc.	 
+	 * @return object
 	 * @see /API/FriendsFans/getFollowingByOffset
 	 */
-	function get_following()
+	function get_following($offset = 0)
 	{
-
+    if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		$array = array(
+			'api_key' => $this->api_key,
+			'offset' => $offset
+		);
+		return $this->plurk(PLURK_GET_FOLLOWING, $array);   
 	}
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * friend_id: The ID of the user you want to befriend.	 
+	 * @return boolean
 	 * @see /API/FriendsFans/becomeFriend
 	 */
-	function become_friend()
+	function become_friend($friend_id = '')
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'friend_id' => $friend_id
+		);
+
+		$result =  $this->plurk(PLURK_BECOME_FRIEND, $array);
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * friend_id: The ID of the user you want to befriend.	 
+	 * @return boolean
 	 * @see /API/FriendsFans/removeAsFriend
 	 */
-	function remove_Friend()
+	function remove_Friend($friend_id = '')
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'friend_id' => $friend_id
+		);
+
+		$result =  $this->plurk(PLURK_REMOVE_FRIEND, $array);
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * fan_id: Become fan of fan_id. To stop being a fan of someone, user /API/FriendsFans/setFollowing?fan_id=FAN_ID&follow=false.
+	 * @return boolean
 	 * @see /API/FriendsFans/becomeFan
 	 */
-	function become_fan()
+	function become_fan($fan_id = '')
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'fan_id' => $fan_id
+		);
+
+		$result =  $this->plurk(PLURK_BECOME_FAN, $array);
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
 	/**
 	 * @param
-	 * @return unknown_type
+	 * user_id: The ID of the user you want to follow/unfollow
+	 * follow: true if the user should be followed, and false if the user should be unfollowed.   	 
+	 * @return boolean
 	 * @see /API/FriendsFans/setFollowing
 	 */
-	function set_following()
+	function set_following($user_id = '', $follow = false)
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		$array = array(
+			'api_key'	   => $this->api_key,
+			'user_id' => $user_id,
+			'follow' => $follow
+		);
+
+		$result =  $this->plurk(PLURK_SET_FOLLOWING, $array);
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
 	/**
-	 * @param
-	 * @return unknown_type
+	 * Returns a JSON object of the logged in users friends (nick name and full name).	
+	 * @param	 
+	 * @return object
 	 * @see /API/FriendsFans/getCompletion
 	 */
 	function get_completion()
 	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		$array = array(
+			'api_key'	   => $this->api_key
+		);
+
+		return $this->plurk(PLURK_GET_COMPLETION, $array);
 	}
 
 	/**
