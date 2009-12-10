@@ -336,7 +336,7 @@ Class plurk_api Extends common_dbi {
 	/**
 	 * @param
 	 * plurk_id: The id of the plurk.	 
-	 * @return object
+	 * @return boolean
 	 * @see /API/Timeline/plurkDelete	 
 	 */
 	function delete_plurk($plurk_id = '')
@@ -346,15 +346,16 @@ Class plurk_api Extends common_dbi {
 			'api_key'	   => $this->api_key,
 			'plurk_id'	  => $plurk_id
 		);
-
-		return $this->plurk(PLURK_TIMELINE_PLURK_DELETE, $array);
+    
+		$result = $this->plurk(PLURK_TIMELINE_PLURK_DELETE, $array);
+		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
 	/**
 	 * @param
 	 * plurk_id: The id of the plurk.
 	 * ontent: The content of plurk.	 
-	 * @return object
+	 * @return boolean
 	 * @see /API/Timeline/plurkEdit
 	 */
 	function edit_plurk($plurk_id = '', $content = '')
@@ -371,7 +372,8 @@ Class plurk_api Extends common_dbi {
 			'plurk_id'	  => $plurk_id,
 			'content'	   => urlencode($content)
 		);
-		return $this->plurk(PLURK_TIMELINE_PLURK_EDIT, $array);
+		$result = $this->plurk(PLURK_TIMELINE_PLURK_EDIT, $array);
+		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
 	/**
@@ -420,7 +422,7 @@ Class plurk_api Extends common_dbi {
 	 * @param
 	 * response_id: The plurk that the responses should be added to.
 	 * plurk_id: The plurk that the response belongs to.   	 
-	 * @return object
+	 * @return boolean
 	 * @see /API/Responses/responseDelete
 	 */
 	function delete_response($plurk_id = '', $response_id = '')
@@ -431,7 +433,8 @@ Class plurk_api Extends common_dbi {
 			'plurk_id' => $plurk_id,
 			'response_id' => $response_id
 		);
-		return $this->plurk(PLURK_DELERE_RESPONSE, $array);    
+		$result = $this->plurk(PLURK_DELERE_RESPONSE, $array);
+    return ($this->http_status == '200') ? TRUE : FALSE;    
 	}
 
 	/**
