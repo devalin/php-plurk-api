@@ -17,7 +17,7 @@
 
 1. 先針對 API 把每個都 method 補完(一個 API 的 URL 對應一個 method，細節可以慢慢補齊)
 
-2. 縮排儘量用 tab 不要用 space
+2. 縮排儘量用 tab 不要用 whitespace
 
 3. 請儘量用 HTTP Status Code 判斷是否成功
 
