@@ -13,5 +13,10 @@
 
 	/* for path */
 	define('BASE_PATH', dirname(__FILE__) . '/');
+	define('PLURK_COOKIE_PATH', BASE_PATH . '/cookie');
+	define('PLURK_LOG_PATH', BASE_PATH . '/log');
+
+	define('PLURK_NOT_LOGIN', '尚未登入 Plurk.');
+
 
 ?>

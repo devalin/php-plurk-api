@@ -28,11 +28,6 @@ Class common {
 		return mysql_query($statement);
 	}
 
-	function rows()
-	{
-
-	}
-
 	/**
 	 * function get_permalink
 	 * 把 plurk_id 轉換為 permalink
@@ -46,13 +41,13 @@ Class common {
 	}
 
 	/**
-	 * function get_permalink
+	 * function get_plurk_id
 	 * 把 permalink 轉換為 plurk_id
 	 *
 	 * @param $permalink
 	 * @return int.
 	 */
-	function permalinkToPlurkID($permalink)
+	function get_plurk_id($permalink)
 	{
 		return base_convert(str_replace('http://www.plurk.com/p/', '', $permalink), 36, 10);
 	}
@@ -62,7 +57,6 @@ Class common {
 	 * 紀錄操作歷史訊息
 	 *
 	 * @param $message
-	 *
 	 */
 	function log($message = '')
 	{
