@@ -932,6 +932,54 @@ Class plurk_api Extends common {
 	}
 
 	/**
+	 * function add_to_clique()
+	 * add friend to clique
+	 *
+	 * @param $clique_name
+	 * @param $user_id
+	 * @return boolean
+	 * @see /API/Cliques/add
+	 */
+	function add_to_clique($clique_name,$user_id)
+	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		$array = array(
+			'api_key'	  => $this->api_key,
+			'clique_name' => $clique_name,
+			'user_id'    => $user_id
+		);
+
+		$result = $this->plurk(PLURK_ADD_TO_CLIQUE, $array);
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
+	}
+
+	/**
+	 * function remove_from_clique()
+	 * remove friend from clique
+	 *
+	 * @param $clique_name
+	 * @param $user_id
+	 * @return boolean
+	 * @see /API/Cliques/remove
+	 */
+	function remove_from_clique($clique_name,$user_id)
+	{
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		$array = array(
+			'api_key'	  => $this->api_key,
+			'clique_name' => $clique_name,
+			'user_id'    => $user_id
+		);
+
+		$result = $this->plurk(PLURK_REMOVE_FROM_CLIQUE, $array);
+
+		return ($this->http_status == '200') ? TRUE : FALSE;
+	}
+
+	/**
 	 * function get_login_status
 	 * 取得登入狀態
 	 * @return boolean
