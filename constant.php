@@ -1,10 +1,4 @@
 <?php
-
-	define('PLURK_COOKIE_PATH', BASE_PATH . '/cookie');
-	define('PLURK_LOG_PATH', BASE_PATH . '/log');
-
-	define('PLURK_NOT_LOGIN', '尚未登入 Plurk.');
-
 	define('PLURK_REGISTER', 'http://www.plurk.com/API/Users/register');
 	define('PLURK_LOGIN', 'http://www.plurk.com/API/Users/login');
 	define('PLURK_UPDATE_PICTURE', 'http://www.plurk.com/API/Users/updatePicture');
