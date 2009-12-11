@@ -17,7 +17,7 @@ require('common.php');
  * @link      http://code.google.com/p/php-plurk-api
  *
  */
-Class plurk_api Extends common_dbi {
+Class plurk_api Extends common {
 
 	/**
 	 * 帳號
@@ -460,7 +460,7 @@ Class plurk_api Extends common_dbi {
 	function get_public_profile($user_id = '')
 	{
 		$user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
-    $array = array(
+		$array = array(
 			'api_key' => $this->api_key,
 			'user_id' => $user_id
 		);
@@ -477,7 +477,7 @@ Class plurk_api Extends common_dbi {
 	function get_friends($user_id = '', $offset = 0)
 	{
 		$user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
-    $array = array(
+		$array = array(
 			'api_key' => $this->api_key,
 			'user_id' => $user_id,
 			'offset' => $offset
@@ -497,7 +497,10 @@ Class plurk_api Extends common_dbi {
 	 */
 	function get_fans($user_id = '', $offset = 0)
 	{
-    $user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		
+		$user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
+		
 		$array = array(
 			'api_key'	   => $this->api_key,
 			'user_id'		=> $user_id,
@@ -515,11 +518,13 @@ Class plurk_api Extends common_dbi {
 	 */
 	function get_following($offset = 0)
 	{
-    if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		
 		$array = array(
 			'api_key' => $this->api_key,
 			'offset' => $offset
 		);
+		
 		return $this->plurk(PLURK_GET_FOLLOWING, $array);   
 	}
 
