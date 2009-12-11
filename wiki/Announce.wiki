@@ -29,4 +29,4 @@
 
 = 成員 =
 
-如果 Member Role 在 Project Contributors 的朋友請先玩玩看，跑得起來後，如果要幫忙修理測試我會幫您轉換到 Committer 的位置。
+如果 Member Role 在 Project Contributors 的朋友請先玩玩看，跑得起來後，如果要幫忙修理測試我會幫您加入 Commit 權限。
