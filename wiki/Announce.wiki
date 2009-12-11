@@ -25,7 +25,7 @@
 
 5. log 和 cookie 不要 commit 回來。
 
-6. 測試時請將 example.php 複製一份為 run.php (或其他名稱以方便測試, 然後設 svn ignore 不要 commit 回來)。
+6. 除非是寫 example ，要不然測試時請將 example.php 複製一份為 run.php (或其他名稱以方便測試, 然後設 svn ignore 不要 commit 回來)。
 
 = 成員 =
 
