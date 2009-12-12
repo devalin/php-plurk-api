@@ -159,7 +159,7 @@ Class plurk_api Extends common {
 
         $gender = strtolower($gender);
 
-        if($gender != 'male' || $gender != 'female')
+        if($gender != 'male' && $gender != 'female')
             $this->log('should be male or female.');
 
         if ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email))
@@ -373,7 +373,6 @@ Class plurk_api Extends common {
     function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = FALSE, $only_private = FALSE)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
         $array = array(
             'api_key'       => $this->api_key,
             'offset'        => $offset,
@@ -382,7 +381,6 @@ Class plurk_api Extends common {
             'only_responded'=> $only_responded,
             'only_private'  => $only_private
         );
-
         return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);
     }
 
@@ -505,7 +503,7 @@ Class plurk_api Extends common {
      * and return a image link that you can add to /API/Timeline/plurkAdd
      *
      * @param
-     * @return unknown_type
+     * @return JSON object
      * @see /API/Timeline/uploadPicture
      */
     function upload_picture($api_key, $upload_image = '')
@@ -975,7 +973,9 @@ Class plurk_api Extends common {
 
     /**
      * @param
-     * @return unknown_type
+     * query: The query after Plurks.
+     * offset: A plurk_id of the oldest Plurk in the last search result.          
+     * @return JSON list
      * @see /API/PlurkSearch/search
      */
     function search_plurk($api_key = '', $query = '', $offset = 0)
@@ -991,12 +991,14 @@ Class plurk_api Extends common {
             'offset'  => $offset
         ) ;
 
-        $result = $this->plurk(PLURK_SEARCH, $array);
+        return $this->plurk(PLURK_SEARCH, $array);
     }
 
     /**
      * @param
-     * @return unknown_type
+     * query: The query after users.
+     * offset: Page offset, like 10, 20, 30 etc.          
+     * @return JSON list
      * @see /API/UserSearch/search
      */
     function search_user($api_key = '', $query = '', $offset = 0)
@@ -1011,7 +1013,7 @@ Class plurk_api Extends common {
             'offset'  => $offset
         ) ;
 
-        $result = $this->plurk(PLURK_USER_SEARCH, $array);
+        return $this->plurk(PLURK_USER_SEARCH, $array);
     }
 
     /**
@@ -1028,7 +1030,8 @@ Class plurk_api Extends common {
 
     /**
      * @param
-     * @return unknown_type
+     * offset: What page should be shown, e.g. 0, 10, 20.     
+     * @return JSON list
      * @see /API/Blocks/get
      */
     function get_blocks($api_key = '', $offset = 0)
@@ -1067,7 +1070,8 @@ Class plurk_api Extends common {
 
     /**
      * @param
-     * @return unknown_type
+     * user_id: The id of the user that should be unblocked.     
+     * @return boolean
      * @see /API/Blocks/unblock
      */
     function unblock_user($user_id)
