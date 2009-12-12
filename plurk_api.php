@@ -248,7 +248,7 @@ Class plurk_api Extends common {
     function get_plurks_polling($offset = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $offset = (empty($offset)) ? date("Y-n-d\TH:i:s") : $offset;
+        $offset = (empty($offset)) ? array_shift(explode("+",date("c",$offset))) : $offset;
         $array = array(
             'api_key'   => $this->api_key,
             'offset'   => $offset
