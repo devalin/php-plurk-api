@@ -1,7 +1,6 @@
 <?php
 
 /**
- *
  * load dependencies.
  */
 require('config.php');
