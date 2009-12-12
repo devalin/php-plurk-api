@@ -456,7 +456,6 @@ Class plurk_api Extends common {
         );
         $this->plurk(PLURK_TIMELINE_MARK_AS_READ, $array);
         return ($this->http_status == '200') ? TRUE : FALSE;
-        return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
@@ -501,15 +500,50 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function upload_picture
+     * to upload a picture to Plurk, you should do a multipart/form-data POST request
+     * to /API/Timeline/uploadPicture. This will add the picture to Plurk's CDN network
+     * and return a image link that you can add to /API/Timeline/plurkAdd
+     *
      * @param
      * @return unknown_type
      * @see /API/Timeline/uploadPicture
      */
-    function upload_picture()
+    function upload_picture($api_key, $upload_image = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
-        $result = $this->plurk(PLURK_TIMELINE_UPLOAD_PICTURE, $array);
+
+        $array = array('api_key' => $api_key);
+
+        $boundary = uniqid('------------------');
+        $MPboundary = '--' . $boundary;
+        $endMPboundary = $MPboundary. '--';
+
+        $file = file_get_contents($upload_image);
+        $file_name = basename($upload_image);
+
+        $multipartbody .= $MPboundary . "\r\n";
+        $multipartbody .= 'Content-Disposition: form-data; name="filename"; filename="' . $file_name . '"' . '"\r\n"';
+        $multipartbody .= 'Content-Type: text/csv'. "\r\n\r\n";
+        $multipartbody .= $file;
+
+        $multipartbody .= $MPboundary . "\r\n";
+        $multipartbody.= "content-disposition: form-data; name=api_key\r\n\r\n";
+        $multipartbody.= $api_key. "\r\n\r\n" . $endMPboundary;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $multipartbody );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: multipart/form-data; boundary=$boundary"));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+        $result = curl_exec($ch);
+
+        $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $this->http_response = $response;
+
+        return $result;
     }
 
     /**
@@ -941,7 +975,7 @@ Class plurk_api Extends common {
      * @return unknown_type
      * @see /API/PlurkSearch/search
      */
-    function search_plurk()
+    protected function search_plurk()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
         $array = array();
@@ -954,7 +988,7 @@ Class plurk_api Extends common {
      * @return unknown_type
      * @see /API/UserSearch/search
      */
-    function search_user()
+    protected function search_user()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
         $array = array();
@@ -966,7 +1000,7 @@ Class plurk_api Extends common {
      * @return unknown_type
      * @see /API/Emoticons/get
      */
-    function get_emoticons()
+    protected function get_emoticons()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
         $array = array();
@@ -978,11 +1012,17 @@ Class plurk_api Extends common {
      * @return unknown_type
      * @see /API/Blocks/get
      */
-    function get_blocks()
+    function get_blocks($api_key = '', $offset = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
-        $result = $this->plurk(PLURK_GET_BLOCKS, $array);
+
+        $array = array(
+          'api_key' => $this->api_key,
+          'offset' => $offset,
+        );
+
+        return $this->plurk(PLURK_GET_BLOCKS, $array);
+
     }
 
     /**
@@ -993,7 +1033,7 @@ Class plurk_api Extends common {
      * @return object
      * @see /API/Blocks/block
      */
-    function block_user($user_id )
+    function block_user($user_id)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1011,11 +1051,15 @@ Class plurk_api Extends common {
      * @return unknown_type
      * @see /API/Blocks/unblock
      */
-    function unblock_user()
+    function unblock_user($user_id)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
-        $result = $this->plurk(PLURK_UNBLOCK, $array);
+        $array = array(
+            'api_key' => $this->api_key,
+            'user_id' => $user_id,
+        );
+        $this->plurk(PLURK_UNBLOCK, $array);
+        return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
