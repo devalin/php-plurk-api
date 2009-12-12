@@ -17,6 +17,7 @@
 	define('PLURK_LOG_PATH', BASE_PATH . '/log');
 
 	define('PLURK_NOT_LOGIN', '尚未登入 Plurk.');
+	define('PLURK_FIELD_NOT_EMPTY', 'field can\'t be empty');
 
 
 ?>
