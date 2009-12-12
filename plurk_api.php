@@ -1017,15 +1017,19 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * @return unknown_type
+     * get emotes
+     * @return JSON list
      * @see /API/Emoticons/get
      */
-    protected function get_emoticons()
+    function get_emoticons()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
         /* ill document */
-        $result = $this->plurk(PLURK_GET_EMOTIONS, array());
+        $array = array(
+            'api_key' => $this->api_key,
+        );
+        $result = $this->plurk(PLURK_GET_EMOTIONS, $array);
+        return $result;
     }
 
     /**
@@ -1104,7 +1108,7 @@ Class plurk_api Extends common {
 
     /**
      * function get_clique()
-     * 取得單一小圈圈的使用者
+     * get users from clique
      *
      * @param $clique_name
      * @return array
