@@ -11,7 +11,7 @@ require('common.php');
  * This is a PHP Plurk API.
  *
  * @category  API
- * @package   php-plurk-api
+ * @version   php-plurk-api 1.0b
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link      http://code.google.com/p/php-plurk-api
  *
