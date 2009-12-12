@@ -251,51 +251,74 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * @return unknown_type
+     * @param $offset Return plurks older than offset, use timestamp. 
+     * @param $limit Limit the number of plurks that is retunred.
+     * @return object
      * @see /API/Timeline/getUnreadPlurks
      */
-    function get_unread_plurks()
+    function get_unread_plurks($offset = null ,$limit = 10)
     {
+        // $offset seens it's not working now. by whatup.tw
+        if($offset == null) $offset = time();
+        $date = array_shift(explode("+",date("c",$offset)));
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
+        $array = array(
+            'api_key'   => $this->api_key,
+            'offset'    => $date,
+            'limit'     => $limit
+        );
         $result = $this->plurk(PLURK_TIMELINE_GET_UNREAD_PLURKS, $array);
+        return $result;
     }
 
     /**
-     * @param
-     * @return unknown_type
+     * @param $ids The plurk ids, eg. array(123,456,789)
+     * @return boolean
      * @see /API/Timeline/mutePlurks
      */
-    function mute_plurks()
+    function mute_plurks($ids)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
+        $array = array(
+            'api_key'    => $this->api_key,
+            'ids'        => json_encode($ids),
+        );
         $result = $this->plurk(PLURK_TIMELINE_MUTE_PLURKS, $array);
+        return ($this->http_status == '200') ? TRUE : FALSE;
+
     }
 
     /**
-     * @param
-     * @return unknown_type
+     * @param $ids The plurk ids, eg. array(123,456,789)
+     * @return boolean
      * @see /API/Timeline/unmutePlurks
      */
-    function unmute_plurks()
+    function unmute_plurks($ids)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
-        $result = $this->plurk(PLURK_TIMELINE_MARK_AS_READ, $array);
+        $array = array(
+            'api_key'    => $this->api_key,
+            'ids'        => json_encode($ids),
+        );
+        $result = $this->plurk(PLURK_TIMELINE_UNMUTE_PLURKS, $array);
+        return ($this->http_status == '200') ? TRUE : FALSE;
+
     }
 
     /**
-     * @param
-     * @return unknown_type
+     * @param $ids The plurk ids, eg. array(123,456,789)
+     * @return boolean
      * @see /API/Timeline/markAsRead
      */
-    function mark_plurk_as_read()
+    function mark_plurk_as_read($ids)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
+        $array = array(
+            'api_key'    => $this->api_key,
+            'ids'        => json_encode($ids),
+        );
         $result = $this->plurk(PLURK_TIMELINE_MARK_AS_READ, $array);
+        return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
