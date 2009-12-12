@@ -960,12 +960,16 @@ Class plurk_api Extends common {
      */
     function remove_notification($user_id = '')
     {
+
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
         $array = array(
             'api_key' => $this->api_key,
             'user_id' => $user_id
         );
+
         $result = $this->plurk(PLURK_REMOVE_NOTIFY, $array);
+
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
@@ -974,12 +978,20 @@ Class plurk_api Extends common {
      * @return unknown_type
      * @see /API/PlurkSearch/search
      */
-    protected function search_plurk()
+    function search_plurk($api_key = '', $query = '', $offset = 0)
     {
-        if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
-        $result = $this->plurk(PLURK_SEARCH, $array);
 
+    	/* offset: A plurk_id of the oldest Plurk in the last search result.  */
+
+        if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+        $array = array(
+            'api_key' => $api_key,
+            'query'   => $query,
+            'offset'  => $offset
+        ) ;
+
+        $result = $this->plurk(PLURK_SEARCH, $array);
     }
 
     /**
@@ -987,10 +999,18 @@ Class plurk_api Extends common {
      * @return unknown_type
      * @see /API/UserSearch/search
      */
-    protected function search_user()
+    function search_user($api_key = '', $query = '', $offset = 0)
     {
+    	/* offset: Page offset, like 10, 20, 30 etc. */
+
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
+
+        $array = array(
+            'api_key' => $api_key,
+            'query'   => $query,
+            'offset'  => $offset
+        ) ;
+
         $result = $this->plurk(PLURK_USER_SEARCH, $array);
     }
 
@@ -1002,8 +1022,8 @@ Class plurk_api Extends common {
     protected function get_emoticons()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array();
-        $result = $this->plurk(PLURK_GET_EMOTIONS, $array);
+        /* ill document */
+        $result = $this->plurk(PLURK_GET_EMOTIONS, array());
     }
 
     /**
