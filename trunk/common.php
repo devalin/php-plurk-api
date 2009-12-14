@@ -30,7 +30,7 @@ Class common {
 
 	/**
 	 * function get_permalink
-	 * 把 plurk_id 轉換為 permalink
+	 * transfer plurk_id to permalink
 	 *
 	 * @param $plurk_id
 	 * @return string.
@@ -42,7 +42,7 @@ Class common {
 
 	/**
 	 * function get_plurk_id
-	 * 把 permalink 轉換為 plurk_id
+	 * transfer permalink to plurk_id
 	 *
 	 * @param $permalink
 	 * @return int.
@@ -54,7 +54,7 @@ Class common {
 
 	/**
 	 * funciton log
-	 * 紀錄操作歷史訊息
+	 * message log
 	 *
 	 * @param $message
 	 */

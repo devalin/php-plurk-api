@@ -11,7 +11,7 @@ require('common.php');
  * This is a PHP Plurk API.
  *
  * @category  API
- * @version   php-plurk-api 1.0b
+ * @version   php-plurk-api 1.2b
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link      http://code.google.com/p/php-plurk-api
  *
@@ -19,13 +19,13 @@ require('common.php');
 Class plurk_api Extends common {
 
     /**
-     * 帳號
+     * User name
      * @var string $username
      */
     protected $username;
 
     /**
-     * 密碼
+     * Password
      * @var string $password
      */
     protected $password;
@@ -37,7 +37,7 @@ Class plurk_api Extends common {
     protected $api_key;
 
     /**
-     * 判斷是否登入
+     * Login status
      * @var bool $is_login
      */
     protected $is_login = 'VIVIEN';
@@ -50,60 +50,124 @@ Class plurk_api Extends common {
 
     /**
      * Current HTTP Server Response
-     * @var String
+     * @var JSON object $http_response
      */
     protected $http_response;
 
     /**
-     * 使用者的資料
-     * @var object $user_info
+     * User infomation
+     * @var JSON object $user_info
      */
     protected $user_info;
 
     /**
-     * fans 數目
+     * The unique user id.
+     * @var int $uid
+     */
+    protected $uid;
+
+    /**
+     * The unique nick_name of the user, for example amix.
+     * @var string $nick_name
+     */
+    protected $nick_name;
+        
+    /**
+     * The non-unique display name of the user, for example Amir S. Only set if it's non empty.
+     * @var string $display_name
+     */    
+    protected $display_name;
+    /**
+     * If 1 then the user has a profile picture, otherwise the user should use the default.
+     * @var int $has_profile_image
+     */
+    protected $has_profile_image;
+
+    /**
+     * Specifies what the latest avatar (profile picture) version is.
+     * @var string $avatar
+     */
+    protected $avatar;
+    
+    /**
+     * The user's location, a text string, for example Aarhus Denmark.
+     * @var string $location
+     */
+    protected $location;
+    
+    /**
+     * date_of_birth: The user's birthday.
+     * @var string $date_of_birth
+     */
+    protected $date_of_birth;
+    
+    /**
+     * The user's full name, like Amir Salihefendic.
+     * @var string $full_name 
+     */
+    protected $full_name;
+    
+    /**
+     * 1 is male, 0 is female.
+     * @var int $gender;
+     */
+    protected $gender;
+    
+    /**
+     * The profile title of the user.
+     * @var string $page_title
+     */
+    protected $page_title;
+    
+    /**
+     * User's karma value.
+     * @var int $karma
+     */
+    protected $karma;
+    
+    /**
+     * How many friends has the user recruited.
+     * @var int $recruited;
+     */
+    protected $recruited;
+    
+    /**
+     * Can be not_saying, single, married, divorced, engaged, in_relationship, complicated, widowed, open_relationship
+     * @var string $relationship
+     */
+    protected $relationship;
+    
+    /**
+     * fans count
      * @var int $fans_count
      */
     protected $fans_count;
 
     /**
-     * 通知數目
+     * alert count
      * @var int $alerts_count
      */
     protected $alerts_count;
 
     /**
-     * 好友數目
+     * friends count
      * @var int $friends_count
      */
     protected $friends_count;
 
     /**
-     * 是否公開河道
+     * Plurk Privacy
      * @var boolean $privacy
      */
     protected $privacy;
-    /*
-     *     id: The unique user id.
-     *     nick_name: The unique nick_name of the user, for example amix.
-     *     display_name: The non-unique display name of the user, for example Amir S. Only set if it's non empty.
-     *     has_profile_image: If 1 then the user has a profile picture, otherwise the user should use the default.
-     *     avatar: Specifies what the latest avatar (profile picture) version is.
-     *     location: The user's location, a text string, for example Aarhus Denmark.
-     *     date_of_birth: The user's birthday.
-     *     full_name: The user's full name, like Amir Salihefendic.
-     *     gender: 1 is male, 0 is female.
-     *     page_title: The profile title of the user.
-     *     karma: User's karma value.
-     *     recruited: How many friends has the user recruited.
-     *     relationship: Can be not_saying, single, married, divorced, engaged, in_relationship, complicated, widowed, open_relationship
-     * */
+
+      
 
     function __construct() {}
 
     /**
      * function plurk
-     * 每次連接到 Plurk Server 都透過這個 method
+     * Connect to Plurk
      *
      * @param $url
      * @param $array
@@ -133,16 +197,17 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * nick_name: The user's nick name. Should be longer than 3 characters. Should be ASCII. Nick name can only contain letters, numbers and _.
-     * full_name: Can't be empty.
-     * password: Should be longer than 3 characters.
-     * gender: Should be male or female.
-     * date_of_birth: Should be YYYY-MM-DD, example 1985-05-13.
+     * function register 
+     * 
+     * @param string $nick_name
+     * @param string $full_name
+     * @param string $password
+     * @param string $gender
+     * @param string $date_of_birth
      * @return JSON object
      * @see /API/Users/register
      */
-    function register($api_key = '', $nick_name = '', $full_name = '', $password = '', $gender = 'male', $date_of_birth = '0000-00-00', $email = '')
+    function register($nick_name = '', $full_name = '', $password = '', $gender = 'male', $date_of_birth = '0000-00-00', $email = NULL)
     {
 
     	if(strlen($nick_name) < 4)
@@ -166,7 +231,7 @@ Class plurk_api Extends common {
             $this->log('must be a valid email.');
 
         $array = array(
-            'api_key'       => $api_key,
+            'api_key'       => $this->api_key,
             'nick_name'     => $nick_name,
             'full_name'     => $full_name,
             'password'      => $password,
@@ -174,15 +239,14 @@ Class plurk_api Extends common {
             'date_of_birth' => $date_of_birth
         );
 
-        if($email != '') $array['email'] = $email;
+        if(isset($email)) $array['email'] = $email;
 
         return $this->plurk(PLURK_REGISTER, $array);
     }
 
     /**
      * function login
-     * 登入 Plurk 用 method
-     *
+     * 
      * @param $username
      * @param $password
      * @param $api_key
@@ -191,10 +255,6 @@ Class plurk_api Extends common {
      */
     function login($api_key = '', $username = '', $password = '')
     {
-
-        $this->username = $username;
-        $this->password = $password;
-        $this->api_key = $api_key;
 
         $array = array(
             'username' => $username,
@@ -209,6 +269,10 @@ Class plurk_api Extends common {
         if($this->is_login)
         {
             $this->log('Login Success');
+           
+            $this->username = $username;
+            $this->password = $password;
+            $this->api_key = $api_key;            
             $this->user_info = $result;
             $this->fans_count = $result->fans_count;
             $this->alerts_count = $result->alerts_count;
@@ -218,6 +282,8 @@ Class plurk_api Extends common {
         else
         {
             $this->log('Login Failed!');
+            
+            exit('Please Login Again');
         }
 
         return $this->is_login;
@@ -225,17 +291,17 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * @return JSON object
+     * function update_picture
+     * 
+     * @param string $profile_image
+     * @return boolean
      * @see /API/Users/updatePicture
      */
-    function update_picture($api_key = '', $profile_image = '')
+    function update_picture($profile_image = '')
     {
     	//  RFC 1867
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
-        $array = array('api_key' => $api_key);
 
         $boundary = uniqid('------------------');
         $MPboundary = '--' . $boundary;
@@ -251,9 +317,10 @@ Class plurk_api Extends common {
 
         $multipartbody .= $MPboundary . "\r\n";
         $multipartbody.= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody.= $api_key. "\r\n\r\n" . $endMPboundary;
+        $multipartbody.= $this->api_key. "\r\n\r\n" . $endMPboundary;
 
         $ch = curl_init();
+        
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $multipartbody );
@@ -270,17 +337,19 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * full_name: Change full name.
-     * new_password: Change password.
-     * email: Change email.
-     * display_name: User's display name, can be empty and full unicode. Must be shorter than 15 characters.
-     * privacy: User's privacy settings. The option can be world (whole world can view the profile), only_friends (only friends can view the profile) or only_me (only the user can view own plurks).
-     * date_of_birth: Should be YYYY-MM-DD, example 1985-05-13.
-     * @return JSON object
+     * function update
+     * 
+     * @param string $current_password
+     * @param string $full_name
+     * @param string $new_password
+     * @param string $email
+     * @param string $display_name
+     * @param string $privacy
+     * @param string $date_of_birth
+     * @return boolean
      * @see /API/Users/update
      */
-    function update($api_key = '', $current_password = '', $full_name = '', $new_password = '', $email = '', $display_name = '', $privacy = '', $date_of_birth = '0000-00-00')
+    function update($current_password = NULL, $full_name = NULL, $new_password = NULL, $email = NULL, $display_name = NULL, $privacy = NULL, $date_of_birth = NULL)
     {
     	if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -300,16 +369,16 @@ Class plurk_api Extends common {
             $this->log('Display name must be shorter than 15 characters.');
 
         $array = array(
-            'api_key'          => $api_key,
+            'api_key'          => $this->api_key,
             'current_password' => $current_password,
         );
 
-        if($full_name != '') $array['full_name'] = $full_name;
-        if($new_password != '') $array['new_password'] = $new_password;
-        if($display_name != '') $array['display_name'] = $display_name;
-        if($email != '') $array['email'] = $email;
-        if($privacy != '') $array['prvacy'] = $privacy;
-        if($date_of_birth != '0000-00-00') $array['date_of_birth'] = $date_of_birth;
+        if(isset($full_name)) $array['full_name'] = $full_name;
+        if(isset($new_password)) $array['new_password'] = $new_password;
+        if(isset($display_name)) $array['display_name'] = $display_name;
+        if(isset($email)) $array['email'] = $email;
+        if(isset($privacy)) $array['prvacy'] = $privacy;
+        if(isset($date_of_birth)) $array['date_of_birth'] = $date_of_birth;
 
         $this->plurk(PLURK_UPDATE, $array);
 
@@ -318,19 +387,20 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * offset: Return plurks newer than offset, formatted as 2009-6-20T21:55:34.
+     * function get_plurks_polling
+     * 
+     * @param time $offset 2009-6-20T21:55:34
      * @return JSON object
      * @see /API/Polling/getPlurks
      */
-    function get_plurks_polling($api_key = '', $offset)
+    function get_plurks_polling($offset = NULL)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-        $offset = (empty($offset)) ? array_shift(explode("+",date("c",$offset))) : $offset;
+        $offset = (isset($offset)) ? $offset : array_shift(explode("+",date("c",$offset)));
 
         $array = array(
-            'api_key' => $api_key,
+            'api_key' => $this->api_key,
             'offset'  => $offset,
         );
 
@@ -340,13 +410,12 @@ Class plurk_api Extends common {
 
     /**
      * function get_plurks
-     * 取回某一個特定的噗
-     *
+     * 
      * @param $plurk_id
-     * @return object
+     * @return JSON object
      * @see /API/Timeline/getPlurk
      */
-    function get_plurk($plurk_id = '')
+    function get_plurk($plurk_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -360,7 +429,6 @@ Class plurk_api Extends common {
 
     /**
      * function get_plurks
-     * 取回自己河道上所有的噗
      *
      * @param $offset
      * @param $limit
@@ -373,6 +441,7 @@ Class plurk_api Extends common {
     function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = FALSE, $only_private = FALSE)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key'       => $this->api_key,
             'offset'        => $offset,
@@ -381,49 +450,63 @@ Class plurk_api Extends common {
             'only_responded'=> $only_responded,
             'only_private'  => $only_private
         );
+        
         return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);
     }
 
     /**
+     * function get_unread_plurks
+     * 
      * @param $offset Return plurks older than offset, use timestamp.
      * @param $limit Limit the number of plurks that is retunred.
-     * @return object
+     * @return JSON object
      * @see /API/Timeline/getUnreadPlurks
      */
     function get_unread_plurks($offset = null ,$limit = 10)
     {
         // $offset seens it's not working now. by whatup.tw
-        if($offset == null) $offset = time();
-        $date = array_shift(explode("+",date("c",$offset)));
+        if( ! isset($offset)) $offset = time();
+        
+        $date = array_shift(explode("+", date("c", $offset)));
+        
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key'   => $this->api_key,
             'offset'    => $date,
             'limit'     => $limit
         );
+        
         $result = $this->plurk(PLURK_TIMELINE_GET_UNREAD_PLURKS, $array);
         return $result;
     }
 
     /**
+     * function mute_plurks
+     *  
      * @param $ids The plurk ids, eg. array(123,456,789)
      * @return boolean
      * @see /API/Timeline/mutePlurks
      */
     function mute_plurks($ids)
     {
+    	
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key'    => $this->api_key,
             'ids'        => json_encode($ids),
         );
+        
         $this->plurk(PLURK_TIMELINE_MUTE_PLURKS, $array);
-        return ($this->http_status == '200') ? TRUE : FALSE;
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
 
     }
 
     /**
+     * function unmute_plurks
+     * 
      * @param $ids The plurk ids, eg. array(123,456,789)
      * @return boolean
      * @see /API/Timeline/unmutePlurks
@@ -431,15 +514,20 @@ Class plurk_api Extends common {
     function unmute_plurks($ids)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key'    => $this->api_key,
             'ids'        => json_encode($ids),
         );
+        
         $result = $this->plurk(PLURK_TIMELINE_UNMUTE_PLURKS, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
+     * function mark_plurk_as_read
+     * 
      * @param $ids The plurk ids, eg. array(123,456,789)
      * @return boolean
      * @see /API/Timeline/markAsRead
@@ -447,11 +535,14 @@ Class plurk_api Extends common {
     function mark_plurk_as_read($ids)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key'    => $this->api_key,
             'ids'        => json_encode($ids),
         );
+        
         $this->plurk(PLURK_TIMELINE_MARK_AS_READ, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
@@ -471,27 +562,20 @@ Class plurk_api Extends common {
 
         if (mb_strlen($content) > 140)
         {
-            $this->log('這個噗訊息太長了');
+            $this->log('this message should shorter than 140 characters.');
         }
 
         $array = array(
-            'api_key'   => $this->api_key,
-            'qualifier' => 'likes',
-            'content'   => urlencode($content),
-            'lang'      => $lang
+            'api_key'     => $this->api_key,
+            'qualifier'   => 'likes',
+            'content'     => urlencode($content),
+            'lang'        => $lang,
+            'no_comments' => $no_comments
         );
 
-        if ($limited_to != NULL)
-        {
-            // need to comfirm
-            $array['limited_to'] = json_encode($limited_to);
-        }
-
-        if ($no_comments != 0)
-        {
-            $array['no_comments'] = $no_comments;
-        }
-
+        // roga.2009-12-14: need to confirm. 
+        if (isset($limited_to)) $array['limited_to'] = json_encode($limited_to);
+        
         $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
@@ -502,15 +586,13 @@ Class plurk_api Extends common {
      * to /API/Timeline/uploadPicture. This will add the picture to Plurk's CDN network
      * and return a image link that you can add to /API/Timeline/plurkAdd
      *
-     * @param
+     * @param string $upload_image
      * @return JSON object
      * @see /API/Timeline/uploadPicture
      */
-    function upload_picture($api_key, $upload_image = '')
+    function upload_picture($upload_image = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
-        $array = array('api_key' => $api_key);
 
         $boundary = uniqid('------------------');
         $MPboundary = '--' . $boundary;
@@ -526,7 +608,7 @@ Class plurk_api Extends common {
 
         $multipartbody .= $MPboundary . "\r\n";
         $multipartbody.= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody.= $api_key. "\r\n\r\n" . $endMPboundary;
+        $multipartbody.= $this->api_key. "\r\n\r\n" . $endMPboundary;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
@@ -544,37 +626,41 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * plurk_id: The id of the plurk.
+     * function delete_plurk
+     *
+     * @param int $plurk_id: The id of the plurk.
      * @return boolean
      * @see /API/Timeline/plurkDelete
      */
-    function delete_plurk($plurk_id = '')
+    function delete_plurk($plurk_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key'  => $this->api_key,
             'plurk_id' => $plurk_id
         );
 
         $result = $this->plurk(PLURK_TIMELINE_PLURK_DELETE, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
-     * plurk_id: The id of the plurk.
-     * ontent: The content of plurk.
+     * function edit_plurk
+     * 
+     * @param int $plurk_id The id of the plurk.
+     * @param string $content The content of plurk.
      * @return boolean
      * @see /API/Timeline/plurkEdit
      */
-    function edit_plurk($plurk_id = '', $content = '')
+    function edit_plurk($plurk_id = 0, $content = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
         if (mb_strlen($content) > 140)
         {
-            $this->log('這個噗訊息太長了');
+            $this->log('this message should shorter than 140 characters.');
         }
 
         $array = array(
@@ -582,18 +668,21 @@ Class plurk_api Extends common {
             'plurk_id' => $plurk_id,
             'content'  => urlencode($content)
         );
+        
         $result = $this->plurk(PLURK_TIMELINE_PLURK_EDIT, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
-     * plurk_id: The plurk that the responses should be added to.
-     * offset: Only fetch responses from an offset, should be 5, 10 or 15.
+     * function get_responses
+     * 
+     * @param plurk_id: The plurk that the responses should be added to.
+     * @param offset: Only fetch responses from an offset, should be 5, 10 or 15.
      * @return JSON object
      * @see /API/Responses/get
      */
-    function get_responses($plurk_id = '', $offset = 0)
+    function get_responses($plurk_id = 0, $offset = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -602,24 +691,26 @@ Class plurk_api Extends common {
             'plurk_id' => $plurk_id,
             'offset'  => $offset
         );
+        
         return $this->plurk(PLURK_GET_RESPONSE, $array);
     }
 
     /**
-     * @param
-     * plurk_id: The plurk that the responses should be added to.
-     * content: The response's text.
-     * qualifier: The Plurk's qualifier, please see documents/README
+     * function add_response
+     * 
+     * @param plurk_id: The plurk that the responses should be added to.
+     * @param content: The response's text.
+     * @param qualifier: The Plurk's qualifier, please see documents/README
      * @return object
      * @see /API/Responses/responseAdd
      */
-    function add_response($plurk_id = '', $content = '', $qualifier = 'says')
+    function add_response($plurk_id = 0, $content = '', $qualifier = 'says')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
         if (mb_strlen($content) > 140)
         {
-            $this->log('這個噗訊息太長了');
+            $this->log('this message should shorter than 140 characters.');
         }
 
         $array = array(
@@ -628,91 +719,97 @@ Class plurk_api Extends common {
             'content'   => urlencode($content),
             'qualifier' => $qualifier
         );
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
-     * response_id: The plurk that the responses should be added to.
-     * plurk_id: The plurk that the response belongs to.
+     * function delete_response
+     * 
+     * @param response_id: The plurk that the responses should be added to.
+     * @param plurk_id: The plurk that the response belongs to.
      * @return boolean
      * @see /API/Responses/responseDelete
      */
-    function delete_response($plurk_id = '', $response_id = '')
+    function delete_response($plurk_id = 0, $response_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key'     => $this->api_key,
             'plurk_id'    => $plurk_id,
             'response_id' => $response_id
         );
+        
         $result = $this->plurk(PLURK_DELERE_RESPONSE, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
-     * @return object
+     * function get_own_profile
+     * 
+     * @return JSON object
      * @see /API/Profile/getOwnProfile
      */
     function get_own_profile()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array(
-            'api_key' => $this->api_key
-        );
+
+        $array = array('api_key' => $this->api_key);
+
         return $this->plurk(PLURK_GET_OWN_PROFILE, $array);
     }
 
     /**
-     * @param
-     * user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+     * function get_public_profile
+     * 
+     * @param user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
      * @return JSON object
      * @see /API/Profile/getPublicProfile
      */
-    function get_public_profile($user_id = '')
+    function get_public_profile($user_id = 0)
     {
-        $user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
+        
         $array = array(
             'api_key' => $this->api_key,
             'user_id' => $user_id
         );
+        
         return $this->plurk(PLURK_GET_PUBLIC_PROFILE, $array);
     }
 
     /**
-     * @param
-     * user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
-     * offset: The offset, can be 10, 20, 30 etc.
+     * function get_friends
+     * 
+     * @param user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+     * @param offset: The offset, can be 10, 20, 30 etc.
      * @return JSON objects
      * @see /API/FriendsFans/getFriendsByOffset
      */
-    function get_friends($user_id = '', $offset = 0)
+    function get_friends($user_id = 0, $offset = 0)
     {
-        $user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
+        
         $array = array(
             'api_key' => $this->api_key,
             'user_id' => $user_id,
             'offset'  => $offset
         );
+        
         return $this->plurk(PLURK_GET_FRIENDS, $array);
     }
 
     /**
      * function get_fans
-     * 取回粉絲列表
-     *
-     * @param
-     * user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
-     * offset: The offset, can be 10, 20, 30 etc.
-     * @return object
+     * 
+     * @param user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+     * @param offset: The offset, can be 10, 20, 30 etc.
+     * @return JSON object
      * @see /API/FriendsFans/getFansByOffset
      */
-    function get_fans($user_id = '', $offset = 0)
+    function get_fans($user_id = 0, $offset = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
-        $user_id = (empty($user_id)) ? $this->user_info->uid : $user_id;
 
         $array = array(
             'api_key' => $this->api_key,
@@ -724,8 +821,9 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * offset: The offset, can be 10, 20, 30 etc.
+     * function get_following
+     * 
+     * @param offset: The offset, can be 10, 20, 30 etc.
      * @return object
      * @see /API/FriendsFans/getFollowingByOffset
      */
@@ -742,12 +840,13 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * friend_id: The ID of the user you want to befriend.
+     * function become_friend
+     * 
+     * @param friend_id: The ID of the user you want to befriend.
      * @return boolean
      * @see /API/FriendsFans/becomeFriend
      */
-    function become_friend($friend_id = '')
+    function become_friend($friend_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -762,12 +861,13 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * friend_id: The ID of the user you want to befriend.
+     * function remove_Friend
+     * 
+     * @param friend_id: The ID of the user you want to befriend.
      * @return boolean
      * @see /API/FriendsFans/removeAsFriend
      */
-    function remove_Friend($friend_id = '')
+    function remove_Friend($friend_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -782,12 +882,13 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * fan_id: Become fan of fan_id. To stop being a fan of someone, user /API/FriendsFans/setFollowing?fan_id=FAN_ID&follow=false.
+     * function become_fan
+     *  
+     * @param fan_id: Become fan of fan_id. To stop being a fan of someone, user /API/FriendsFans/setFollowing?fan_id=FAN_ID&follow=false.
      * @return boolean
      * @see /API/FriendsFans/becomeFan
      */
-    function become_fan($fan_id = '')
+    function become_fan($fan_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -802,13 +903,14 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * user_id: The ID of the user you want to follow/unfollow
-     * follow: true if the user should be followed, and false if the user should be unfollowed.
+     * function set_following
+     * 
+     * @param user_id: The ID of the user you want to follow/unfollow
+     * @param follow: true if the user should be followed, and false if the user should be unfollowed.
      * @return boolean
      * @see /API/FriendsFans/setFollowing
      */
-    function set_following($user_id = '', $follow = false)
+    function set_following($user_id = 0, $follow = false)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -824,37 +926,40 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function get_completion
      * Returns a JSON object of the logged in users friends (nick name and full name).
+     * 
      * @param
-     * @return object
+     * @return JSON object
      * @see /API/FriendsFans/getCompletion
      */
     function get_completion()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-        $array = array(
-            'api_key' => $this->api_key
-        );
+        $array = array('api_key' => $this->api_key);
 
         return $this->plurk(PLURK_GET_COMPLETION, $array);
     }
 
     /**
-     * @param
+     * function get_active
+     * 
      * @return JSON object
      * @see /API/Alerts/getActive
      */
     function get_active()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array(
-            'api_key' => $this->api_key
-        );
+        
+        $array = array('api_key' => $this->api_key);
+        
         return $this->plurk(PLURK_GET_ACTIVE, $array);
     }
 
     /**
+     * function get_history
+     * 
      * @param
      * @return JSON object
      * @see /API/Alerts/getHistory
@@ -862,101 +967,117 @@ Class plurk_api Extends common {
     function get_history()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array(
-            'api_key' => $this->api_key
-        );
+        
+        $array = array('api_key' => $this->api_key);
+        
         return $this->plurk(PLURK_GET_HISTORY, $array);
     }
 
     /**
-     * @param
-     * user_id: The user_id that has asked for friendship.
+     * function add_as_fan
+     * 
+     * @param user_id: The user_id that has asked for friendship.
      * @return Boolean
      * @see /API/Alerts/addAsFan
      */
-    function add_as_fan($user_id = '')
+    function add_as_fan($user_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key' => $this->api_key,
             'user_id' => $user_id
         );
+        
         $result = $this->plurk(PLURK_ADD_AS_FAN, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
-     * user_id: The user_id that has asked for friendship.
+     * function add_as_friend
+     * 
+     * @param user_id: The user_id that has asked for friendship.
      * @return Boolean
      * @see /API/Alerts/addAsFriend
      */
-    function add_as_friend()
+    function add_as_friend($user_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key' => $this->api_key,
             'user_id' => $user_id
         );
+        
         $result = $this->plurk(PLURK_ADD_AS_FRIEND, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
+     * function add_all_as_fan
+     * 
      * @return Boolean
      * @see /API/Alerts/addAllAsFan
      */
     function add_all_as_fan()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array(
-            'api_key' => $this->api_key
-        );
+        
+        $array = array('api_key' => $this->api_key);
+        
         $result = $this->plurk(PLURK_ADD_ALL_AS_FAN, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
 
     /**
-     * @param
-     * @return Boolean
+     * function add_all_as_friends
+     * 
+     * @return boolean
      * @see /API/Alerts/addAllAsFriends
      */
     function add_all_as_friends()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        $array = array(
-            'api_key' => $this->api_key
-        );
+        
+        $array = array('api_key' => $this->api_key);
+        
         $result = $this->plurk(PLURK_ADD_ALL_AS_FRIEND, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
-     * The user_id that has asked for friendship.
+     * function deny_friendship
+     * @param int $user_id The user_id that has asked for friendship.
      * @return Boolean
      * @see /API/Alerts/denyFriendship
      */
-    function deny_friendship($user_id = '')
+    function deny_friendship($user_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key' => $this->api_key,
             'user_id' => $user_id
         );
+        
         $result = $this->plurk(PLURK_DENY_FRIEND, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * @param
-     * user_id: The user_id that the current user has requested friendship for.
+     * function remove_notification
+     * 
+     * @param user_id: The user_id that the current user has requested friendship for.
      * @return Boolean
      * @see /API/Alerts/removeNotification
      */
-    function remove_notification($user_id = '')
+    function remove_notification($user_id = 0)
     {
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
@@ -972,13 +1093,14 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * query: The query after Plurks.
-     * offset: A plurk_id of the oldest Plurk in the last search result.          
-     * @return JSON list
+     * function search_plurk
+     * 
+     * @param query: The query after Plurks.
+     * @param offset: A plurk_id of the oldest Plurk in the last search result.          
+     * @return JSON object
      * @see /API/PlurkSearch/search
      */
-    function search_plurk($api_key = '', $query = '', $offset = 0)
+    function search_plurk($query = '', $offset = 0)
     {
 
     	/* offset: A plurk_id of the oldest Plurk in the last search result.  */
@@ -986,7 +1108,7 @@ Class plurk_api Extends common {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
         $array = array(
-            'api_key' => $api_key,
+            'api_key' => $this->api_key,
             'query'   => $query,
             'offset'  => $offset
         ) ;
@@ -995,20 +1117,21 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * query: The query after users.
-     * offset: Page offset, like 10, 20, 30 etc.          
-     * @return JSON list
+     * function search_user
+     * 
+     * @param query: The query after users.
+     * @param offset: Page offset, like 10, 20, 30 etc.          
+     * @return JSON object
      * @see /API/UserSearch/search
      */
-    function search_user($api_key = '', $query = '', $offset = 0)
+    function search_user($query = '', $offset = 0)
     {
     	/* offset: Page offset, like 10, 20, 30 etc. */
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
         $array = array(
-            'api_key' => $api_key,
+            'api_key' => $this->api_key,
             'query'   => $query,
             'offset'  => $offset
         ) ;
@@ -1017,34 +1140,36 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function get_emoticons
      * get emotes
-     * @return JSON list
+     * @return JSON object
      * @see /API/Emoticons/get
      */
     function get_emoticons()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        /* ill document */
-        $array = array(
-            'api_key' => $this->api_key,
-        );
+        
+        $array = array('api_key' => $this->api_key);
+        
         $result = $this->plurk(PLURK_GET_EMOTIONS, $array);
+        
         return $result;
     }
 
     /**
-     * @param
-     * offset: What page should be shown, e.g. 0, 10, 20.     
+     * function get_blocks
+     * 
+     * @param offset: What page should be shown, e.g. 0, 10, 20.     
      * @return JSON list
      * @see /API/Blocks/get
      */
-    function get_blocks($api_key = '', $offset = 0)
+    function get_blocks($offset = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
         $array = array(
           'api_key' => $this->api_key,
-          'offset' => $offset,
+          'offset'  => $offset,
         );
 
         return $this->plurk(PLURK_GET_BLOCKS, $array);
@@ -1053,13 +1178,12 @@ Class plurk_api Extends common {
 
     /**
      * funciton block_user
-     * 封鎖特定使用者
      *
      * @param $user_id
      * @return object
      * @see /API/Blocks/block
      */
-    function block_user($user_id)
+    function block_user($user_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1073,48 +1197,50 @@ Class plurk_api Extends common {
     }
 
     /**
-     * @param
-     * user_id: The id of the user that should be unblocked.     
+     * function unblock_user
+     * 
+     * @param user_id: The id of the user that should be unblocked.     
      * @return boolean
      * @see /API/Blocks/unblock
      */
-    function unblock_user($user_id)
+    function unblock_user($user_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        
         $array = array(
             'api_key' => $this->api_key,
             'user_id' => $user_id,
         );
+        
         $this->plurk(PLURK_UNBLOCK, $array);
+        
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
     /**
-     * function get_cliques()
-     * 取得小圈圈
-     * @return array
+     * function get_cliques
+     * 
+     * @return JSON object
      * @see /API/Cliques/get_cliques
      */
     function get_cliques()
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-        $array = array(
-            'api_key' => $this->api_key,
-        );
+        $array = array('api_key' => $this->api_key);
 
         return $this->plurk(PLURK_GET_CLIQUES, $array);
     }
 
     /**
-     * function get_clique()
+     * function get_clique
      * get users from clique
      *
      * @param $clique_name
      * @return array
      * @see /API/Cliques/get_clique
      */
-    function get_clique($clique_name)
+    function get_clique($clique_name = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1128,14 +1254,14 @@ Class plurk_api Extends common {
 
 
     /**
-     * function create_clique()
+     * function create_clique
      * create clique
      *
      * @param $clique_name
      * @return boolean
      * @see /API/Cliques/create_clique
      */
-    function create_clique($clique_name)
+    function create_clique($clique_name = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1151,14 +1277,14 @@ Class plurk_api Extends common {
     }
 
     /**
-     * function delete_clique()
+     * function delete_clique
      * delete clique
      *
      * @param $clique_name
      * @return boolean
      * @see
      */
-    function delete_clique($clique_name)
+    function delete_clique($clique_name = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1174,7 +1300,7 @@ Class plurk_api Extends common {
     }
 
     /**
-     * function rename_clique()
+     * function rename_clique
      * rename clique
      *
      * @param $clique_name
@@ -1182,7 +1308,7 @@ Class plurk_api Extends common {
      * @return boolean
      * @see /API/Cliques/rename_clique
      */
-    function rename_clique($clique_name,$new_name)
+    function rename_clique($clique_name = '', $new_name = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1198,7 +1324,7 @@ Class plurk_api Extends common {
     }
 
     /**
-     * function add_to_clique()
+     * function add_to_clique
      * add friend to clique
      *
      * @param $clique_name
@@ -1206,7 +1332,7 @@ Class plurk_api Extends common {
      * @return boolean
      * @see /API/Cliques/add
      */
-    function add_to_clique($clique_name,$user_id)
+    function add_to_clique($clique_name = '', $user_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1230,7 +1356,7 @@ Class plurk_api Extends common {
      * @return boolean
      * @see /API/Cliques/remove
      */
-    function remove_from_clique($clique_name,$user_id)
+    function remove_from_clique($clique_name = '', $user_id = 0)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1247,7 +1373,8 @@ Class plurk_api Extends common {
 
     /**
      * function get_login_status
-     * 取得登入狀態
+     * Get login status
+     * 
      * @return boolean
      */
     function get_login_status()
@@ -1257,7 +1384,8 @@ Class plurk_api Extends common {
 
     /**
      * function get_http_status
-     * 取得 HTTP Status Code
+     * Get HTTP Status Code
+     * 
      * @return int
      */
     function get_http_status()
@@ -1267,7 +1395,8 @@ Class plurk_api Extends common {
 
     /**
      * function get_http_response
-     * 取得 HTTP Server Response
+     * Get HTTP Server Response
+     * 
      * @return int
      */
     function get_http_response()
@@ -1277,8 +1406,9 @@ Class plurk_api Extends common {
 
     /**
      * function get_user_info
-     * 取得使用者資料
-     * @return object
+     * Get user information
+     * 
+     * @return JSON object
      */
     function get_user_info()
     {

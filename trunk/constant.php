@@ -1,4 +1,11 @@
 <?php
+
+    /**
+     *  @desc: URLs setting
+     *  @see: http://www.plurk.com/API
+     *  
+     **/
+
     define('PLURK_REGISTER', 'http://www.plurk.com/API/Users/register');
     define('PLURK_LOGIN', 'http://www.plurk.com/API/Users/login');
     define('PLURK_UPDATE_PICTURE', 'http://www.plurk.com/API/Users/updatePicture');
@@ -58,5 +65,4 @@
     define('PLURK_DELETE_CLIQUE', 'http://www.plurk.com/API/Cliques/delete_clique');
     define('PLURK_ADD_TO_CLIQUE', 'http://www.plurk.com/API/Cliques/add');
     define('PLURK_REMOVE_FROM_CLIQUE', 'http://www.plurk.com/API/Cliques/remove');
-
 ?>
