@@ -5,11 +5,16 @@
 
 	$plurk = new plurk_api();
 
+	/**
+	 * @desc: Get the API key via Official API website, http://www.plurk.com/API
+	 * 
+	 */
+	
 	$api_key = '';
 	$user_name = '';
 	$password = '';
 
-	$plurk->login($user_name, $password, $api_key);
+	$plurk->login($api_key, $user_name, $password);
 
 	print_r($plurk->get_plurks());
 	print_r($plurk->get_user_info());
