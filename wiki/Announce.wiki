@@ -16,8 +16,10 @@
 = 程式 =
 
 1. 希望和 RLPlurkAPI 100 相容。
+
 2. 缺 Example 驗證 plurk_api 裡面的每個 method
-4. 自己的 log 和 cookie 不要 commit 回來。
+
+3. 自己的 log 和 cookie 不要 commit 回來。
 
 = 成員 =
 
