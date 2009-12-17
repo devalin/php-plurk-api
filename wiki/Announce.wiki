@@ -5,14 +5,6 @@
 
 2. plurk_api 類別繼承 common 類別
 
-= 資料庫作用 =
-
-1. 儲存 uid 和 display_name 的關係，這個在每則噗不會紀錄
-
-2. 儲存回應過的噗
-
-3. 錯誤訊息紀錄
-
 = 程式 =
 
 1. 存有自己資料的 log 和 cookie 不要 commit 回來。
