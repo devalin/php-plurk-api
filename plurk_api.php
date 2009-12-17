@@ -40,7 +40,7 @@ Class plurk_api Extends common {
      * Login status
      * @var bool $is_login
      */
-    protected $is_login = 'VIVIEN';
+    protected $is_login = FALSE;
 
     /**
      * Current HTTP Status Code
@@ -171,7 +171,7 @@ Class plurk_api Extends common {
      *
      * @param $url
      * @param $array
-     * @return object
+     * @return JSON object
      */
     function plurk($url, $array)
     {
@@ -182,7 +182,7 @@ Class plurk_api Extends common {
         curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api v1.0 beta");
+        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api 1.2b");
 
         curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
         curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
@@ -440,7 +440,7 @@ Class plurk_api Extends common {
      * @param int $only_user The numeric ID of the user who's plurks should be returned.
      * @param boolean $only_responded Setting it to true will only return responded plurks.
      * @param boolean $only_private Setting it to true will only return private plurks.
-     * @return object
+     * @return JSON object
      * @see /API/Timeline/getPlurks
      */
     function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = FALSE, $only_private = FALSE)
@@ -554,17 +554,13 @@ Class plurk_api Extends common {
     /**
      * function add_Plurk
      *
-     * no_comments:
-     * 如果是 0, 允許回應
-     * 如果是 1, 不允許回應
-     * 如果是 2, 只有好友能夠回應
      * @param string $lang The plurk's language.
      * @param string $qualifier The Plurk's qualifier, must be in English. please see documents/README
      * @param string $content The Plurk's text.
      * @param $limited_to Limit the plurk only to some users (also known as private plurking). limited_to should be a Array list of friend ids, e.g. limited_to = array(3,4,66,34) will only be plurked to these user ids.
      * @param string $lang The plurk's language.
      * @param int $no_commetns If set to 1, then responses are disabled for this plurk. If set to 2, then only friends can respond to this plurk.
-     * @return object
+     * @return JSON object
      * @see /API/Timeline/plurkAdd
      */
     function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
@@ -712,7 +708,7 @@ Class plurk_api Extends common {
      * @param int $plurk_id The plurk that the responses should be added to.
      * @param string $content The response's text.
      * @param string $qualifier The Plurk's qualifier, please see documents/README
-     * @return object
+     * @return JSON object
      * @see /API/Responses/responseAdd
      */
     function add_response($plurk_id = 0, $content = '', $qualifier = 'says')
@@ -1185,7 +1181,7 @@ Class plurk_api Extends common {
      * function get_blocks
      * 
      * @param int $offset What page should be shown, e.g. 0, 10, 20.     
-     * @return JSON list
+     * @return JSON object
      * @see /API/Blocks/get
      */
     function get_blocks($offset = 0)
