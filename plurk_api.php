@@ -40,7 +40,7 @@ Class plurk_api Extends common {
      * Login status
      * @var bool $is_login
      */
-    protected $is_login = FALSE;
+    protected $is_login = 'VIVIEN';
 
     /**
      * Current HTTP Status Code
@@ -171,7 +171,7 @@ Class plurk_api Extends common {
      *
      * @param $url
      * @param $array
-     * @return JSON object
+     * @return object
      */
     function plurk($url, $array)
     {
@@ -182,7 +182,7 @@ Class plurk_api Extends common {
         curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api 1.2b");
+        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api v1.0 beta");
 
         curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
         curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
@@ -440,7 +440,7 @@ Class plurk_api Extends common {
      * @param int $only_user The numeric ID of the user who's plurks should be returned.
      * @param boolean $only_responded Setting it to true will only return responded plurks.
      * @param boolean $only_private Setting it to true will only return private plurks.
-     * @return JSON object
+     * @return object
      * @see /API/Timeline/getPlurks
      */
     function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = FALSE, $only_private = FALSE)
@@ -457,6 +457,28 @@ Class plurk_api Extends common {
         );
         
         return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);
+    }
+
+    /**
+     * function getPlurks
+     * Compatible with RLPlurkAPI
+     * Gets the plurks for the user. Only 25 plurks are fetch at a time as this 
+     * is limited on the server.
+     * The array returned is ordered most recent post first followed by 
+     * previous posts.
+     *
+     * @param int    $int_uid          The UID to fetch plurks for.
+     * @param string $date_from        The date/time to start fetching plurks. This must be in the <yyyy-mm-dd>T<hh:mm:ss> format assumed to be UTC time.
+     * @param string $date_offset      The date/time offset that fetches plurks earlier than this offset. The format is the same as $date_from.
+     * @param bool   $fetch_responses  If true, populate the responses_fetch value with the array of responses.
+     * @param bool   $self_plurks_only If true, return only self plurks.
+     * @return array The array (numerical) of plurks (an associative subarray).
+     * @todo Should rewrite.
+     */
+    function getPlurks($int_uid = null, $date_from = null, $date_offset = null, 
+        $fetch_responses = false, $self_plurks_only = false)
+    {
+        printf("getPlurks: This function is not implemented yet.\n");
     }
 
     /**
@@ -484,6 +506,20 @@ Class plurk_api Extends common {
         
         $result = $this->plurk(PLURK_TIMELINE_GET_UNREAD_PLURKS, $array);
         return $result;
+    }
+
+    /**
+     * function getUnreadPlurks
+     * Compatible with RLPlurkAPI
+     * Get the unread plurks.
+     *
+     * @param bool $fetch_responses If true, populate the responses_fetch value with the array of responses.
+     * @return array The array (numerical) of unread plurks (an associative subarray).
+     * @todo $fetch_responses not implemented
+     */
+    function getUnreadPlurks($fetch_responses = false)
+    {
+        return $this-> get_unread_plurks(null, 10);
     }
 
     /**
@@ -531,6 +567,37 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function mutePlurk
+     * Compatible with RLPlurkAPI
+     * Mute or unmute plurks
+     *
+     * @param array $int_plurk_id The plurk id to be muted/unmuted.
+     * @param bool  $bool_setmute If true, this plurk is to be muted, else, 
+     *                            unmute it.
+     *
+     * @return bool Returns true if successful or false otherwise.
+     */
+    function mutePlurk($int_plurk_id, $bool_setmute)
+    {
+
+        if (!is_int($int_plurk_id) || ! is_bool($bool_setmute))
+        {
+            return false;
+        }
+
+		if ($bool_setmute == true)
+        {
+            return mute_plurks(array($int_plurk_id));
+        }
+        else if ($bool_setmute == false)
+        {
+            return unmute_plurks(array($int_plurk_id));
+        }
+
+        return false;
+    }
+
+    /**
      * function mark_plurk_as_read
      * 
      * @param $ids The plurk ids, eg. array(123,456,789)
@@ -554,13 +621,17 @@ Class plurk_api Extends common {
     /**
      * function add_Plurk
      *
+     * no_comments:
+     * 如果是 0, 允許回應
+     * 如果是 1, 不允許回應
+     * 如果是 2, 只有好友能夠回應
      * @param string $lang The plurk's language.
      * @param string $qualifier The Plurk's qualifier, must be in English. please see documents/README
      * @param string $content The Plurk's text.
      * @param $limited_to Limit the plurk only to some users (also known as private plurking). limited_to should be a Array list of friend ids, e.g. limited_to = array(3,4,66,34) will only be plurked to these user ids.
      * @param string $lang The plurk's language.
      * @param int $no_commetns If set to 1, then responses are disabled for this plurk. If set to 2, then only friends can respond to this plurk.
-     * @return JSON object
+     * @return boolean
      * @see /API/Timeline/plurkAdd
      */
     function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
@@ -585,6 +656,17 @@ Class plurk_api Extends common {
         
         $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
         return ($this->http_status == '200') ? TRUE : FALSE;
+    }
+
+    /**
+     * function addPlurk
+     * Compatible with RLPlurkAPI
+     *
+     * @return boolean
+     */
+    function addPlurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
+    {
+        return $this->add_plurk($lang, $qualifier, $content, $limited_to, $no_comments);
     }
 
     /**
@@ -654,6 +736,19 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function deletePlurk
+     * Compatible with RLPlurkAPI
+     * delete a plurk
+     *
+     * @param array $int_plurk_id The plurk id to be deleted.
+     * @return bool Returns true if successful or false otherwise.
+     */
+    function deletePlurk($int_plurk_id)
+    {
+        return delete_plurk($int_plurk_id);
+    }
+
+    /**
      * function edit_plurk
      * 
      * @param int $plurk_id The id of the plurk.
@@ -703,12 +798,25 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function getResponses
+     * Compatible with RLPlurkAPI
+     * Get the responses of a plurk. This method will load "temporary" friends who have responded to the plurk.
+     *
+     * @param int $int_plurk_id The plurk ID 
+     * @return array The array of responses.
+     */
+    function getResponses($int_plurk_id)
+    {
+        return $this->get_responses($int_plurk_id, 0);
+    }
+
+    /**
      * function add_response
      * 
      * @param int $plurk_id The plurk that the responses should be added to.
      * @param string $content The response's text.
      * @param string $qualifier The Plurk's qualifier, please see documents/README
-     * @return JSON object
+     * @return object
      * @see /API/Responses/responseAdd
      */
     function add_response($plurk_id = 0, $content = '', $qualifier = 'says')
@@ -728,6 +836,23 @@ Class plurk_api Extends common {
         );
         
         return ($this->http_status == '200') ? TRUE : FALSE;
+    }
+
+    /**
+     * function respondToPlurk
+     * Compatible with RLPlurkAPI
+     * Respond to a plurk.
+     *
+     * @param int    $int_plurk_id     The plurk ID number to respond to.
+     * @param string $string_lang      The plurk language.
+     * @param string $string_qualifier The qualifier to use for this response.
+     * @param string $string_content   The content to be posted as a reply.
+     *
+     * @return mixed false on failure, otherwise the http response from plurk.
+     */
+    function respondToPlurk($int_plurk_id = 0, $string_lang = 'en', $string_qualifie = 'says', $string_content = 'test from roga-plurk-api')
+    {
+        return $this->add_response($int_plurk_id, $string_content, $string_qualifie);
     }
 
     /**
@@ -966,6 +1091,17 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function getAlerts
+     * Compatible with RLPlurkAPI
+     *
+     * @return JSON object
+     */
+    function getAlerts()
+    {
+        return $this->active();
+    }
+
+    /**
      * function get_history
      * Return a JSON list of past 30 alerts.
      * 
@@ -1085,6 +1221,59 @@ Class plurk_api Extends common {
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
+	/**
+     * function befriend
+     * Compatible with RLPlurkAPI
+     *
+     * @param array $array_uid The array of firend uids.
+     * @todo should modify in a better way
+     */
+    function befriend($array_uid = null, $bool_befriend = false)
+    {
+        $return = true;
+
+        if ($bool_befriend == false)
+        {
+            foreach($array_uid as $friend_id)
+			{
+				$return = ($return && $this->deny_friendship($friend_id));
+			}
+        }
+		else if ($bool_befriend == true)
+		{
+			foreach($array_uid as $friend_id)
+			{
+				$return = ($return && $this->add_as_friend($friend_id));
+			}
+		}
+
+        return $return;
+    }
+
+    /**
+     * function denyFriendMakeFan
+     * Compatible with RLPlurkAPI
+     *
+     * @param array $array_uid The array of friend requests uids.
+     * @todo should modify in a better way
+     */
+    function denyFriendMakeFan($array_uid = null)
+    {
+        $return = true;
+
+        if (!is_array($array_uid))
+        {
+            return false;
+        }
+
+         foreach ($array_uid as $friend_id)
+         {
+             $return = ($return && $this->add_as_fan($friend_id));
+         }
+
+        return $return;
+    }
+
     /**
      * function remove_notification
      * Remove notification to user with id user_id.
@@ -1181,7 +1370,7 @@ Class plurk_api Extends common {
      * function get_blocks
      * 
      * @param int $offset What page should be shown, e.g. 0, 10, 20.     
-     * @return JSON object
+     * @return JSON list
      * @see /API/Blocks/get
      */
     function get_blocks($offset = 0)
@@ -1195,6 +1384,18 @@ Class plurk_api Extends common {
 
         return $this->plurk(PLURK_GET_BLOCKS, $array);
 
+    }
+
+    /**
+     * function getBlockedUsers
+     * Compatible with RLPlurkAPI
+     * Get my list of blocked users.
+     *
+     * @return array Returns an array of blocked users.
+     */
+    function getBlockedUsers()
+    {
+        return $this->get_blocks(0);
     }
 
     /**
@@ -1218,6 +1419,30 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function blockUser
+     * Compatible with RLPlurkAPI
+     *
+     * @param array $array_uid The array of user ids to be blocked.
+     * @return bool Returns true if successful or false otherwise.
+     */
+    function blockUser($array_uid = null)
+    {
+        $return = true;
+
+        if (!is_array($array_uid))
+        {
+            return false;
+        }
+
+         foreach ($array_uid as $friend_id)
+         {
+             $return = ($return && $this->block_user($friend_id));
+         }
+
+        return $return;    
+    }
+
+    /**
      * function unblock_user
      * 
      * @param user_id: The id of the user that should be unblocked.     
@@ -1236,6 +1461,30 @@ Class plurk_api Extends common {
         $this->plurk(PLURK_UNBLOCK, $array);
         
         return ($this->http_status == '200') ? TRUE : FALSE;
+    }
+
+    /**
+     * function unblockUser
+     * Compatible with RLPlurkAPI
+     *
+     * @param array $array_uid The array of user ids to be unblocked.
+     * @return bool Returns true if successful or false otherwise.
+     */
+    function unblockUser($array_uid = null)
+    {
+        $return = true;
+
+        if (!is_array($array_uid))
+        {
+            return false;
+        }
+
+         foreach ($array_uid as $friend_id)
+         {
+             $return = ($return && $this->unblock_user($friend_id));
+         }
+
+        return $return;
     }
 
     /**
@@ -1393,6 +1642,52 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function uidToNickname
+     * Compatible with RLPlurkAPI
+     * Translates a uid to the corresponding nickname.
+     *
+     * @param int $uid The uid to be translated.
+     * @return string The nick_name corresponding to the given uid.
+     * @todo not test yet. (?)
+     */
+    function uidToNickname($uid)
+    {
+        if (!is_int($uid)) {
+            return false;
+        }
+
+        if ($uid == $this->uid) {
+            return (string) $this->nick_name;
+        }
+
+        foreach ($this->get_friends() as $friend) {
+            if ($friend['uid'] == $uid) {
+                return (string) $friend['nick_name'];
+            }
+        }
+
+        /*
+         * We don't know who this is, just return the string "User $uid"
+         */
+        return 'User ' . $uid;
+
+    }
+
+    /**
+     * function nicknameToUid
+     * Compatible with RLPlurkAPI
+     * Retrieve a user's uid from given his/her plurk nick name.
+     * 
+     * @param string $string_nick_name The nickname of the user to retrieve the uid from.
+     * @return int The uid of the given nickname.
+     * @todo not implemented yet
+     */
+    function nicknameToUid($string_nick_name)
+    {
+        printf("nicknameToUid: This function is not implemented yet.\n");
+    }
+
+    /**
      * function get_login_status
      * Get login status
      * 
@@ -1401,6 +1696,17 @@ Class plurk_api Extends common {
     function get_login_status()
     {
         return ($this->is_login) ? TRUE : FALSE;
+    }
+
+    /**
+     * function isLoggedIn
+     * Compatible with RLPlurkAPI
+     *
+     * @return boolean true if we are logged in, false otherwise.
+     */
+    function isLoggedIn()
+    {
+        return $this->get_login_status();
     }
 
     /**
@@ -1435,4 +1741,98 @@ Class plurk_api Extends common {
     {
         return $this->user_info;
     }
+
+    /**
+     * function uidToUserinfo
+     * Compatible with RLPlurkAPI
+     * Retrieve a user's information given a plurk uid.
+     * 
+     * @param int $int_uid The uid of the plurk member.
+     * @return array The associative array of user information.
+     * @todo not implemented yet
+     */
+    function uidToUserinfo($int_uid)
+    {
+        printf("uidToUserinfo: This function is not implemented yet.\n");
+    }
+
+
+    /**
+     * function getPermalink
+     * Compatible with RLPlurkAPI
+     * Convert a plurk ID to a permalink URL.
+     *
+     * @param int $plurk_id The plurk ID number.
+     * @return string The permalink URL address.
+     */
+    function getPermalink($plurk_id)
+    {
+        if (!is_int($plurk_id))
+        {
+            return '';
+        }
+
+        return "http://www.plurk.com/p/" . base_convert($plurk_id, 10, 36);
+    }
+
+    /**
+     * function permalinkToPlurkID
+     * Compatible with RLPlurkAPI
+     * Convert a plurk permalink URL address to a plurk ID.
+     *
+     * @param string $string_permalink The plurk permalink URL address.
+     * @return int The plurk ID number.
+     */
+    function permalinkToPlurkID($string_permalink)
+    {
+        $base36number = str_replace('http://www.plurk.com/p/', '', 
+            $string_permalink);
+
+        return (int) base_convert($base36number, 36, 10);
+    }
+
+    /**
+     * function getCities
+     * Compatible with RLPlurkAPI
+     * Get cities.
+     *
+     * @param int $int_uid       The user's UID to be passed to the getCities.
+     * @param int $int_region_id The region's ID to be passed to the getCities.
+     * @return array The associative array of cities within a region and their details.
+     * @todo not implemented yet
+     */
+    function getCities($int_uid = null, $int_region_id = null)
+    {
+        printf("getCities: This function is not implemented yet.\n");
+    }
+
+    /**
+     * function getRegions
+     * Compatible with RLPlurkAPI
+     * Get the regions in a given country.
+     *
+     * @param int $int_uid        The user's UID to be passed to the getRegions.
+     * @param int $int_country_id The country's ID to be passed to the getRegions.
+     * @return array The associative array of regions in a country and their details.
+     * @todo not implemented yet
+     */
+    function getRegions($int_uid = null, $int_country_id = null)
+    {
+        printf("getRegions: This function is not implemented yet.\n");
+    }
+
+    /**
+     * function getCountries
+     * Compatible with RLPlurkAPI
+     * Get thie list of countries.
+     *
+     * @param int $int_uid The user's UID to be passed to the getCountries.
+     * @return array The associative array of countries and their details.
+     * @todo not implemented yet
+     */
+    function getCountries($int_uid = null)
+    {
+        printf("getCountries: This function is not implemented yet.\n");
+    }
+
 }
