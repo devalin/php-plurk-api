@@ -30,7 +30,7 @@ php-plurk-api 相容的寫法：
 require('plurk_api.php');
 $plurk = new plurk_api();
         
-$api_key = 'your-api-key-goes here';
+$api_key = 'your-api-key-goes-here';
 
 $user_name = 'johndoe';
 $password = 'secret!';
