@@ -1,14 +1,51 @@
-#summary One-sentence summary of this page.
 #labels Featured
+= TODO List =
 
-= Introduction =
+1. 缺 Documentation，請參考 [http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_sample2.pkg.html phpDocumentor的用法]，每個變數的解釋和意義請交互參照官方 API 文件補齊。
 
-Add your content here.
+2. 缺 Example 驗證 plurk_api 裡面的每個 method，不需要寫的太複雜，一開始只需基本功能展示即可。範例可以參考這邊的[http://code.google.com/p/rlplurkapi/source/browse/trunk/example.php example.php]，看看每個 method 能不能 work，這樣就很 OK 了，不需要太複雜(下班時間很寶貴，請多多珍惜)。
 
+3. 希望和 RLPlurkAPI 的每個 method 100% 相容，讓使用者可以無痛轉換。
 
-= Details =
+舉例來說， RLPlurkAPI 的用法：
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+{{{
+/* 在 example 內 */
+$nick_name = 'johndoe';
+$password = 'secret!';
+
+require 'RLPlurkAPI.php';
+
+$plurk = new RLPlurkAPI();
+
+echo "\n\n------ addPlurk ------\n";
+$plurk->addPlurk('en', 'is', 'tired (:');
+}}}
+
+php-plurk-api 相容的寫法：
+
+{{{
+/* 在 example 內 */
+
+require('plurk_api.php');
+$plurk = new plurk_api();
+        
+$api_key = 'your-api-key-goes here';
+
+$user_name = 'johndoe';
+$password = 'secret!';
+
+$plurk->login($api_key, $user_name, $password);
+
+$plurk->addPlurk('en', 'is', 'tired (:');
+
+/* 在 plurk_api 類別內，多寫一個 addPlurk() 的方法 */
+
+Class plurk_api extends common {
+    function addPlurk($string_lang = 'en', $string_qualifier = 'says', $string_content = '', $allow_comments = true, $array_limited_to = array()) 
+    {        
+        ($allow_comments) ?	$no_comments = 0 : $no_comments = 1;       
+        $this->add_plurk($string_lang, $string_qualifier, $string_content, $array_limited_to, $no_comments);
+	}
+}
+}}}
