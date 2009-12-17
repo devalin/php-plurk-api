@@ -198,12 +198,14 @@ Class plurk_api Extends common {
 
     /**
      * function register 
+     * Register a new Plurk account. Should be HTTPS
      * 
-     * @param string $nick_name
-     * @param string $full_name
-     * @param string $password
-     * @param string $gender
-     * @param string $date_of_birth
+     * @param string $nick_name The user's nick name. Should be longer than 3 characters. Should be ASCII. Nick name can only contain letters, numbers and _.
+     * @param string $full_name Can't be empty.
+     * @param string $password Should be longer than 3 characters.
+     * @param string $gender Should be male or female.
+     * @param string $date_of_birth Should be YYYY-MM-DD, example 1985-05-13.
+     * $param string $email (Optional) Must be a valid email.
      * @return JSON object
      * @see /API/Users/register
      */
@@ -246,10 +248,11 @@ Class plurk_api Extends common {
 
     /**
      * function login
+     * Login an already created user. Login creates a session cookie, which can be used to access the other methods.
      * 
-     * @param $username
-     * @param $password
-     * @param $api_key
+     * @param $username The user's nick name or email.
+     * @param $password The user's password.
+     * @param $api_key Your Plurk API key.
      * @return boolean
      * @see /API/Users/login
      */
@@ -292,8 +295,9 @@ Class plurk_api Extends common {
 
     /**
      * function update_picture
+     * pdate a user's profile picture. You can read more about how to render an avatar via user data.
      * 
-     * @param string $profile_image
+     * @param string $profile_image The new profile image.
      * @return boolean
      * @see /API/Users/updatePicture
      */
@@ -338,14 +342,15 @@ Class plurk_api Extends common {
 
     /**
      * function update
+     * Update a user's information (such as email, password or privacy). Should be HTTPS
      * 
-     * @param string $current_password
-     * @param string $full_name
-     * @param string $new_password
-     * @param string $email
-     * @param string $display_name
-     * @param string $privacy
-     * @param string $date_of_birth
+     * @param string $current_password User's current password.
+     * @param string $full_name Change full name.
+     * @param string $new_password Change password.
+     * @param string $email Change email.
+     * @param string $display_name User's display name, can be empty and full unicode. Must be shorter than 15 characters.
+     * @param string $privacy User's privacy settings. The option can be world (whole world can view the profile), only_friends (only friends can view the profile) or only_me (only the user can view own plurks).
+     * @param string $date_of_birth Should be YYYY-MM-DD, example 1985-05-13.
      * @return boolean
      * @see /API/Users/update
      */
@@ -389,7 +394,7 @@ Class plurk_api Extends common {
     /**
      * function get_plurks_polling
      * 
-     * @param time $offset 2009-6-20T21:55:34
+     * @param time $offset Return plurks newer than offset, use timestamp.
      * @return JSON object
      * @see /API/Polling/getPlurks
      */
@@ -411,7 +416,7 @@ Class plurk_api Extends common {
     /**
      * function get_plurks
      * 
-     * @param $plurk_id
+     * @param int $plurk_id The unique id of the plurk. Should be passed as a number, and not base 36 encoded.
      * @return JSON object
      * @see /API/Timeline/getPlurk
      */
@@ -430,11 +435,11 @@ Class plurk_api Extends common {
     /**
      * function get_plurks
      *
-     * @param $offset
-     * @param $limit
-     * @param $only_user
-     * @param $only_responded
-     * @param $only_private
+     * @param time $offset Return plurks older than offset, use timestamp.
+     * @param int $limit How many plurks should be returned? Default is 20.
+     * @param int $only_user The numeric ID of the user who's plurks should be returned.
+     * @param boolean $only_responded Setting it to true will only return responded plurks.
+     * @param boolean $only_private Setting it to true will only return private plurks.
      * @return object
      * @see /API/Timeline/getPlurks
      */
@@ -457,8 +462,8 @@ Class plurk_api Extends common {
     /**
      * function get_unread_plurks
      * 
-     * @param $offset Return plurks older than offset, use timestamp.
-     * @param $limit Limit the number of plurks that is retunred.
+     * @param time $offset Return plurks older than offset, use timestamp
+     * @param int $limit Limit the number of plurks that is retunred.
      * @return JSON object
      * @see /API/Timeline/getUnreadPlurks
      */
@@ -553,6 +558,12 @@ Class plurk_api Extends common {
      * 如果是 0, 允許回應
      * 如果是 1, 不允許回應
      * 如果是 2, 只有好友能夠回應
+     * @param string $lang The plurk's language.
+     * @param string $qualifier The Plurk's qualifier, must be in English. please see documents/README
+     * @param string $content The Plurk's text.
+     * @param $limited_to Limit the plurk only to some users (also known as private plurking). limited_to should be a Array list of friend ids, e.g. limited_to = array(3,4,66,34) will only be plurked to these user ids.
+     * @param string $lang The plurk's language.
+     * @param int $no_commetns If set to 1, then responses are disabled for this plurk. If set to 2, then only friends can respond to this plurk.
      * @return object
      * @see /API/Timeline/plurkAdd
      */
@@ -677,8 +688,8 @@ Class plurk_api Extends common {
     /**
      * function get_responses
      * 
-     * @param plurk_id: The plurk that the responses should be added to.
-     * @param offset: Only fetch responses from an offset, should be 5, 10 or 15.
+     * @param int $plurk_id: The plurk that the responses should be added to.
+     * @param int $offset: Only fetch responses from an offset, should be 5, 10 or 15.
      * @return JSON object
      * @see /API/Responses/get
      */
@@ -698,9 +709,9 @@ Class plurk_api Extends common {
     /**
      * function add_response
      * 
-     * @param plurk_id: The plurk that the responses should be added to.
-     * @param content: The response's text.
-     * @param qualifier: The Plurk's qualifier, please see documents/README
+     * @param int $plurk_id The plurk that the responses should be added to.
+     * @param string $content The response's text.
+     * @param string $qualifier The Plurk's qualifier, please see documents/README
      * @return object
      * @see /API/Responses/responseAdd
      */
@@ -726,8 +737,8 @@ Class plurk_api Extends common {
     /**
      * function delete_response
      * 
-     * @param response_id: The plurk that the responses should be added to.
-     * @param plurk_id: The plurk that the response belongs to.
+     * @param int $response_id The plurk that the responses should be added to.
+     * @param int $plurk_id The plurk that the response belongs to.
      * @return boolean
      * @see /API/Responses/responseDelete
      */
@@ -764,7 +775,7 @@ Class plurk_api Extends common {
     /**
      * function get_public_profile
      * 
-     * @param user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+     * @param int $user_id The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
      * @return JSON object
      * @see /API/Profile/getPublicProfile
      */
@@ -782,8 +793,8 @@ Class plurk_api Extends common {
     /**
      * function get_friends
      * 
-     * @param user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
-     * @param offset: The offset, can be 10, 20, 30 etc.
+     * @param int|string $user_id The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+     * @param int $offset The offset, can be 10, 20, 30 etc.
      * @return JSON objects
      * @see /API/FriendsFans/getFriendsByOffset
      */
@@ -802,8 +813,8 @@ Class plurk_api Extends common {
     /**
      * function get_fans
      * 
-     * @param user_id: The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
-     * @param offset: The offset, can be 10, 20, 30 etc.
+     * @param int|string $user_id The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+     * @param int $offset The offset, can be 10, 20, 30 etc.
      * @return JSON object
      * @see /API/FriendsFans/getFansByOffset
      */
@@ -823,7 +834,7 @@ Class plurk_api Extends common {
     /**
      * function get_following
      * 
-     * @param offset: The offset, can be 10, 20, 30 etc.
+     * @param int $offset The offset, can be 10, 20, 30 etc.
      * @return object
      * @see /API/FriendsFans/getFollowingByOffset
      */
@@ -842,7 +853,7 @@ Class plurk_api Extends common {
     /**
      * function become_friend
      * 
-     * @param friend_id: The ID of the user you want to befriend.
+     * @param int $friend_id The ID of the user you want to befriend.
      * @return boolean
      * @see /API/FriendsFans/becomeFriend
      */
@@ -863,7 +874,7 @@ Class plurk_api Extends common {
     /**
      * function remove_Friend
      * 
-     * @param friend_id: The ID of the user you want to befriend.
+     * @param int $friend_id The ID of the user you want to befriend.
      * @return boolean
      * @see /API/FriendsFans/removeAsFriend
      */
@@ -884,7 +895,7 @@ Class plurk_api Extends common {
     /**
      * function become_fan
      *  
-     * @param fan_id: Become fan of fan_id. To stop being a fan of someone, user /API/FriendsFans/setFollowing?fan_id=FAN_ID&follow=false.
+     * @param int $fan_id Become fan of fan_id. To stop being a fan of someone, user /API/FriendsFans/setFollowing?fan_id=FAN_ID&follow=false.
      * @return boolean
      * @see /API/FriendsFans/becomeFan
      */
@@ -904,9 +915,10 @@ Class plurk_api Extends common {
 
     /**
      * function set_following
+     * Update following of user_id. A user can befriend someone, but can unfollow them. This request is also used to stop following someone as a fan.
      * 
-     * @param user_id: The ID of the user you want to follow/unfollow
-     * @param follow: true if the user should be followed, and false if the user should be unfollowed.
+     * @param int $user_id The ID of the user you want to follow/unfollow
+     * @param boolean $follow true if the user should be followed, and false if the user should be unfollowed.
      * @return boolean
      * @see /API/FriendsFans/setFollowing
      */
@@ -929,7 +941,6 @@ Class plurk_api Extends common {
      * function get_completion
      * Returns a JSON object of the logged in users friends (nick name and full name).
      * 
-     * @param
      * @return JSON object
      * @see /API/FriendsFans/getCompletion
      */
@@ -944,6 +955,7 @@ Class plurk_api Extends common {
 
     /**
      * function get_active
+     * Return a JSON list of current active alert
      * 
      * @return JSON object
      * @see /API/Alerts/getActive
@@ -959,6 +971,7 @@ Class plurk_api Extends common {
 
     /**
      * function get_history
+     * Return a JSON list of past 30 alerts.
      * 
      * @param
      * @return JSON object
@@ -975,8 +988,9 @@ Class plurk_api Extends common {
 
     /**
      * function add_as_fan
+     * Accept user_id as fan.
      * 
-     * @param user_id: The user_id that has asked for friendship.
+     * @param int $user_id The user_id that has asked for friendship.
      * @return Boolean
      * @see /API/Alerts/addAsFan
      */
@@ -996,8 +1010,9 @@ Class plurk_api Extends common {
 
     /**
      * function add_as_friend
+     * Accept user_id as friend.
      * 
-     * @param user_id: The user_id that has asked for friendship.
+     * @param int $user_id The user_id that has asked for friendship.
      * @return Boolean
      * @see /API/Alerts/addAsFriend
      */
@@ -1017,6 +1032,7 @@ Class plurk_api Extends common {
 
     /**
      * function add_all_as_fan
+     * Accept all friendship requests as fans.
      * 
      * @return Boolean
      * @see /API/Alerts/addAllAsFan
@@ -1035,6 +1051,7 @@ Class plurk_api Extends common {
 
     /**
      * function add_all_as_friends
+     * Accept all friendship requests as friends.
      * 
      * @return boolean
      * @see /API/Alerts/addAllAsFriends
@@ -1052,6 +1069,8 @@ Class plurk_api Extends common {
 
     /**
      * function deny_friendship
+     * Deny friendship to user_id.
+     *
      * @param int $user_id The user_id that has asked for friendship.
      * @return Boolean
      * @see /API/Alerts/denyFriendship
@@ -1072,8 +1091,9 @@ Class plurk_api Extends common {
 
     /**
      * function remove_notification
+     * Remove notification to user with id user_id.
      * 
-     * @param user_id: The user_id that the current user has requested friendship for.
+     * @param int $user_id The user_id that the current user has requested friendship for.
      * @return Boolean
      * @see /API/Alerts/removeNotification
      */
@@ -1094,9 +1114,10 @@ Class plurk_api Extends common {
 
     /**
      * function search_plurk
+     * Returns the latest 20 plurks on a search term.
      * 
-     * @param query: The query after Plurks.
-     * @param offset: A plurk_id of the oldest Plurk in the last search result.          
+     * @param string $query The query after Plurks.
+     * @param int $offset A plurk_id of the oldest Plurk in the last search result.          
      * @return JSON object
      * @see /API/PlurkSearch/search
      */
@@ -1118,9 +1139,10 @@ Class plurk_api Extends common {
 
     /**
      * function search_user
+     * Returns 10 users that match query, users are sorted by karma.
      * 
-     * @param query: The query after users.
-     * @param offset: Page offset, like 10, 20, 30 etc.          
+     * @param string $query The query after users.
+     * @param int $offset Page offset, like 10, 20, 30 etc.          
      * @return JSON object
      * @see /API/UserSearch/search
      */
@@ -1141,7 +1163,10 @@ Class plurk_api Extends common {
 
     /**
      * function get_emoticons
-     * get emotes
+     * Emoticons are a big part of Plurk since they make it easy to express feelings. 
+     * <a href="http://www.plurk.com/Help/extraSmilies">Check out current Plurk emoticons.</a> This call returns a JSON object that looks like:
+     * $link http://www.plurk.com/Help/extraSmilies Check out current Plurk emoticons.
+     *
      * @return JSON object
      * @see /API/Emoticons/get
      */
@@ -1159,7 +1184,7 @@ Class plurk_api Extends common {
     /**
      * function get_blocks
      * 
-     * @param offset: What page should be shown, e.g. 0, 10, 20.     
+     * @param int $offset What page should be shown, e.g. 0, 10, 20.     
      * @return JSON list
      * @see /API/Blocks/get
      */
@@ -1179,8 +1204,8 @@ Class plurk_api Extends common {
     /**
      * funciton block_user
      *
-     * @param $user_id
-     * @return object
+     * @param int $user_id The id of the user that should be blocked.
+     * @return boolean
      * @see /API/Blocks/block
      */
     function block_user($user_id = 0)
@@ -1236,7 +1261,7 @@ Class plurk_api Extends common {
      * function get_clique
      * get users from clique
      *
-     * @param $clique_name
+     * @param string $clique_name The name of the new clique
      * @return array
      * @see /API/Cliques/get_clique
      */
@@ -1257,7 +1282,7 @@ Class plurk_api Extends common {
      * function create_clique
      * create clique
      *
-     * @param $clique_name
+     * @param string $clique_name The name of the new clique
      * @return boolean
      * @see /API/Cliques/create_clique
      */
@@ -1280,7 +1305,7 @@ Class plurk_api Extends common {
      * function delete_clique
      * delete clique
      *
-     * @param $clique_name
+     * @param string $clique_name The name of the new clique
      * @return boolean
      * @see
      */
@@ -1303,8 +1328,8 @@ Class plurk_api Extends common {
      * function rename_clique
      * rename clique
      *
-     * @param $clique_name
-     * @param $new_name
+     * @param string $clique_name The name of the current clique.
+     * @param string $new_name The name of the new clique.
      * @return boolean
      * @see /API/Cliques/rename_clique
      */
@@ -1327,8 +1352,8 @@ Class plurk_api Extends common {
      * function add_to_clique
      * add friend to clique
      *
-     * @param $clique_name
-     * @param $user_id
+     * @param string $clique_name The name of the clique to add.
+     * @param int $user_id The user to add to the clique
      * @return boolean
      * @see /API/Cliques/add
      */
@@ -1351,8 +1376,8 @@ Class plurk_api Extends common {
      * function remove_from_clique()
      * remove friend from clique
      *
-     * @param $clique_name
-     * @param $user_id
+     * @param string $clique_name The name of the clique to delete
+     * @param int $user_id The user to remove from the clique
      * @return boolean
      * @see /API/Cliques/remove
      */
