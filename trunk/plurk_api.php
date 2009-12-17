@@ -443,7 +443,7 @@ Class plurk_api Extends common {
      * @return object
      * @see /API/Timeline/getPlurks
      */
-    function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = FALSE, $only_private = FALSE)
+    function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = '', $only_private = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
         
@@ -834,7 +834,9 @@ Class plurk_api Extends common {
             'content'   => urlencode($content),
             'qualifier' => $qualifier
         );
-        
+       
+        $result = $this->plurk(PLURK_ADD_RESPONSE, $array);
+ 
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
