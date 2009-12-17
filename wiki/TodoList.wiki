@@ -44,8 +44,8 @@ $plurk->addPlurk('en', 'is', 'tired (:');
 Class plurk_api extends common {
     function addPlurk($string_lang = 'en', $string_qualifier = 'says', $string_content = '', $allow_comments = true, $array_limited_to = array()) 
     {        
-        ($allow_comments) ?	$no_comments = 0 : $no_comments = 1;       
+        ($allow_comments) ? $no_comments = 0 : $no_comments = 1;
         $this->add_plurk($string_lang, $string_qualifier, $string_content, $array_limited_to, $no_comments);
-	}
+    }
 }
 }}}
