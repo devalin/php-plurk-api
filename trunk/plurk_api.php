@@ -40,7 +40,7 @@ Class plurk_api Extends common {
      * Login status
      * @var bool $is_login
      */
-    protected $is_login = 'VIVIEN';
+    protected $is_login = FALSE;
 
     /**
      * Current HTTP Status Code
@@ -171,7 +171,7 @@ Class plurk_api Extends common {
      *
      * @param $url
      * @param $array
-     * @return object
+     * @return JSON object
      */
     function plurk($url, $array)
     {
@@ -182,7 +182,7 @@ Class plurk_api Extends common {
         curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api v1.0 beta");
+        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api v1.2 beta");
 
         curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
         curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
@@ -440,7 +440,7 @@ Class plurk_api Extends common {
      * @param int $only_user The numeric ID of the user who's plurks should be returned.
      * @param boolean $only_responded Setting it to true will only return responded plurks.
      * @param boolean $only_private Setting it to true will only return private plurks.
-     * @return object
+     * @return JSON object
      * @see /API/Timeline/getPlurks
      */
     function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = '', $only_private = '')
@@ -816,7 +816,7 @@ Class plurk_api Extends common {
      * @param int $plurk_id The plurk that the responses should be added to.
      * @param string $content The response's text.
      * @param string $qualifier The Plurk's qualifier, please see documents/README
-     * @return object
+     * @return boolean
      * @see /API/Responses/responseAdd
      */
     function add_response($plurk_id = 0, $content = '', $qualifier = 'says')
@@ -958,7 +958,7 @@ Class plurk_api Extends common {
      * function get_following
      * 
      * @param int $offset The offset, can be 10, 20, 30 etc.
-     * @return object
+     * @return JSON object
      * @see /API/FriendsFans/getFollowingByOffset
      */
     function get_following($offset = 0)
