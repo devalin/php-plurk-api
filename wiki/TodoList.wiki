@@ -1,9 +1,9 @@
 #labels Featured
 = TODO List =
 
-1. 缺 Example 驗證 plurk_api 裡面的每個 method，不需要寫的太複雜，一開始只需基本功能展示即可。範例可以參考這邊的 [http://code.google.com/p/rlplurkapi/source/browse/trunk/example.php example.php] ，看看每個 method 能不能 work，這樣就很 OK 了，不需要太複雜(下班時間很寶貴，請多多珍惜)。
+1. 目前僅缺缺 Example 驗證 plurk_api 裡面的每個 method，不需要寫的太複雜，一開始只需基本功能展示即可。範例可以參考這邊的 [http://code.google.com/p/rlplurkapi/source/browse/trunk/example.php example.php] ，看看每個 method 能不能 work，這樣就很 OK 了，不需要太複雜(下班時間很寶貴，請多多珍惜)。
 
-2. 希望和 RLPlurkAPI 的每個 method 100% 相容，讓使用者可以無痛轉換。
+2. RLPlurkAPI 的每個 method 100% 相容，讓使用者可以無痛轉換的功能已經
 
 舉例來說， RLPlurkAPI 的用法：
 
@@ -47,3 +47,5 @@ Class plurk_api extends common {
     }
 }
 }}}
+
+備註：感謝 ChrisLiuQQ 撰寫第二部份，辛苦了！
