@@ -409,8 +409,7 @@ Class plurk_api Extends common {
             'offset'  => $offset,
         );
 
-        $result = $this->plurk(PLURK_POLLING_GET_PLURK, $array);
-
+        return $this->plurk(PLURK_POLLING_GET_PLURK, $array);
     }
 
     /**
