@@ -1,4 +1,3 @@
-#labels Featured
 = TODO List =
 
 1. 目前僅缺缺 Example 驗證 plurk_api 裡面的每個 method，不需要寫的太複雜，一開始只需基本功能展示即可。範例可以參考這邊的 [http://code.google.com/p/rlplurkapi/source/browse/trunk/example.php example.php] ，看看每個 method 能不能 work，這樣就很 OK 了，不需要太複雜(下班時間很寶貴，請多多珍惜)。
