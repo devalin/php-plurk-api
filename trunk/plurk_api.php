@@ -1100,7 +1100,7 @@ Class plurk_api Extends common {
      */
     function getAlerts()
     {
-        return $this->active();
+        return $this->get_active();
     }
 
     /**
