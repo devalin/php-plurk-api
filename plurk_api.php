@@ -11,7 +11,7 @@ require('common.php');
  * This is a PHP Plurk API.
  *
  * @category  API
- * @version   php-plurk-api 1.2b
+ * @version   php-plurk-api 1.3b
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link      http://code.google.com/p/php-plurk-api
  *
@@ -182,7 +182,7 @@ Class plurk_api Extends common {
         curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api v1.2 beta");
+        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api agent");
 
         curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
         curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
@@ -621,10 +621,6 @@ Class plurk_api Extends common {
     /**
      * function add_Plurk
      *
-     * no_comments:
-     * 如果是 0, 允許回應
-     * 如果是 1, 不允許回應
-     * 如果是 2, 只有好友能夠回應
      * @param string $lang The plurk's language.
      * @param string $qualifier The Plurk's qualifier, must be in English. please see documents/README
      * @param string $content The Plurk's text.

@@ -1,4 +1,13 @@
 <?php
+/**
+ * PHP Plurk API Common Lib.
+ *
+ * @category  API
+ * @version   php-plurk-api 1.3b
+ * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @link      http://code.google.com/p/php-plurk-api
+ *
+ */
 Class common {
 
 
