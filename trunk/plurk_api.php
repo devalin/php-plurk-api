@@ -442,18 +442,19 @@ Class plurk_api Extends common {
      * @return JSON object
      * @see /API/Timeline/getPlurks
      */
-    function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = '', $only_private = '')
+    function get_plurks($offset = 0, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        
+                
         $array = array(
             'api_key'       => $this->api_key,
             'offset'        => $offset,
-            'limit'         => $limit,
-            'only_user'     => $only_user,
-            'only_responded'=> $only_responded,
-            'only_private'  => $only_private
+            'limit'         => $limit
         );
+        
+        if(isset($only_user)) $array['only_user'] = $only_user;        
+        if(isset($only_responded)) $array['only_responded'] = $only_responded;
+        if(isset($only_private)) $array['only_private'] = $only_private;        
         
         return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);
     }
