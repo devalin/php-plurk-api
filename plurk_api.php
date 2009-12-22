@@ -212,7 +212,7 @@ Class plurk_api Extends common {
     function register($nick_name = '', $full_name = '', $password = '', $gender = 'male', $date_of_birth = '0000-00-00', $email = NULL)
     {
 
-    	if(strlen($nick_name) < 4)
+        if(strlen($nick_name) < 4)
             $this->log('nick name should be longer than 3 characters.');
 
         if ( ! preg_match('/^[\w_]+$/', $str))
@@ -303,7 +303,7 @@ Class plurk_api Extends common {
      */
     function update_picture($profile_image = '')
     {
-    	//  RFC 1867
+        //  RFC 1867
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -356,7 +356,7 @@ Class plurk_api Extends common {
      */
     function update($current_password = NULL, $full_name = NULL, $new_password = NULL, $email = NULL, $display_name = NULL, $privacy = NULL, $date_of_birth = NULL)
     {
-    	if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
         if($full_name == "")
             $this->log('full name can not be empty.');
@@ -409,8 +409,7 @@ Class plurk_api Extends common {
             'offset'  => $offset,
         );
 
-        $result = $this->plurk(PLURK_POLLING_GET_PLURK, $array);
-
+        return $this->plurk(PLURK_POLLING_GET_PLURK, $array);
     }
 
     /**
@@ -443,18 +442,19 @@ Class plurk_api Extends common {
      * @return JSON object
      * @see /API/Timeline/getPlurks
      */
-    function get_plurks($offset = 0, $limit = 20, $only_user = '', $only_responded = '', $only_private = '')
+    function get_plurks($offset = 0, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-        
+                
         $array = array(
             'api_key'       => $this->api_key,
             'offset'        => $offset,
-            'limit'         => $limit,
-            'only_user'     => $only_user,
-            'only_responded'=> $only_responded,
-            'only_private'  => $only_private
+            'limit'         => $limit
         );
+        
+        if(isset($only_user)) $array['only_user'] = $only_user;        
+        if(isset($only_responded)) $array['only_responded'] = $only_responded;
+        if(isset($only_private)) $array['only_private'] = $only_private;        
         
         return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);
     }
@@ -531,7 +531,7 @@ Class plurk_api Extends common {
      */
     function mute_plurks($ids)
     {
-    	
+        
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
         
         $array = array(
@@ -585,7 +585,7 @@ Class plurk_api Extends common {
             return false;
         }
 
-		if ($bool_setmute == true)
+        if ($bool_setmute == true)
         {
             return mute_plurks(array($int_plurk_id));
         }
@@ -1219,7 +1219,7 @@ Class plurk_api Extends common {
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
-	/**
+    /**
      * function befriend
      * Compatible with RLPlurkAPI
      *
@@ -1233,17 +1233,17 @@ Class plurk_api Extends common {
         if ($bool_befriend == false)
         {
             foreach($array_uid as $friend_id)
-			{
-				$return = ($return && $this->deny_friendship($friend_id));
-			}
+            {
+                $return = ($return && $this->deny_friendship($friend_id));
+            }
         }
-		else if ($bool_befriend == true)
-		{
-			foreach($array_uid as $friend_id)
-			{
-				$return = ($return && $this->add_as_friend($friend_id));
-			}
-		}
+        else if ($bool_befriend == true)
+        {
+            foreach($array_uid as $friend_id)
+            {
+                $return = ($return && $this->add_as_friend($friend_id));
+            }
+        }
 
         return $return;
     }
@@ -1307,7 +1307,7 @@ Class plurk_api Extends common {
     function search_plurk($query = '', $offset = 0)
     {
 
-    	/* offset: A plurk_id of the oldest Plurk in the last search result.  */
+        /* offset: A plurk_id of the oldest Plurk in the last search result.  */
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1331,7 +1331,7 @@ Class plurk_api Extends common {
      */
     function search_user($query = '', $offset = 0)
     {
-    	/* offset: Page offset, like 10, 20, 30 etc. */
+        /* offset: Page offset, like 10, 20, 30 etc. */
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
