@@ -650,8 +650,8 @@ Class plurk_api Extends common {
         // roga.2009-12-14: need to confirm.
         if (isset($limited_to)) $array['limited_to'] = json_encode($limited_to);
 
-        $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
-        return ($this->http_status == '200') ? TRUE : FALSE;
+        return $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
+
     }
 
     /**
