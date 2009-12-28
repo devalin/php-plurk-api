@@ -182,7 +182,7 @@ Class plurk_api Extends common {
         curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_USERAGENT, "php-plurk-api agent");
+        curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
         curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
         curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
@@ -684,11 +684,17 @@ Class plurk_api Extends common {
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
-        curl_setopt($ch, CURLOPT_POST, 1);
-          
+        curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+          
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        
+        curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
+        curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
+        
         $result = curl_exec($ch);
 
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
