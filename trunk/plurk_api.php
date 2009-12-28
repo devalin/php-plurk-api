@@ -391,10 +391,11 @@ Class plurk_api Extends common {
      * function get_plurks_polling
      *
      * @param time $offset Return plurks newer than offset, use timestamp.
+     * @param int $limit The max number of plurks to be returned (default 50). 
      * @return JSON object
      * @see /API/Polling/getPlurks
      */
-    function get_plurks_polling($offset = NULL)
+    function get_plurks_polling($offset = NULL, $limit = 50)
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -403,6 +404,7 @@ Class plurk_api Extends common {
         $array = array(
             'api_key' => $this->api_key,
             'offset'  => $offset,
+            'limit'   => $limit,
         );
 
         return $this->plurk(PLURK_POLLING_GET_PLURK, $array);
