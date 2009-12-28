@@ -678,29 +678,16 @@ Class plurk_api Extends common {
     function upload_picture($upload_image = '')
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
-        $boundary = uniqid('------------------');
-        $MPboundary = '--' . $boundary;
-        $endMPboundary = $MPboundary. '--';
-
-        $file = file_get_contents($upload_image);
-        $file_name = basename($upload_image);
-
-        $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody .= 'Content-Disposition: form-data; name="filename"; filename="' . $file_name . '"' . '"\r\n"';
-        $multipartbody .= 'Content-Type: image/jpeg'. "\r\n\r\n";
-        $multipartbody .= $file;
-
-        $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody .= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody .= $this->api_key. "\r\n\r\n" . $endMPboundary;
-
+                   
+        $params['api_key'] = $this->api_key;
+        $params['image'] = "@" . $upload_image;
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
-        curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $multipartbody );
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: multipart/form-data; boundary=$boundary"));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_POST, 1);
+          
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         $result = curl_exec($ch);
 
