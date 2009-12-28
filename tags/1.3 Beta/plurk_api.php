@@ -316,12 +316,12 @@ Class plurk_api Extends common {
 
         $multipartbody .= $MPboundary . "\r\n";
         $multipartbody .= 'Content-Disposition: form-data; name="filename"; filename="' . $file_name . '"' . '"\r\n"';
-        $multipartbody .= 'Content-Type: text/csv'. "\r\n\r\n";
+        $multipartbody .= 'Content-Type: image/jpeg'. "\r\n\r\n";
         $multipartbody .= $file;
 
         $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody.= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody.= $this->api_key. "\r\n\r\n" . $endMPboundary;
+        $multipartbody .= "content-disposition: form-data; name=api_key\r\n\r\n";
+        $multipartbody .= $this->api_key. "\r\n\r\n" . $endMPboundary;
 
         $ch = curl_init();
 
@@ -334,7 +334,7 @@ Class plurk_api Extends common {
         $result = curl_exec($ch);
 
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $this->http_response = $response;
+        $this->http_response = $result;
 
         return ($this->http_status == '200') ? TRUE : FALSE;
 
@@ -688,12 +688,12 @@ Class plurk_api Extends common {
 
         $multipartbody .= $MPboundary . "\r\n";
         $multipartbody .= 'Content-Disposition: form-data; name="filename"; filename="' . $file_name . '"' . '"\r\n"';
-        $multipartbody .= 'Content-Type: text/csv'. "\r\n\r\n";
+        $multipartbody .= 'Content-Type: image/jpeg'. "\r\n\r\n";
         $multipartbody .= $file;
 
         $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody.= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody.= $this->api_key. "\r\n\r\n" . $endMPboundary;
+        $multipartbody .= "content-disposition: form-data; name=api_key\r\n\r\n";
+        $multipartbody .= $this->api_key. "\r\n\r\n" . $endMPboundary;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
@@ -705,7 +705,7 @@ Class plurk_api Extends common {
         $result = curl_exec($ch);
 
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $this->http_response = $response;
+        $this->http_response = $result;
 
         return $result;
     }

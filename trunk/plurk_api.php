@@ -212,7 +212,7 @@ Class plurk_api Extends common {
     function register($nick_name = '', $full_name = '', $password = '', $gender = 'male', $date_of_birth = '0000-00-00', $email = NULL)
     {
 
-    	if(strlen($nick_name) < 4)
+        if(strlen($nick_name) < 4)
             $this->log('nick name should be longer than 3 characters.');
 
         if ( ! preg_match('/^[\w_]+$/', $str))
@@ -303,7 +303,7 @@ Class plurk_api Extends common {
      */
     function update_picture($profile_image = '')
     {
-    	//  RFC 1867
+        //  RFC 1867
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -316,12 +316,12 @@ Class plurk_api Extends common {
 
         $multipartbody .= $MPboundary . "\r\n";
         $multipartbody .= 'Content-Disposition: form-data; name="filename"; filename="' . $file_name . '"' . '"\r\n"';
-        $multipartbody .= 'Content-Type: text/csv'. "\r\n\r\n";
+        $multipartbody .= 'Content-Type: image/jpeg'. "\r\n\r\n";
         $multipartbody .= $file;
 
         $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody.= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody.= $this->api_key. "\r\n\r\n" . $endMPboundary;
+        $multipartbody .= "content-disposition: form-data; name=api_key\r\n\r\n";
+        $multipartbody .= $this->api_key. "\r\n\r\n" . $endMPboundary;
 
         $ch = curl_init();
 
@@ -334,7 +334,7 @@ Class plurk_api Extends common {
         $result = curl_exec($ch);
 
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $this->http_response = $response;
+        $this->http_response = $result;
 
         return ($this->http_status == '200') ? TRUE : FALSE;
 
@@ -356,7 +356,7 @@ Class plurk_api Extends common {
      */
     function update($current_password = NULL, $full_name = NULL, $new_password = NULL, $email = NULL, $display_name = NULL, $privacy = NULL, $date_of_birth = NULL)
     {
-    	if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+        if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
         if($full_name == "")
             $this->log('full name can not be empty.');
@@ -585,7 +585,7 @@ Class plurk_api Extends common {
             return false;
         }
 
-		if ($bool_setmute == true)
+        if ($bool_setmute == true)
         {
             return mute_plurks(array($int_plurk_id));
         }
@@ -688,12 +688,12 @@ Class plurk_api Extends common {
 
         $multipartbody .= $MPboundary . "\r\n";
         $multipartbody .= 'Content-Disposition: form-data; name="filename"; filename="' . $file_name . '"' . '"\r\n"';
-        $multipartbody .= 'Content-Type: text/csv'. "\r\n\r\n";
+        $multipartbody .= 'Content-Type: image/jpeg'. "\r\n\r\n";
         $multipartbody .= $file;
 
         $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody.= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody.= $this->api_key. "\r\n\r\n" . $endMPboundary;
+        $multipartbody .= "content-disposition: form-data; name=api_key\r\n\r\n";
+        $multipartbody .= $this->api_key. "\r\n\r\n" . $endMPboundary;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
@@ -705,7 +705,7 @@ Class plurk_api Extends common {
         $result = curl_exec($ch);
 
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $this->http_response = $response;
+        $this->http_response = $result;
 
         return $result;
     }
@@ -1219,7 +1219,7 @@ Class plurk_api Extends common {
         return ($this->http_status == '200') ? TRUE : FALSE;
     }
 
-	/**
+    /**
      * function befriend
      * Compatible with RLPlurkAPI
      *
@@ -1233,17 +1233,17 @@ Class plurk_api Extends common {
         if ($bool_befriend == false)
         {
             foreach($array_uid as $friend_id)
-			{
-				$return = ($return && $this->deny_friendship($friend_id));
-			}
+            {
+                $return = ($return && $this->deny_friendship($friend_id));
+            }
         }
-		else if ($bool_befriend == true)
-		{
-			foreach($array_uid as $friend_id)
-			{
-				$return = ($return && $this->add_as_friend($friend_id));
-			}
-		}
+        else if ($bool_befriend == true)
+        {
+            foreach($array_uid as $friend_id)
+            {
+                $return = ($return && $this->add_as_friend($friend_id));
+            }
+        }
 
         return $return;
     }
@@ -1307,7 +1307,7 @@ Class plurk_api Extends common {
     function search_plurk($query = '', $offset = 0)
     {
 
-    	/* offset: A plurk_id of the oldest Plurk in the last search result.  */
+        /* offset: A plurk_id of the oldest Plurk in the last search result.  */
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
@@ -1331,7 +1331,7 @@ Class plurk_api Extends common {
      */
     function search_user($query = '', $offset = 0)
     {
-    	/* offset: Page offset, like 10, 20, 30 etc. */
+        /* offset: Page offset, like 10, 20, 30 etc. */
 
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
