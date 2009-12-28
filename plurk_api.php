@@ -304,40 +304,32 @@ Class plurk_api Extends common {
     function update_picture($profile_image = '')
     {
         //  RFC 1867
-
+        
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
-        $boundary = uniqid('------------------');
-        $MPboundary = '--' . $boundary;
-        $endMPboundary = $MPboundary. '--';
-
-        $file = file_get_contents($profile_image);
-        $file_name = basename($profile_image);
-
-        $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody .= 'Content-Disposition: form-data; name="filename"; filename="' . $file_name . '"' . '"\r\n"';
-        $multipartbody .= 'Content-Type: image/jpeg'. "\r\n\r\n";
-        $multipartbody .= $file;
-
-        $multipartbody .= $MPboundary . "\r\n";
-        $multipartbody .= "content-disposition: form-data; name=api_key\r\n\r\n";
-        $multipartbody .= $this->api_key. "\r\n\r\n" . $endMPboundary;
-
+                   
+        $params['api_key'] = $this->api_key;
+        $params['profile_image'] = "@" . $upload_image;
+        
         $ch = curl_init();
-
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
         curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $multipartbody );
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: multipart/form-data; boundary=$boundary"));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+          
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        
+        curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
+        curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
+        
         $result = curl_exec($ch);
 
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $this->http_response = $result;
+        $this->http_response = $result;        
 
-        return ($this->http_status == '200') ? TRUE : FALSE;
-
+        return $result;
+        
     }
 
     /**
@@ -364,7 +356,7 @@ Class plurk_api Extends common {
         if(strlen($current_password) < 4)
             $this->log('password should be longer than 3 characters.');
 
-         if($full_name == "")
+        if($full_name == "")
             $this->log('full name can not be empty.');
 
         if ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email))
@@ -699,8 +691,8 @@ Class plurk_api Extends common {
 
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $this->http_response = $result;
-
-        return $result;
+        
+        return json_decode($result);
     }
 
     /**
