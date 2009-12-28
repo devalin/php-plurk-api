@@ -11,7 +11,7 @@ require('common.php');
  * This is a PHP Plurk API.
  *
  * @category  API
- * @version   php-plurk-api 1.3b
+ * @version   php-plurk-api 1.4 Beta
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link      http://code.google.com/p/php-plurk-api
  *
@@ -180,14 +180,17 @@ Class plurk_api Extends common {
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
+        
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        
         curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
         curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
         curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
 
         $response = curl_exec($ch);
+        
         $this->http_response = $response;
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
@@ -307,13 +310,14 @@ Class plurk_api Extends common {
         
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
                    
-        $params['api_key'] = $this->api_key;
-        $params['profile_image'] = "@" . $upload_image;
+        $array['api_key'] = $this->api_key;
+        $array['profile_image'] = "@" . $upload_image;
         
         $ch = curl_init();
+        
         curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
         curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
           
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
@@ -328,7 +332,7 @@ Class plurk_api Extends common {
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $this->http_response = $result;        
 
-        return $result;
+        return json_decode($result);
         
     }
 
@@ -394,7 +398,7 @@ Class plurk_api Extends common {
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-        $offset = (isset($offset)) ? $offset : array_shift(explode("+",date("c",$offset)));
+        $offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c", $offset)));
 
         $array = array(
             'api_key' => $this->api_key,
@@ -671,13 +675,14 @@ Class plurk_api Extends common {
     {
         if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
                    
-        $params['api_key'] = $this->api_key;
-        $params['image'] = "@" . $upload_image;
+        $array['api_key'] = $this->api_key;
+        $array['image'] = "@" . $upload_image;
         
         $ch = curl_init();
+        
         curl_setopt($ch, CURLOPT_URL, PLURK_TIMELINE_UPLOAD_PICTURE);
         curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
           
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
@@ -812,7 +817,7 @@ Class plurk_api Extends common {
         $array = array(
             'api_key'   => $this->api_key,
             'plurk_id'  => $plurk_id,
-            'content'   => urlencode($content),
+            'content'   => $content,
             'qualifier' => $qualifier
         );
 
@@ -1417,10 +1422,10 @@ Class plurk_api Extends common {
             return false;
         }
 
-         foreach ($array_uid as $friend_id)
-         {
-             $return = ($return && $this->block_user($friend_id));
-         }
+        foreach ($array_uid as $friend_id)
+        {
+            $return = ($return && $this->block_user($friend_id));
+        }
 
         return $return;
     }
@@ -1462,10 +1467,10 @@ Class plurk_api Extends common {
             return false;
         }
 
-         foreach ($array_uid as $friend_id)
-         {
-             $return = ($return && $this->unblock_user($friend_id));
-         }
+        foreach ($array_uid as $friend_id)
+        {
+            $return = ($return && $this->unblock_user($friend_id));
+        }
 
         return $return;
     }
@@ -1768,8 +1773,7 @@ Class plurk_api Extends common {
      */
     function permalinkToPlurkID($string_permalink)
     {
-        $base36number = str_replace('http://www.plurk.com/p/', '',
-            $string_permalink);
+        $base36number = str_replace('http://www.plurk.com/p/', '', $string_permalink);
 
         return (int) base_convert($base36number, 36, 10);
     }
