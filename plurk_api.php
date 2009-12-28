@@ -683,7 +683,7 @@ Class plurk_api Extends common {
         $params['image'] = "@" . $upload_image;
         
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
+        curl_setopt($ch, CURLOPT_URL, PLURK_TIMELINE_UPLOAD_PICTURE);
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
           
