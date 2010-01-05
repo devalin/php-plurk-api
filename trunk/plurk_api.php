@@ -639,7 +639,7 @@ Class plurk_api Extends common {
 
         $array = array(
             'api_key'     => $this->api_key,
-            'qualifier'   => 'likes',
+            'qualifier'   => $qualifier,
             'content'     => $content,
             'lang'        => $lang,
             'no_comments' => $no_comments
