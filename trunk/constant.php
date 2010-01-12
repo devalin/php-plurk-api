@@ -8,6 +8,7 @@
 
     define('PLURK_REGISTER', 'http://www.plurk.com/API/Users/register');
     define('PLURK_LOGIN', 'http://www.plurk.com/API/Users/login');
+    define('PLURK_LOGOUT', 'http://www.plurk.com/API/Users/logout');
     define('PLURK_UPDATE_PICTURE', 'http://www.plurk.com/API/Users/updatePicture');
     define('PLURK_UPDATE', 'http://www.plurk.com/API/Users/update');
 
