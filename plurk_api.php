@@ -253,9 +253,9 @@ Class plurk_api Extends common {
      * function login
      * Login an already created user. Login creates a session cookie, which can be used to access the other methods.
      *
+     * @param $api_key Your Plurk API key.
      * @param $username The user's nick name or email.
      * @param $password The user's password.
-     * @param $api_key Your Plurk API key.
      * @return boolean
      * @see /API/Users/login
      */
@@ -297,8 +297,28 @@ Class plurk_api Extends common {
     }
 
     /**
+     * function login
+     * Logout current user.
+     *
+     * @return boolean
+     * @see /API/Users/logout
+     */
+    function logout()
+    {
+        $array = array(
+            'api_key'   => $this->api_key,
+        );
+
+        $result = $this->plurk(PLURK_LOGOUT, $array);
+        ($this->http_status == '200') ? $this->is_login = FALSE : $this->is_login = TRUE;
+
+        return !$this->is_login;
+        
+    }
+
+    /**
      * function update_picture
-     * pdate a user's profile picture. You can read more about how to render an avatar via user data.
+     * update a user's profile picture. You can read more about how to render an avatar via user data.
      *
      * @param string $profile_image The new profile image.
      * @return boolean
