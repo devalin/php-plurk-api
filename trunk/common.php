@@ -2,8 +2,9 @@
 /**
  * PHP Plurk API Common Lib.
  *
+ * @package   php-plurk-api
  * @category  API
- * @version   php-plurk-api 1.3b
+ * @version   php-plurk-api 1.3
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link      http://code.google.com/p/php-plurk-api
  *

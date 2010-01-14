@@ -1,8 +1,9 @@
 <?php
 
     /**
-     *  @desc: URLs setting
-     *  @see: http://www.plurk.com/API
+     *  constants for url setting
+     *  @package php-plurk-api
+     *  @see     http://www.plurk.com/API
      *  
      **/
 
