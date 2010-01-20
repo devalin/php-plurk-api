@@ -460,9 +460,12 @@ Class plurk_api Extends common {
 	 * @return JSON object
 	 * @see /API/Timeline/getPlurks
 	 */
-	function get_plurks($offset = 0, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL)
+	function get_plurks($offset = NULL, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL)
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		if( ! isset($offset)) $offset = date('c');
+		/* format 2010-01-18T11:24:43+00:00 */		
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -776,7 +779,7 @@ Class plurk_api Extends common {
 		$array = array(
 			'api_key'  => $this->api_key,
 			'plurk_id' => $plurk_id,
-			'content'  => urlencode($content)
+			'content'  => $content
 		);
 
 		$result = $this->plurk(PLURK_TIMELINE_PLURK_EDIT, $array);

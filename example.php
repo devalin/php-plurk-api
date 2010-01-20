@@ -26,8 +26,8 @@
 	 * set plurk id = {123, 456, 789}
 	 ******************************************/
 	
-	// echo "\n\n ----- get plurks ----- \n";
-	// print_r($plurk->get_plurks());
+	echo "\n\n ----- get plurks ----- \n";
+	print_r($plurk->get_plurks(NULL, 20, NULL, NULL, NULL));
 	
 	// echo "\n\n ----- get someone's plurk ----- \n";
 	// print_r($plurk->get_plurk(123));
