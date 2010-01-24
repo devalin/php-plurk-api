@@ -214,7 +214,6 @@ Class plurk_api Extends common {
 	 */
 	function register($nick_name = '', $full_name = '', $password = '', $gender = 'male', $date_of_birth = '0000-00-00', $email = NULL)
 	{
-
 		if(strlen($nick_name) < 4)
 			$this->log('nick name should be longer than 3 characters.');
 
@@ -291,9 +290,7 @@ Class plurk_api Extends common {
 
 			exit('Please Login Again');
 		}
-
 		return $this->is_login;
-
 	}
 
 	/**
@@ -353,7 +350,6 @@ Class plurk_api Extends common {
 		$this->http_response = $result;		
 
 		return json_decode($result);
-		
 	}
 
 	/**
@@ -404,7 +400,6 @@ Class plurk_api Extends common {
 		$this->plurk(PLURK_UPDATE, $array);
 
 		return ($this->http_status == '200') ? TRUE : FALSE;
-
 	}
 
 	/**
@@ -496,8 +491,7 @@ Class plurk_api Extends common {
 	 * @return array The array (numerical) of plurks (an associative subarray).
 	 * @todo Should rewrite.
 	 */
-	function getPlurks($int_uid = null, $date_from = null, $date_offset = null,
-		$fetch_responses = false, $self_plurks_only = false)
+	function getPlurks($int_uid = null, $date_from = null, $date_offset = null, $fetch_responses = false, $self_plurks_only = false)
 	{
 		printf("getPlurks: This function is not implemented yet.\n");
 	}
@@ -648,7 +642,7 @@ Class plurk_api Extends common {
 	 * @param $limited_to Limit the plurk only to some users (also known as private plurking). limited_to should be a Array list of friend ids, e.g. limited_to = array(3,4,66,34) will only be plurked to these user ids.
 	 * @param string $lang The plurk's language.
 	 * @param int $no_commetns If set to 1, then responses are disabled for this plurk. If set to 2, then only friends can respond to this plurk.
-	 * @return boolean
+	 * @return JSON object
 	 * @see /API/Timeline/plurkAdd
 	 */
 	function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
@@ -671,8 +665,13 @@ Class plurk_api Extends common {
 		// roga.2009-12-14: need to confirm.
 		if (isset($limited_to)) $array['limited_to'] = json_encode($limited_to);
 
-		return $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
+		$result = $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
+		if ( !isset($result->plurk_id) ) 
+		{
+			$this->log($result->error_text);
+		}
 
+		return $result;
 	}
 
 	/**
@@ -764,7 +763,7 @@ Class plurk_api Extends common {
 	 *
 	 * @param int $plurk_id The id of the plurk.
 	 * @param string $content The content of plurk.
-	 * @return boolean
+	 * @return JSON object
 	 * @see /API/Timeline/plurkEdit
 	 */
 	function edit_plurk($plurk_id = 0, $content = '')
@@ -784,7 +783,12 @@ Class plurk_api Extends common {
 
 		$result = $this->plurk(PLURK_TIMELINE_PLURK_EDIT, $array);
 
-		return ($this->http_status == '200') ? TRUE : FALSE;
+		if ( !isset($result->plurk_id) )
+		{
+			$this->log($result->error_text);
+		}
+
+		return $result;
 	}
 
 	/**
@@ -827,7 +831,7 @@ Class plurk_api Extends common {
 	 * @param int $plurk_id The plurk that the responses should be added to.
 	 * @param string $content The response's text.
 	 * @param string $qualifier The Plurk's qualifier, please see documents/README
-	 * @return boolean
+	 * @return JSON object
 	 * @see /API/Responses/responseAdd
 	 */
 	function add_response($plurk_id = 0, $content = '', $qualifier = 'says')
@@ -847,8 +851,13 @@ Class plurk_api Extends common {
 		);
 
 		$result = $this->plurk(PLURK_ADD_RESPONSE, $array);
+		
+		if ( !isset($result->id) ) 
+		{
+			$this->log($result->error_text);
+		}
 
-		return ($this->http_status == '200') ? TRUE : FALSE;
+		return $result;
 	}
 
 	/**
