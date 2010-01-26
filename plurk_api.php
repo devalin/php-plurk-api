@@ -901,7 +901,7 @@ Class plurk_api Extends common {
 
 		$array = array('api_key' => $this->api_key);
         
-		$result = $this->plurk(PLURK_GET_OWN_PROFILE, $array)        
+		$result = $this->plurk(PLURK_GET_OWN_PROFILE, $array);        
 		$this->user_info = $result;
         
 		return $result;
