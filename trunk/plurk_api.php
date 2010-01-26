@@ -364,6 +364,9 @@ Class plurk_api Extends common {
 
 		if($full_name == "")
 			$this->log('full name can not be empty.');
+			
+		if($privacy == "")
+			$this->log('User\'s privacy must be world, only_friends or only_me.');        
 
 		$array = array(
 			'api_key'          => $this->api_key,
@@ -629,11 +632,16 @@ Class plurk_api Extends common {
 	 * @return JSON object
 	 * @see /API/Timeline/plurkAdd
 	 */
-	function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
+	function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from plurk-api', $limited_to = NULL, $no_comments = 0)
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-		$array = array(
+		if (mb_strlen($content) > 140)
+		{
+			$this->log('this message should shorter than 140 characters.');
+		}
+        		
+        $array = array(
 			'api_key'     => $this->api_key,
 			'qualifier'   => $qualifier,
 			'content'     => $content,
@@ -1314,6 +1322,11 @@ Class plurk_api Extends common {
 
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		if ($query == "")
+		{
+			$this->log('query message can\'t be empty.');
+		}
+
 		$array = array(
 			'api_key' => $this->api_key,
 			'query'   => $query,
@@ -1337,6 +1350,11 @@ Class plurk_api Extends common {
 		/* offset: Page offset, like 10, 20, 30 etc. */
 
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+
+		if ($query == "")
+		{
+			$this->log('query message can\'t be empty.');
+		}
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1536,6 +1554,11 @@ Class plurk_api Extends common {
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
+		if ($clique_name == "")
+		{
+			$this->log('clique_name can\'t be empty.');
+		}
+		
 		$array = array(
 			'api_key'     => $this->api_key,
 			'clique_name' => $clique_name
