@@ -232,7 +232,9 @@ Class plurk_api Extends common {
 		);
 
 		if(isset($email)) $array['email'] = $email;		
-        $result = $this->plurk(PLURK_REGISTER, $array);
+        
+		$result = $this->plurk(PLURK_REGISTER, $array);
+		
 		if ( !isset($result->id) ) 
 		{
 			$this->log($result->error_text);
@@ -640,8 +642,8 @@ Class plurk_api Extends common {
 		{
 			$this->log('this message should shorter than 140 characters.');
 		}
-        		
-        $array = array(
+		
+		$array = array(
 			'api_key'     => $this->api_key,
 			'qualifier'   => $qualifier,
 			'content'     => $content,
@@ -1324,7 +1326,7 @@ Class plurk_api Extends common {
 
 		if ($query == "")
 		{
-			$this->log('query message can\'t be empty.');
+			$this->log('query message can not be empty.');
 		}
 
 		$array = array(
@@ -1353,7 +1355,7 @@ Class plurk_api Extends common {
 
 		if ($query == "")
 		{
-			$this->log('query message can\'t be empty.');
+			$this->log('query message can not be empty.');
 		}
 
 		$array = array(
@@ -1556,7 +1558,7 @@ Class plurk_api Extends common {
 
 		if ($clique_name == "")
 		{
-			$this->log('clique_name can\'t be empty.');
+			$this->log('clique_name can not be empty.');
 		}
 		
 		$array = array(
