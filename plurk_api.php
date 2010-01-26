@@ -900,8 +900,11 @@ Class plurk_api Extends common {
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
-
-		return $this->plurk(PLURK_GET_OWN_PROFILE, $array);
+        
+		$result = $this->plurk(PLURK_GET_OWN_PROFILE, $array)        
+		$this->user_info = $result;
+        
+		return $result;
 	}
 
 	/**
