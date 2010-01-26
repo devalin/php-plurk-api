@@ -367,7 +367,7 @@ Class plurk_api Extends common {
 		if($full_name == "")
 			$this->log('full name can not be empty.');
 			
-		if($privacy == "")
+		if($privacy != "world" && $privacy != "only_friends" && $privacy != "only_me")
 			$this->log('User\'s privacy must be world, only_friends or only_me.');        
 
 		$array = array(
