@@ -214,25 +214,13 @@ Class plurk_api Extends common {
 	 */
 	function register($nick_name = '', $full_name = '', $password = '', $gender = 'male', $date_of_birth = '0000-00-00', $email = NULL)
 	{
-		if(strlen($nick_name) < 4)
-			$this->log('nick name should be longer than 3 characters.');
-
-		if ( ! preg_match('/^[\w_]+$/', $str))
-			$this->log('nick name should be ASCII, numbers and _.');
-
 		if($full_name == "")
 			$this->log('full name can not be empty.');
-
-		if(strlen($password) < 4)
-			$this->log('password should be longer than 3 characters.');
-
+		
 		$gender = strtolower($gender);
 
 		if($gender != 'male' && $gender != 'female')
 			$this->log('should be male or female.');
-
-		if ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email))
-			$this->log('must be a valid email.');
 
 		$array = array(
 			'api_key'       => $this->api_key,
@@ -243,9 +231,13 @@ Class plurk_api Extends common {
 			'date_of_birth' => $date_of_birth
 		);
 
-		if(isset($email)) $array['email'] = $email;
-
-		return $this->plurk(PLURK_REGISTER, $array);
+		if(isset($email)) $array['email'] = $email;		
+        $result = $this->plurk(PLURK_REGISTER, $array);
+		if ( !isset($result->id) ) 
+		{
+			$this->log($result->error_text);
+		}
+		return $result;
 	}
 
 	/**
@@ -373,18 +365,6 @@ Class plurk_api Extends common {
 		if($full_name == "")
 			$this->log('full name can not be empty.');
 
-		if(strlen($current_password) < 4)
-			$this->log('password should be longer than 3 characters.');
-
-		if($full_name == "")
-			$this->log('full name can not be empty.');
-
-		if ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email))
-			$this->log('must be a valid email.');
-
-		if(strlen($display_name) < 16)
-			$this->log('Display name must be shorter than 15 characters.');
-
 		$array = array(
 			'api_key'          => $this->api_key,
 			'current_password' => $current_password,
@@ -397,8 +377,12 @@ Class plurk_api Extends common {
 		if(isset($privacy)) $array['prvacy'] = $privacy;
 		if(isset($date_of_birth)) $array['date_of_birth'] = $date_of_birth;
 
-		$this->plurk(PLURK_UPDATE, $array);
-
+		$result = $this->plurk(PLURK_UPDATE, $array);
+		
+		if ( !isset($result->id) ) 
+		{
+			$this->log($result->error_text);
+		}        
 		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
@@ -648,11 +632,6 @@ Class plurk_api Extends common {
 	function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from roga-plurk-api', $limited_to = NULL, $no_comments = 0)
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-
-		if (mb_strlen($content) > 140)
-		{
-			$this->log('this message should shorter than 140 characters.');
-		}
 
 		$array = array(
 			'api_key'     => $this->api_key,
