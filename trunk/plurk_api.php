@@ -161,7 +161,17 @@ Class plurk_api Extends common {
 	 */
 	protected $privacy;
 
+	/**
+	 * String contains proxy host and port for CURL connection
+	 * @var string $proxy
+	 */
+	protected $proxy = '';
 
+	/**
+	 * String contains proxy authentication for CURL connection
+	 * @var string $proxy_auth
+	 */
+	protected $proxy_auth = '';
 
 	function __construct() {}
 
@@ -189,6 +199,12 @@ Class plurk_api Extends common {
 		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
 
+		if($this->proxy != '')
+			curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
+
+		if($this->proxy_auth != '')
+			curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxy_auth);
+
 		$response = curl_exec($ch);
 		
 		$this->http_response = $response;
@@ -197,6 +213,24 @@ Class plurk_api Extends common {
 		curl_close($ch);
 
 		return json_decode($response);
+	}
+
+	/**
+	 * function set_proxy
+	 * Set proxy server options while connecting to Plurk API
+	 *
+	 * @param string $host Proxy server host
+	 * @param string $port Proxy server port
+	 * @param string $username Username for proxy server authentication. Could be ignored if no need.
+	 * @param string $password Password for proxy server authentication. Could be ignored if no need.
+	 */
+	function set_proxy($host = '', $port = 0, $username = '', $password = '')
+	{
+		if($host != '' && $port != 0)
+			$this->proxy = "http://$host:$port";
+
+		if($username != '' && $password != '')
+			$this->proxy_auth = "$username:$password";
 	}
 
 	/**
