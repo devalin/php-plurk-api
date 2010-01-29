@@ -314,9 +314,7 @@ Class plurk_api Extends common {
 		}
 		else
 		{
-			$this->log('Login Failed!');
-
-			exit('Please Login Again');
+			$this->log('Login Failed! '. $result->error_text);
 		}
 		return $this->is_login;
 	}
@@ -346,7 +344,7 @@ Class plurk_api Extends common {
 	 * update a user's profile picture. You can read more about how to render an avatar via user data.
 	 *
 	 * @param string $profile_image The new profile image.
-	 * @return boolean
+	 * @return JSON object
 	 * @see /API/Users/updatePicture
 	 */
 	function update_picture($profile_image = '')
