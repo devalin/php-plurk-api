@@ -354,7 +354,7 @@ Class plurk_api Extends common {
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 				   
 		$array['api_key'] = $this->api_key;
-		$array['profile_image'] = "@" . $upload_image;
+		$array['profile_image'] = "@" . $profile_image;
 		
 		$ch = curl_init();
 		
