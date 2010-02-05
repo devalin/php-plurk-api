@@ -4,7 +4,7 @@
      *  constants for url setting
      *  @package php-plurk-api
      *  @see     http://www.plurk.com/API
-     *  
+     *
      **/
 
     define('PLURK_REGISTER', 'http://www.plurk.com/API/Users/register');
@@ -14,6 +14,7 @@
     define('PLURK_UPDATE', 'http://www.plurk.com/API/Users/update');
 
     define('PLURK_POLLING_GET_PLURK', 'http://www.plurk.com/API/Polling/getPlurks');
+    define('PLURK_POLLING_GET_UNREAD_COUNT', 'http://www.plurk.com/API/Polling/getUnreadCount');
 
     define('PLURK_TIMELINE_GET_PLURK', 'http://www.plurk.com/API/Timeline/getPlurk');
     define('PLURK_TIMELINE_GET_PLURKS', 'http://www.plurk.com/API/Timeline/getPlurks');
