@@ -20,6 +20,12 @@ Class plurk_api Extends common {
 
 	/**
 	 * User name
+	 * @var string $cookie
+	 */
+	protected $cookie = NULL;
+
+	/**
+	 * User name
 	 * @var string $username
 	 */
 	protected $username;
@@ -190,14 +196,22 @@ Class plurk_api Extends common {
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS , http_build_query($array));
-		
+
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-		
+
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
-		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
+		if(isset($this->cookie))
+		{
+			curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie);
+			curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookie);
+		}
+		else
+		{
+			curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
+			curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
+		}
 
 		if($this->proxy != '')
 			curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
@@ -206,7 +220,7 @@ Class plurk_api Extends common {
 			curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxy_auth);
 
 		$response = curl_exec($ch);
-		
+
 		$this->http_response = $response;
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
@@ -234,6 +248,17 @@ Class plurk_api Extends common {
 	}
 
 	/**
+	 * function set_cookie_path
+	 * set curl cookie path
+	 *
+	 * @param string $cookie_path Proxy server host
+	 */
+	function set_cookie_path($cookie_path = NULL)
+	{
+		$this->cookie = $cookie_path;
+	}
+
+	/**
 	 * function register
 	 * Register a new Plurk account. Should be HTTPS
 	 *
@@ -250,7 +275,7 @@ Class plurk_api Extends common {
 	{
 		if($full_name == "")
 			$this->log('full name can not be empty.');
-		
+
 		$gender = strtolower($gender);
 
 		if($gender != 'male' && $gender != 'female')
@@ -265,11 +290,11 @@ Class plurk_api Extends common {
 			'date_of_birth' => $date_of_birth
 		);
 
-		if(isset($email)) $array['email'] = $email;		
-        
+		if(isset($email)) $array['email'] = $email;
+
 		$result = $this->plurk(PLURK_REGISTER, $array);
-		
-		if ( !isset($result->id) ) 
+
+		if ( !isset($result->id) )
 		{
 			$this->log($result->error_text);
 		}
@@ -336,7 +361,7 @@ Class plurk_api Extends common {
 		($this->http_status == '200') ? $this->is_login = FALSE : $this->is_login = TRUE;
 
 		return !$this->is_login;
-		
+
 	}
 
 	/**
@@ -350,30 +375,30 @@ Class plurk_api Extends common {
 	function update_picture($profile_image = '')
 	{
 		//  RFC 1867
-		
+
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-				   
+
 		$array['api_key'] = $this->api_key;
 		$array['profile_image'] = "@" . $profile_image;
-		
+
 		$ch = curl_init();
-		
+
 		curl_setopt($ch, CURLOPT_URL, PLURK_UPDATE_PICTURE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
-		  
+
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-		
+
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
 		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
-		
+
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		$this->http_response = $result;		
+		$this->http_response = $result;
 
 		return json_decode($result);
 	}
@@ -398,9 +423,9 @@ Class plurk_api Extends common {
 
 		if($full_name == "")
 			$this->log('full name can not be empty.');
-			
+
 		if($privacy != "world" && $privacy != "only_friends" && $privacy != "only_me")
-			$this->log('User\'s privacy must be world, only_friends or only_me.');        
+			$this->log('User\'s privacy must be world, only_friends or only_me.');
 
 		$array = array(
 			'api_key'          => $this->api_key,
@@ -415,11 +440,11 @@ Class plurk_api Extends common {
 		if(isset($date_of_birth)) $array['date_of_birth'] = $date_of_birth;
 
 		$result = $this->plurk(PLURK_UPDATE, $array);
-		
-		if ( !isset($result->id) ) 
+
+		if ( !isset($result->id) )
 		{
 			$this->log($result->error_text);
-		}        
+		}
 		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
@@ -427,7 +452,7 @@ Class plurk_api Extends common {
 	 * function get_plurks_polling
 	 *
 	 * @param time $offset Return plurks newer than offset, use timestamp.
-	 * @param int $limit The max number of plurks to be returned (default 50). 
+	 * @param int $limit The max number of plurks to be returned (default 50).
 	 * @return JSON object
 	 * @see /API/Polling/getPlurks
 	 */
@@ -481,7 +506,7 @@ Class plurk_api Extends common {
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		if( ! isset($offset)) $offset = date('c');
-		/* format 2010-01-18T11:24:43+00:00 */		
+		/* format 2010-01-18T11:24:43+00:00 */
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -674,7 +699,7 @@ Class plurk_api Extends common {
 		{
 			$this->log('this message should shorter than 140 characters.');
 		}
-		
+
 		$array = array(
 			'api_key'     => $this->api_key,
 			'qualifier'   => $qualifier,
@@ -687,7 +712,7 @@ Class plurk_api Extends common {
 		if (isset($limited_to)) $array['limited_to'] = json_encode($limited_to);
 
 		$result = $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
-		if ( !isset($result->plurk_id) ) 
+		if ( !isset($result->plurk_id) )
 		{
 			$this->log($result->error_text);
 		}
@@ -719,29 +744,29 @@ Class plurk_api Extends common {
 	function upload_picture($upload_image = '')
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
-				   
+
 		$array['api_key'] = $this->api_key;
 		$array['image'] = "@" . $upload_image;
-		
+
 		$ch = curl_init();
-		
+
 		curl_setopt($ch, CURLOPT_URL, PLURK_TIMELINE_UPLOAD_PICTURE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
-		  
+
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-		
+
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
 		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
-		
+
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$this->http_response = $result;
-		
+
 		return json_decode($result);
 	}
 
@@ -872,8 +897,8 @@ Class plurk_api Extends common {
 		);
 
 		$result = $this->plurk(PLURK_ADD_RESPONSE, $array);
-		
-		if ( !isset($result->id) ) 
+
+		if ( !isset($result->id) )
 		{
 			$this->log($result->error_text);
 		}
@@ -932,10 +957,10 @@ Class plurk_api Extends common {
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
-        
-		$result = $this->plurk(PLURK_GET_OWN_PROFILE, $array);        
+
+		$result = $this->plurk(PLURK_GET_OWN_PROFILE, $array);
 		$this->user_info = $result;
-        
+
 		return $result;
 	}
 
@@ -1595,7 +1620,7 @@ Class plurk_api Extends common {
 		{
 			$this->log('clique_name can not be empty.');
 		}
-		
+
 		$array = array(
 			'api_key'     => $this->api_key,
 			'clique_name' => $clique_name
