@@ -19,7 +19,7 @@ require('common.php');
 Class plurk_api Extends common {
 
 	/**
-	 * User name
+	 * cookie file.
 	 * @var string $cookie
 	 */
 	protected $cookie = NULL;
