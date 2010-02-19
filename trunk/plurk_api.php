@@ -695,7 +695,7 @@ Class plurk_api Extends common {
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-		if (mb_strlen($content) > 140)
+		if (mb_strlen($content, 'utf8') > 140)
 		{
 			$this->log('this message should shorter than 140 characters.');
 		}
@@ -816,7 +816,7 @@ Class plurk_api Extends common {
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-		if (mb_strlen($content) > 140)
+		if (mb_strlen($content, 'utf8') > 140)
 		{
 			$this->log('this message should shorter than 140 characters.');
 		}
@@ -884,7 +884,7 @@ Class plurk_api Extends common {
 	{
 		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
-		if (mb_strlen($content) > 140)
+		if (mb_strlen($content, 'utf8') > 140)
 		{
 			$this->log('this message should shorter than 140 characters.');
 		}
