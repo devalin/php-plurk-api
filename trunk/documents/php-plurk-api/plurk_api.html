@@ -27,7 +27,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">This is a PHP Plurk API.</p>
 	<ul class="tags">
-				<li><span class="field">version:</span> php-plurk-api 1.4</li>
+				<li><span class="field">version:</span> php-plurk-api 1.4.2</li>
 				<li><span class="field">link:</span> <a href="http://code.google.com/p/php-plurk-api">http://code.google.com/p/php-plurk-api</a></li>
 				<li><span class="field">license:</span> <a href="http://www.opensource.org/licenses/bsd-license.php">BSD License</a></li>
 			</ul>
@@ -57,7 +57,7 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																																																																																																																																																																																<div class="var-title">
+																																																																																																																																																																																																																																								<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
 					<span class="var-type">int</span>
 					<a href="#$alerts_count" title="details" class="var-name">$alerts_count</a>
@@ -71,6 +71,11 @@
 					<img src="../media/images/Variable.png" alt=" " />
 					<span class="var-type">string</span>
 					<a href="#$avatar" title="details" class="var-name">$avatar</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$cookie_path" title="details" class="var-name">$cookie_path</a>
 				</div>
 																<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
@@ -203,7 +208,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								<div class="method-definition">
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">plurk_api</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -475,6 +480,12 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string.</span>
+										<a href="#get_permalink" title="details" class="method-name">get_permalink</a>
+											(<span class="var-type">$plurk_id</span>&nbsp;<span class="var-name">$plurk_id</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">JSON</span>
 										<a href="#get_plurk" title="details" class="method-name">get_plurk</a>
 											([<span class="var-type">int</span>&nbsp;<span class="var-name">$plurk_id</span> = <span class="var-default">0</span>])
@@ -490,6 +501,12 @@
 											<span class="method-result">JSON</span>
 										<a href="#get_plurks_polling" title="details" class="method-name">get_plurks_polling</a>
 											([<span class="var-type">time</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">NULL</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">50</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">int.</span>
+										<a href="#get_plurk_id" title="details" class="method-name">get_plurk_id</a>
+											(<span class="var-type">$permalink</span>&nbsp;<span class="var-name">$permalink</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -619,6 +636,12 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#set_cookie_path" title="details" class="method-name">set_cookie_path</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$cookie_path</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">boolean</span>
 										<a href="#set_following" title="details" class="method-name">set_following</a>
 											([<span class="var-type">int</span>&nbsp;<span class="var-name">$user_id</span> = <span class="var-default">0</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$follow</span> = <span class="var-default">false</span>])
@@ -667,7 +690,7 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">boolean</span>
+											<span class="method-result">JSON</span>
 										<a href="#update_picture" title="details" class="method-name">update_picture</a>
 											([<span class="var-type">string</span>&nbsp;<span class="var-name">$profile_image</span> = <span class="var-default">''</span>])
 									</div>
@@ -703,7 +726,7 @@
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$alerts_count</span>
-						(line <span class="line-number">150</span>)
+						(line <span class="line-number">156</span>)
 		</span>
 	</div>
 
@@ -726,7 +749,7 @@
 		<span class="var-title">
 			<span class="var-type">$api_key</span>
 			<span class="var-name">$api_key</span>
-						(line <span class="line-number">37</span>)
+						(line <span class="line-number">43</span>)
 		</span>
 	</div>
 
@@ -749,7 +772,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$avatar</span>
-						(line <span class="line-number">90</span>)
+						(line <span class="line-number">96</span>)
 		</span>
 	</div>
 
@@ -764,15 +787,38 @@
 		
 
 </div>
-<a name="var$date_of_birth" id="$date_of_birth"><!-- --></A>
+<a name="var$cookie_path" id="$cookie_path"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
+			<span class="var-name">$cookie_path</span>
+			 = <span class="var-default"> NULL</span>			(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">cookie file path.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$date_of_birth" id="$date_of_birth"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
 			<span class="var-name">$date_of_birth</span>
-						(line <span class="line-number">102</span>)
+						(line <span class="line-number">108</span>)
 		</span>
 	</div>
 
@@ -788,14 +834,14 @@
 
 </div>
 <a name="var$display_name" id="$display_name"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$display_name</span>
-						(line <span class="line-number">79</span>)
+						(line <span class="line-number">85</span>)
 		</span>
 	</div>
 
@@ -811,14 +857,14 @@
 
 </div>
 <a name="var$fans_count" id="$fans_count"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$fans_count</span>
-						(line <span class="line-number">144</span>)
+						(line <span class="line-number">150</span>)
 		</span>
 	</div>
 
@@ -834,14 +880,14 @@
 
 </div>
 <a name="var$friends_count" id="$friends_count"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$friends_count</span>
-						(line <span class="line-number">156</span>)
+						(line <span class="line-number">162</span>)
 		</span>
 	</div>
 
@@ -857,14 +903,14 @@
 
 </div>
 <a name="var$full_name" id="$full_name"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$full_name</span>
-						(line <span class="line-number">108</span>)
+						(line <span class="line-number">114</span>)
 		</span>
 	</div>
 
@@ -880,14 +926,14 @@
 
 </div>
 <a name="var$gender" id="$gender"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$gender</span>
-						(line <span class="line-number">114</span>)
+						(line <span class="line-number">120</span>)
 		</span>
 	</div>
 
@@ -903,14 +949,14 @@
 
 </div>
 <a name="var$has_profile_image" id="$has_profile_image"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$has_profile_image</span>
-						(line <span class="line-number">84</span>)
+						(line <span class="line-number">90</span>)
 		</span>
 	</div>
 
@@ -926,14 +972,14 @@
 
 </div>
 <a name="var$http_response" id="$http_response"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">JSON</span>
 			<span class="var-name">$http_response</span>
-						(line <span class="line-number">55</span>)
+						(line <span class="line-number">61</span>)
 		</span>
 	</div>
 
@@ -950,14 +996,14 @@
 
 </div>
 <a name="var$http_status" id="$http_status"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$http_status</span>
-						(line <span class="line-number">49</span>)
+						(line <span class="line-number">55</span>)
 		</span>
 	</div>
 
@@ -973,14 +1019,14 @@
 
 </div>
 <a name="var$is_login" id="$is_login"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">bool</span>
 			<span class="var-name">$is_login</span>
-			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">43</span>)
+			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -996,14 +1042,14 @@
 
 </div>
 <a name="var$karma" id="$karma"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$karma</span>
-						(line <span class="line-number">126</span>)
+						(line <span class="line-number">132</span>)
 		</span>
 	</div>
 
@@ -1019,14 +1065,14 @@
 
 </div>
 <a name="var$location" id="$location"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$location</span>
-						(line <span class="line-number">96</span>)
+						(line <span class="line-number">102</span>)
 		</span>
 	</div>
 
@@ -1042,14 +1088,14 @@
 
 </div>
 <a name="var$nick_name" id="$nick_name"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$nick_name</span>
-						(line <span class="line-number">73</span>)
+						(line <span class="line-number">79</span>)
 		</span>
 	</div>
 
@@ -1065,14 +1111,14 @@
 
 </div>
 <a name="var$page_title" id="$page_title"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$page_title</span>
-						(line <span class="line-number">120</span>)
+						(line <span class="line-number">126</span>)
 		</span>
 	</div>
 
@@ -1088,14 +1134,14 @@
 
 </div>
 <a name="var$password" id="$password"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$password</span>
-						(line <span class="line-number">31</span>)
+						(line <span class="line-number">37</span>)
 		</span>
 	</div>
 
@@ -1111,14 +1157,14 @@
 
 </div>
 <a name="var$privacy" id="$privacy"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$privacy</span>
-						(line <span class="line-number">162</span>)
+						(line <span class="line-number">168</span>)
 		</span>
 	</div>
 
@@ -1134,14 +1180,14 @@
 
 </div>
 <a name="var$proxy" id="$proxy"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$proxy</span>
-			 = <span class="var-default"> ''</span>			(line <span class="line-number">168</span>)
+			 = <span class="var-default"> NULL</span>			(line <span class="line-number">174</span>)
 		</span>
 	</div>
 
@@ -1157,14 +1203,14 @@
 
 </div>
 <a name="var$proxy_auth" id="$proxy_auth"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$proxy_auth</span>
-			 = <span class="var-default"> ''</span>			(line <span class="line-number">174</span>)
+			 = <span class="var-default"> NULL</span>			(line <span class="line-number">180</span>)
 		</span>
 	</div>
 
@@ -1180,14 +1226,14 @@
 
 </div>
 <a name="var$recruited" id="$recruited"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$recruited</span>
-						(line <span class="line-number">132</span>)
+						(line <span class="line-number">138</span>)
 		</span>
 	</div>
 
@@ -1203,14 +1249,14 @@
 
 </div>
 <a name="var$relationship" id="$relationship"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$relationship</span>
-						(line <span class="line-number">138</span>)
+						(line <span class="line-number">144</span>)
 		</span>
 	</div>
 
@@ -1226,14 +1272,14 @@
 
 </div>
 <a name="var$uid" id="$uid"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$uid</span>
-						(line <span class="line-number">67</span>)
+						(line <span class="line-number">73</span>)
 		</span>
 	</div>
 
@@ -1249,14 +1295,14 @@
 
 </div>
 <a name="var$username" id="$username"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$username</span>
-						(line <span class="line-number">25</span>)
+						(line <span class="line-number">31</span>)
 		</span>
 	</div>
 
@@ -1272,14 +1318,14 @@
 
 </div>
 <a name="var$user_info" id="$user_info"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">JSON</span>
 			<span class="var-name">$user_info</span>
-						(line <span class="line-number">61</span>)
+						(line <span class="line-number">67</span>)
 		</span>
 	</div>
 
@@ -1311,11 +1357,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">176</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1332,11 +1378,11 @@
 			
 	</div>
 <a name="methodaddPlurk" id="addPlurk"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">addPlurk</span> (line <span class="line-number">706</span>)
+		<span class="method-title">addPlurk</span> (line <span class="line-number">722</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1371,11 +1417,11 @@
 			
 	</div>
 <a name="methodadd_all_as_fan" id="add_all_as_fan"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_all_as_fan</span> (line <span class="line-number">1220</span>)
+		<span class="method-title">add_all_as_fan</span> (line <span class="line-number">1236</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1396,11 +1442,11 @@
 			
 	</div>
 <a name="methodadd_all_as_friends" id="add_all_as_friends"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_all_as_friends</span> (line <span class="line-number">1239</span>)
+		<span class="method-title">add_all_as_friends</span> (line <span class="line-number">1255</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1421,11 +1467,11 @@
 			
 	</div>
 <a name="methodadd_as_fan" id="add_as_fan"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_as_fan</span> (line <span class="line-number">1177</span>)
+		<span class="method-title">add_as_fan</span> (line <span class="line-number">1193</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1451,11 +1497,11 @@
 			
 	</div>
 <a name="methodadd_as_friend" id="add_as_friend"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_as_friend</span> (line <span class="line-number">1199</span>)
+		<span class="method-title">add_as_friend</span> (line <span class="line-number">1215</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1481,11 +1527,11 @@
 			
 	</div>
 <a name="methodadd_plurk" id="add_plurk"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_plurk</span> (line <span class="line-number">671</span>)
+		<span class="method-title">add_plurk</span> (line <span class="line-number">687</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1527,11 +1573,11 @@
 			
 	</div>
 <a name="methodadd_response" id="add_response"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_response</span> (line <span class="line-number">860</span>)
+		<span class="method-title">add_response</span> (line <span class="line-number">876</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1564,11 +1610,11 @@
 			
 	</div>
 <a name="methodadd_to_clique" id="add_to_clique"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_to_clique</span> (line <span class="line-number">1668</span>)
+		<span class="method-title">add_to_clique</span> (line <span class="line-number">1682</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1597,11 +1643,11 @@
 			
 	</div>
 <a name="methodbecome_fan" id="become_fan"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">become_fan</span> (line <span class="line-number">1071</span>)
+		<span class="method-title">become_fan</span> (line <span class="line-number">1087</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1627,11 +1673,11 @@
 			
 	</div>
 <a name="methodbecome_friend" id="become_friend"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">become_friend</span> (line <span class="line-number">1029</span>)
+		<span class="method-title">become_friend</span> (line <span class="line-number">1045</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1657,11 +1703,11 @@
 			
 	</div>
 <a name="methodbefriend" id="befriend"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">befriend</span> (line <span class="line-number">1279</span>)
+		<span class="method-title">befriend</span> (line <span class="line-number">1295</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1690,11 +1736,11 @@
 			
 	</div>
 <a name="methodblockUser" id="blockUser"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">blockUser</span> (line <span class="line-number">1486</span>)
+		<span class="method-title">blockUser</span> (line <span class="line-number">1500</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1720,11 +1766,11 @@
 			
 	</div>
 <a name="methodblock_user" id="block_user"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">block_user</span> (line <span class="line-number">1466</span>)
+		<span class="method-title">block_user</span> (line <span class="line-number">1480</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1750,11 +1796,11 @@
 			
 	</div>
 <a name="methodcreate_clique" id="create_clique"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">create_clique</span> (line <span class="line-number">1592</span>)
+		<span class="method-title">create_clique</span> (line <span class="line-number">1606</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1780,11 +1826,11 @@
 			
 	</div>
 <a name="methoddeletePlurk" id="deletePlurk"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">deletePlurk</span> (line <span class="line-number">779</span>)
+		<span class="method-title">deletePlurk</span> (line <span class="line-number">795</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1810,11 +1856,11 @@
 			
 	</div>
 <a name="methoddelete_clique" id="delete_clique"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_clique</span> (line <span class="line-number">1620</span>)
+		<span class="method-title">delete_clique</span> (line <span class="line-number">1634</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1840,11 +1886,11 @@
 			
 	</div>
 <a name="methoddelete_plurk" id="delete_plurk"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_plurk</span> (line <span class="line-number">757</span>)
+		<span class="method-title">delete_plurk</span> (line <span class="line-number">773</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1873,11 +1919,11 @@
 			
 	</div>
 <a name="methoddelete_response" id="delete_response"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_response</span> (line <span class="line-number">911</span>)
+		<span class="method-title">delete_response</span> (line <span class="line-number">927</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1906,11 +1952,11 @@
 			
 	</div>
 <a name="methoddenyFriendMakeFan" id="denyFriendMakeFan"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">denyFriendMakeFan</span> (line <span class="line-number">1308</span>)
+		<span class="method-title">denyFriendMakeFan</span> (line <span class="line-number">1324</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1936,11 +1982,11 @@
 			
 	</div>
 <a name="methoddeny_friendship" id="deny_friendship"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">deny_friendship</span> (line <span class="line-number">1258</span>)
+		<span class="method-title">deny_friendship</span> (line <span class="line-number">1274</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1966,11 +2012,11 @@
 			
 	</div>
 <a name="methodedit_plurk" id="edit_plurk"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">edit_plurk</span> (line <span class="line-number">792</span>)
+		<span class="method-title">edit_plurk</span> (line <span class="line-number">808</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2000,11 +2046,11 @@
 			
 	</div>
 <a name="methodgetAlerts" id="getAlerts"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getAlerts</span> (line <span class="line-number">1147</span>)
+		<span class="method-title">getAlerts</span> (line <span class="line-number">1163</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2025,11 +2071,11 @@
 			
 	</div>
 <a name="methodgetBlockedUsers" id="getBlockedUsers"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getBlockedUsers</span> (line <span class="line-number">1454</span>)
+		<span class="method-title">getBlockedUsers</span> (line <span class="line-number">1468</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2050,11 +2096,11 @@
 			
 	</div>
 <a name="methodgetCities" id="getCities"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getCities</span> (line <span class="line-number">1866</span>)
+		<span class="method-title">getCities</span> (line <span class="line-number">1873</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2084,11 +2130,11 @@
 			
 	</div>
 <a name="methodgetCountries" id="getCountries"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getCountries</span> (line <span class="line-number">1895</span>)
+		<span class="method-title">getCountries</span> (line <span class="line-number">1902</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2115,11 +2161,11 @@
 			
 	</div>
 <a name="methodgetPermalink" id="getPermalink"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getPermalink</span> (line <span class="line-number">1831</span>)
+		<span class="method-title">getPermalink</span> (line <span class="line-number">1845</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2145,11 +2191,11 @@
 			
 	</div>
 <a name="methodgetPlurks" id="getPlurks"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getPlurks</span> (line <span class="line-number">517</span>)
+		<span class="method-title">getPlurks</span> (line <span class="line-number">535</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2189,11 +2235,11 @@
 			
 	</div>
 <a name="methodgetRegions" id="getRegions"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getRegions</span> (line <span class="line-number">1881</span>)
+		<span class="method-title">getRegions</span> (line <span class="line-number">1888</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2223,11 +2269,11 @@
 			
 	</div>
 <a name="methodgetResponses" id="getResponses"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getResponses</span> (line <span class="line-number">846</span>)
+		<span class="method-title">getResponses</span> (line <span class="line-number">862</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2253,11 +2299,11 @@
 			
 	</div>
 <a name="methodgetUnreadPlurks" id="getUnreadPlurks"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getUnreadPlurks</span> (line <span class="line-number">558</span>)
+		<span class="method-title">getUnreadPlurks</span> (line <span class="line-number">576</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2284,11 +2330,11 @@
 			
 	</div>
 <a name="methodget_active" id="get_active"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_active</span> (line <span class="line-number">1132</span>)
+		<span class="method-title">get_active</span> (line <span class="line-number">1148</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2310,11 +2356,11 @@
 			
 	</div>
 <a name="methodget_blocks" id="get_blocks"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_blocks</span> (line <span class="line-number">1434</span>)
+		<span class="method-title">get_blocks</span> (line <span class="line-number">1448</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2341,11 +2387,11 @@
 			
 	</div>
 <a name="methodget_clique" id="get_clique"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_clique</span> (line <span class="line-number">1571</span>)
+		<span class="method-title">get_clique</span> (line <span class="line-number">1585</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2371,11 +2417,11 @@
 			
 	</div>
 <a name="methodget_cliques" id="get_cliques"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_cliques</span> (line <span class="line-number">1554</span>)
+		<span class="method-title">get_cliques</span> (line <span class="line-number">1568</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2397,11 +2443,11 @@
 			
 	</div>
 <a name="methodget_completion" id="get_completion"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_completion</span> (line <span class="line-number">1116</span>)
+		<span class="method-title">get_completion</span> (line <span class="line-number">1132</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2423,11 +2469,11 @@
 			
 	</div>
 <a name="methodget_emoticons" id="get_emoticons"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_emoticons</span> (line <span class="line-number">1416</span>)
+		<span class="method-title">get_emoticons</span> (line <span class="line-number">1430</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2450,11 +2496,11 @@
 			
 	</div>
 <a name="methodget_fans" id="get_fans"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_fans</span> (line <span class="line-number">990</span>)
+		<span class="method-title">get_fans</span> (line <span class="line-number">1006</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2484,11 +2530,11 @@
 			
 	</div>
 <a name="methodget_following" id="get_following"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_following</span> (line <span class="line-number">1010</span>)
+		<span class="method-title">get_following</span> (line <span class="line-number">1026</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2515,11 +2561,11 @@
 			
 	</div>
 <a name="methodget_friends" id="get_friends"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_friends</span> (line <span class="line-number">970</span>)
+		<span class="method-title">get_friends</span> (line <span class="line-number">986</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2549,11 +2595,11 @@
 			
 	</div>
 <a name="methodget_history" id="get_history"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_history</span> (line <span class="line-number">1160</span>)
+		<span class="method-title">get_history</span> (line <span class="line-number">1176</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2575,11 +2621,11 @@
 			
 	</div>
 <a name="methodget_http_response" id="get_http_response"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_http_response</span> (line <span class="line-number">1792</span>)
+		<span class="method-title">get_http_response</span> (line <span class="line-number">1806</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2597,11 +2643,11 @@
 			
 	</div>
 <a name="methodget_http_status" id="get_http_status"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_http_status</span> (line <span class="line-number">1781</span>)
+		<span class="method-title">get_http_status</span> (line <span class="line-number">1795</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2619,11 +2665,11 @@
 			
 	</div>
 <a name="methodget_login_status" id="get_login_status"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_login_status</span> (line <span class="line-number">1759</span>)
+		<span class="method-title">get_login_status</span> (line <span class="line-number">1773</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2641,11 +2687,11 @@
 			
 	</div>
 <a name="methodget_own_profile" id="get_own_profile"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_own_profile</span> (line <span class="line-number">932</span>)
+		<span class="method-title">get_own_profile</span> (line <span class="line-number">948</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2666,12 +2712,39 @@
 		
 			
 	</div>
+<a name="methodget_permalink" id="get_permalink"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_permalink</span> (line <span class="line-number">1914</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">function get_permalink  transfer plurk_id to permalink</p>
+	
+	<div class="method-signature">
+		<span class="method-result">string.</span>
+		<span class="method-name">
+			get_permalink
+		</span>
+					(<span class="var-type">$plurk_id</span>&nbsp;<span class="var-name">$plurk_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$plurk_id</span>
+				<span class="var-name">$plurk_id</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodget_plurk" id="get_plurk"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_plurk</span> (line <span class="line-number">458</span>)
+		<span class="method-title">get_plurk</span> (line <span class="line-number">476</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2702,7 +2775,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_plurks</span> (line <span class="line-number">481</span>)
+		<span class="method-title">get_plurks</span> (line <span class="line-number">499</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2745,7 +2818,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_plurks_polling</span> (line <span class="line-number">436</span>)
+		<span class="method-title">get_plurks_polling</span> (line <span class="line-number">454</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2774,12 +2847,39 @@
 		
 			
 	</div>
-<a name="methodget_public_profile" id="get_public_profile"><!-- --></a>
+<a name="methodget_plurk_id" id="get_plurk_id"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_public_profile</span> (line <span class="line-number">951</span>)
+		<span class="method-title">get_plurk_id</span> (line <span class="line-number">1926</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">function get_plurk_id  transfer permalink to plurk_id</p>
+	
+	<div class="method-signature">
+		<span class="method-result">int.</span>
+		<span class="method-name">
+			get_plurk_id
+		</span>
+					(<span class="var-type">$permalink</span>&nbsp;<span class="var-name">$permalink</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$permalink</span>
+				<span class="var-name">$permalink</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_public_profile" id="get_public_profile"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_public_profile</span> (line <span class="line-number">967</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2806,11 +2906,11 @@
 			
 	</div>
 <a name="methodget_responses" id="get_responses"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_responses</span> (line <span class="line-number">825</span>)
+		<span class="method-title">get_responses</span> (line <span class="line-number">841</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2846,11 +2946,11 @@
 			
 	</div>
 <a name="methodget_unread_plurks" id="get_unread_plurks"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_unread_plurks</span> (line <span class="line-number">530</span>)
+		<span class="method-title">get_unread_plurks</span> (line <span class="line-number">548</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2880,11 +2980,11 @@
 			
 	</div>
 <a name="methodget_user_info" id="get_user_info"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_user_info</span> (line <span class="line-number">1803</span>)
+		<span class="method-title">get_user_info</span> (line <span class="line-number">1817</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2905,11 +3005,11 @@
 			
 	</div>
 <a name="methodisLoggedIn" id="isLoggedIn"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">isLoggedIn</span> (line <span class="line-number">1770</span>)
+		<span class="method-title">isLoggedIn</span> (line <span class="line-number">1784</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2930,11 +3030,11 @@
 			
 	</div>
 <a name="methodlogin" id="login"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">login</span> (line <span class="line-number">289</span>)
+		<span class="method-title">login</span> (line <span class="line-number">308</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2966,11 +3066,11 @@
 			
 	</div>
 <a name="methodlogout" id="logout"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">logout</span> (line <span class="line-number">331</span>)
+		<span class="method-title">logout</span> (line <span class="line-number">349</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -2991,11 +3091,11 @@
 			
 	</div>
 <a name="methodmark_plurk_as_read" id="mark_plurk_as_read"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">mark_plurk_as_read</span> (line <span class="line-number">645</span>)
+		<span class="method-title">mark_plurk_as_read</span> (line <span class="line-number">661</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3021,11 +3121,11 @@
 			
 	</div>
 <a name="methodmutePlurk" id="mutePlurk"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">mutePlurk</span> (line <span class="line-number">618</span>)
+		<span class="method-title">mutePlurk</span> (line <span class="line-number">635</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3054,11 +3154,11 @@
 			
 	</div>
 <a name="methodmute_plurks" id="mute_plurks"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">mute_plurks</span> (line <span class="line-number">570</span>)
+		<span class="method-title">mute_plurks</span> (line <span class="line-number">588</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3084,11 +3184,11 @@
 			
 	</div>
 <a name="methodnicknameToUid" id="nicknameToUid"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">nicknameToUid</span> (line <span class="line-number">1748</span>)
+		<span class="method-title">nicknameToUid</span> (line <span class="line-number">1762</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3115,11 +3215,11 @@
 			
 	</div>
 <a name="methodpermalinkToPlurkID" id="permalinkToPlurkID"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">permalinkToPlurkID</span> (line <span class="line-number">1849</span>)
+		<span class="method-title">permalinkToPlurkID</span> (line <span class="line-number">1858</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3145,11 +3245,11 @@
 			
 	</div>
 <a name="methodplurk" id="plurk"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">plurk</span> (line <span class="line-number">186</span>)
+		<span class="method-title">plurk</span> (line <span class="line-number">192</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3178,11 +3278,11 @@
 			
 	</div>
 <a name="methodregister" id="register"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">register</span> (line <span class="line-number">249</span>)
+		<span class="method-title">register</span> (line <span class="line-number">268</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3224,11 +3324,11 @@
 			
 	</div>
 <a name="methodremove_Friend" id="remove_Friend"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">remove_Friend</span> (line <span class="line-number">1050</span>)
+		<span class="method-title">remove_Friend</span> (line <span class="line-number">1066</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3254,11 +3354,11 @@
 			
 	</div>
 <a name="methodremove_from_clique" id="remove_from_clique"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">remove_from_clique</span> (line <span class="line-number">1692</span>)
+		<span class="method-title">remove_from_clique</span> (line <span class="line-number">1706</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3287,11 +3387,11 @@
 			
 	</div>
 <a name="methodremove_notification" id="remove_notification"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">remove_notification</span> (line <span class="line-number">1333</span>)
+		<span class="method-title">remove_notification</span> (line <span class="line-number">1349</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3317,11 +3417,11 @@
 			
 	</div>
 <a name="methodrename_clique" id="rename_clique"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">rename_clique</span> (line <span class="line-number">1644</span>)
+		<span class="method-title">rename_clique</span> (line <span class="line-number">1658</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3350,11 +3450,11 @@
 			
 	</div>
 <a name="methodrespondToPlurk" id="respondToPlurk"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">respondToPlurk</span> (line <span class="line-number">898</span>)
+		<span class="method-title">respondToPlurk</span> (line <span class="line-number">914</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3392,11 +3492,11 @@
 			
 	</div>
 <a name="methodsearch_plurk" id="search_plurk"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">search_plurk</span> (line <span class="line-number">1357</span>)
+		<span class="method-title">search_plurk</span> (line <span class="line-number">1372</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3426,11 +3526,11 @@
 			
 	</div>
 <a name="methodsearch_user" id="search_user"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">search_user</span> (line <span class="line-number">1387</span>)
+		<span class="method-title">search_user</span> (line <span class="line-number">1401</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3459,12 +3559,39 @@
 		
 			
 	</div>
+<a name="methodset_cookie_path" id="set_cookie_path"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_cookie_path</span> (line <span class="line-number">250</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">function set_cookie_path  set curl cookie path</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_cookie_path
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$cookie_path</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cookie_path</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodset_following" id="set_following"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_following</span> (line <span class="line-number">1094</span>)
+		<span class="method-title">set_following</span> (line <span class="line-number">1110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3497,7 +3624,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_proxy</span> (line <span class="line-number">227</span>)
+		<span class="method-title">set_proxy</span> (line <span class="line-number">235</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3533,7 +3660,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">uidToNickname</span> (line <span class="line-number">1716</span>)
+		<span class="method-title">uidToNickname</span> (line <span class="line-number">1730</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3564,7 +3691,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">uidToUserinfo</span> (line <span class="line-number">1817</span>)
+		<span class="method-title">uidToUserinfo</span> (line <span class="line-number">1831</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3595,7 +3722,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">unblockUser</span> (line <span class="line-number">1531</span>)
+		<span class="method-title">unblockUser</span> (line <span class="line-number">1545</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3625,7 +3752,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">unblock_user</span> (line <span class="line-number">1510</span>)
+		<span class="method-title">unblock_user</span> (line <span class="line-number">1524</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3655,7 +3782,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">unmute_plurks</span> (line <span class="line-number">593</span>)
+		<span class="method-title">unmute_plurks</span> (line <span class="line-number">610</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3685,7 +3812,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">397</span>)
+		<span class="method-title">update</span> (line <span class="line-number">415</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3733,17 +3860,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update_picture</span> (line <span class="line-number">352</span>)
+		<span class="method-title">update_picture</span> (line <span class="line-number">370</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">function update_picture  update a user's profile picture. You can read more about how to render an avatar via user data.</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> object</li>
 				<li><span class="field">see:</span> /API/Users/updatePicture</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">boolean</span>
+		<span class="method-result">JSON</span>
 		<span class="method-name">
 			update_picture
 		</span>
@@ -3763,7 +3891,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">upload_picture</span> (line <span class="line-number">721</span>)
+		<span class="method-title">upload_picture</span> (line <span class="line-number">737</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -3796,10 +3924,6 @@
 					<p>Inherited From <span class="classname"><a href="../php-plurk-api/common.html">common</a></span></p>
 					<blockquote>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../php-plurk-api/common.html#methodget_permalink">common::get_permalink()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../php-plurk-api/common.html#methodget_plurk_id">common::get_plurk_id()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../php-plurk-api/common.html#methodlog">common::log()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../php-plurk-api/common.html#method__consturct">common::__consturct()</a></span><br>
@@ -3812,7 +3936,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Wed, 27 Jan 2010 12:40:40 +0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Wed, 24 Feb 2010 16:27:38 +0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
