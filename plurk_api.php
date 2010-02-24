@@ -19,10 +19,10 @@ require('common.php');
 Class plurk_api Extends common {
 
 	/**
-	 * cookie file.
-	 * @var string $cookie
+	 * cookie file path.
+	 * @var string $cookie_path
 	 */
-	protected $cookie = NULL;
+	protected $cookie_path = NULL;
 
 	/**
 	 * User name
@@ -171,13 +171,13 @@ Class plurk_api Extends common {
 	 * String contains proxy host and port for CURL connection
 	 * @var string $proxy
 	 */
-	protected $proxy = '';
+	protected $proxy = NULL;
 
 	/**
 	 * String contains proxy authentication for CURL connection
 	 * @var string $proxy_auth
 	 */
-	protected $proxy_auth = '';
+	protected $proxy_auth = NULL;
 
 	function __construct() {}
 
@@ -202,21 +202,15 @@ Class plurk_api Extends common {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
-		if(isset($this->cookie))
-		{
-			curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie);
-			curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookie);
-		}
-		else
-		{
-			curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
-			curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
-		}
+		(isset($this->cookie_path)) ? $cookie_path = $this->cookie_path : $cookie_path = PLURK_COOKIE_PATH;
 
-		if($this->proxy != '')
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_path);
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_path);
+
+		if(isset($this->proxy))
 			curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
 
-		if($this->proxy_auth != '')
+		if(isset(($this->proxy_auth))
 			curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxy_auth);
 
 		$response = curl_exec($ch);
@@ -251,11 +245,11 @@ Class plurk_api Extends common {
 	 * function set_cookie_path
 	 * set curl cookie path
 	 *
-	 * @param string $cookie_path Proxy server host
+	 * @param string $cookie_path
 	 */
 	function set_cookie_path($cookie_path = NULL)
 	{
-		$this->cookie = $cookie_path;
+		$this->cookie_path = $cookie_path;
 	}
 
 	/**
@@ -341,6 +335,7 @@ Class plurk_api Extends common {
 		{
 			$this->log('Login Failed! '. $result->error_text);
 		}
+
 		return $this->is_login;
 	}
 
@@ -376,7 +371,7 @@ Class plurk_api Extends common {
 	{
 		//  RFC 1867
 
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array['api_key'] = $this->api_key;
 		$array['profile_image'] = "@" . $profile_image;
@@ -419,7 +414,7 @@ Class plurk_api Extends common {
 	 */
 	function update($current_password = NULL, $full_name = NULL, $new_password = NULL, $email = NULL, $display_name = NULL, $privacy = NULL, $date_of_birth = NULL)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		if($full_name == "")
 			$this->log('full name can not be empty.');
@@ -458,7 +453,7 @@ Class plurk_api Extends common {
 	 */
 	function get_plurks_polling($offset = NULL, $limit = 50)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c", $offset)));
 
@@ -480,7 +475,7 @@ Class plurk_api Extends common {
 	 */
 	function get_plurk($plurk_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'   => $this->api_key,
@@ -503,7 +498,7 @@ Class plurk_api Extends common {
 	 */
 	function get_plurks($offset = NULL, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		if( ! isset($offset)) $offset = date('c');
 		/* format 2010-01-18T11:24:43+00:00 */
@@ -552,12 +547,12 @@ Class plurk_api Extends common {
 	 */
 	function get_unread_plurks($offset = null ,$limit = 10)
 	{
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+
 		// $offset seens it's not working now. by whatup.tw
 		if( ! isset($offset)) $offset = time();
 
 		$date = array_shift(explode("+", date("c", $offset)));
-
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -592,8 +587,7 @@ Class plurk_api Extends common {
 	 */
 	function mute_plurks($ids)
 	{
-
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -615,7 +609,7 @@ Class plurk_api Extends common {
 	 */
 	function unmute_plurks($ids)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -640,7 +634,6 @@ Class plurk_api Extends common {
 	 */
 	function mutePlurk($int_plurk_id, $bool_setmute)
 	{
-
 		if (!is_int($int_plurk_id) || ! is_bool($bool_setmute))
 		{
 			return false;
@@ -667,7 +660,7 @@ Class plurk_api Extends common {
 	 */
 	function mark_plurk_as_read($ids)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -693,7 +686,7 @@ Class plurk_api Extends common {
 	 */
 	function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from plurk-api', $limited_to = NULL, $no_comments = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		if (mb_strlen($content, 'utf8') > 140)
 		{
@@ -743,7 +736,7 @@ Class plurk_api Extends common {
 	 */
 	function upload_picture($upload_image = '')
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array['api_key'] = $this->api_key;
 		$array['image'] = "@" . $upload_image;
@@ -779,7 +772,7 @@ Class plurk_api Extends common {
 	 */
 	function delete_plurk($plurk_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -814,7 +807,7 @@ Class plurk_api Extends common {
 	 */
 	function edit_plurk($plurk_id = 0, $content = '')
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		if (mb_strlen($content, 'utf8') > 140)
 		{
@@ -847,7 +840,7 @@ Class plurk_api Extends common {
 	 */
 	function get_responses($plurk_id = 0, $offset = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -882,7 +875,7 @@ Class plurk_api Extends common {
 	 */
 	function add_response($plurk_id = 0, $content = '', $qualifier = 'says')
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		if (mb_strlen($content, 'utf8') > 140)
 		{
@@ -933,7 +926,7 @@ Class plurk_api Extends common {
 	 */
 	function delete_response($plurk_id = 0, $response_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'     => $this->api_key,
@@ -954,7 +947,7 @@ Class plurk_api Extends common {
 	 */
 	function get_own_profile()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1012,7 +1005,7 @@ Class plurk_api Extends common {
 	 */
 	function get_fans($user_id = 0, $offset = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1032,7 +1025,7 @@ Class plurk_api Extends common {
 	 */
 	function get_following($offset = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1051,7 +1044,7 @@ Class plurk_api Extends common {
 	 */
 	function become_friend($friend_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'   => $this->api_key,
@@ -1072,7 +1065,7 @@ Class plurk_api Extends common {
 	 */
 	function remove_Friend($friend_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'   => $this->api_key,
@@ -1093,7 +1086,7 @@ Class plurk_api Extends common {
 	 */
 	function become_fan($fan_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1116,7 +1109,7 @@ Class plurk_api Extends common {
 	 */
 	function set_following($user_id = 0, $follow = false)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1138,7 +1131,7 @@ Class plurk_api Extends common {
 	 */
 	function get_completion()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1154,7 +1147,7 @@ Class plurk_api Extends common {
 	 */
 	function get_active()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1182,7 +1175,7 @@ Class plurk_api Extends common {
 	 */
 	function get_history()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1199,7 +1192,7 @@ Class plurk_api Extends common {
 	 */
 	function add_as_fan($user_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1221,7 +1214,7 @@ Class plurk_api Extends common {
 	 */
 	function add_as_friend($user_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1242,7 +1235,7 @@ Class plurk_api Extends common {
 	 */
 	function add_all_as_fan()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1261,7 +1254,7 @@ Class plurk_api Extends common {
 	 */
 	function add_all_as_friends()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1280,7 +1273,7 @@ Class plurk_api Extends common {
 	 */
 	function deny_friendship($user_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1355,8 +1348,7 @@ Class plurk_api Extends common {
 	 */
 	function remove_notification($user_id = 0)
 	{
-
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1379,10 +1371,9 @@ Class plurk_api Extends common {
 	 */
 	function search_plurk($query = '', $offset = 0)
 	{
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		/* offset: A plurk_id of the oldest Plurk in the last search result.  */
-
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
 
 		if ($query == "")
 		{
@@ -1409,9 +1400,9 @@ Class plurk_api Extends common {
 	 */
 	function search_user($query = '', $offset = 0)
 	{
-		/* offset: Page offset, like 10, 20, 30 etc. */
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		/* offset: Page offset, like 10, 20, 30 etc. */
 
 		if ($query == "")
 		{
@@ -1438,7 +1429,7 @@ Class plurk_api Extends common {
 	 */
 	function get_emoticons()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1456,7 +1447,7 @@ Class plurk_api Extends common {
 	 */
 	function get_blocks($offset = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 		  'api_key' => $this->api_key,
@@ -1532,7 +1523,7 @@ Class plurk_api Extends common {
 	 */
 	function unblock_user($user_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1576,7 +1567,7 @@ Class plurk_api Extends common {
 	 */
 	function get_cliques()
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1593,7 +1584,7 @@ Class plurk_api Extends common {
 	 */
 	function get_clique($clique_name = '')
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'     => $this->api_key,
@@ -1614,7 +1605,7 @@ Class plurk_api Extends common {
 	 */
 	function create_clique($clique_name = '')
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		if ($clique_name == "")
 		{
@@ -1642,7 +1633,7 @@ Class plurk_api Extends common {
 	 */
 	function delete_clique($clique_name = '')
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'     => $this->api_key,
@@ -1666,7 +1657,7 @@ Class plurk_api Extends common {
 	 */
 	function rename_clique($clique_name = '', $new_name = '')
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'     => $this->api_key,
@@ -1690,7 +1681,7 @@ Class plurk_api Extends common {
 	 */
 	function add_to_clique($clique_name = '', $user_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'     => $this->api_key,
@@ -1714,7 +1705,7 @@ Class plurk_api Extends common {
 	 */
 	function remove_from_clique($clique_name = '', $user_id = 0)
 	{
-		if( ! $this->is_login) exit(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
 		$array = array(
 			'api_key'     => $this->api_key,
@@ -1853,12 +1844,7 @@ Class plurk_api Extends common {
 	 */
 	function getPermalink($plurk_id)
 	{
-		if (!is_int($plurk_id))
-		{
-			return '';
-		}
-
-		return "http://www.plurk.com/p/" . base_convert($plurk_id, 10, 36);
+		return $this->get_permalink($plurk_id);
 	}
 
 	/**
@@ -1871,9 +1857,7 @@ Class plurk_api Extends common {
 	 */
 	function permalinkToPlurkID($string_permalink)
 	{
-		$base36number = str_replace('http://www.plurk.com/p/', '', $string_permalink);
-
-		return (int) base_convert($base36number, 36, 10);
+		return $this->get_plurk_id($plurk_id);
 	}
 
 	/**
@@ -1918,6 +1902,30 @@ Class plurk_api Extends common {
 	function getCountries($int_uid = null)
 	{
 		printf("getCountries: This function is not implemented yet.\n");
+	}
+
+	/**
+	 * function get_permalink
+	 * transfer plurk_id to permalink
+	 *
+	 * @param $plurk_id
+	 * @return string.
+	 */
+	function get_permalink($plurk_id)
+	{
+		return "http://www.plurk.com/p/" . base_convert($plurk_id, 10, 36);
+	}
+
+	/**
+	 * function get_plurk_id
+	 * transfer permalink to plurk_id
+	 *
+	 * @param $permalink
+	 * @return int.
+	 */
+	function get_plurk_id($permalink)
+	{
+		return base_convert(str_replace('http://www.plurk.com/p/', '', $permalink), 36, 10);
 	}
 
 }
