@@ -4,6 +4,10 @@
  *
  */ 
 
+2010-02-26 11:49:46 CST  appleboy.tw@gmail.com
+
+	fixed syntax error on 213 line in plurk_api.php file
+
 2010-02-24 16:15:46 CST  roga.lin@gmail.com
 
 	move two methods from class "common" to "plurk_api", re-define the config file, and error handling.
