@@ -2,8 +2,16 @@
  * This is a PHP Plurk API.
  * @package php-plurk-api
  *
- */ 
+ */
+ 
+2010-02-26 11:50:29 CST  appleboy.tw
 
+	edit ChangeLog	
+
+2010-02-26 11:46:56 CST  appleboy.tw
+
+	fixed syntax error on 213 line in plurk_api.php file
+ 
 2010-02-24 16:15:46 CST  roga.lin@gmail.com
 
 	move two methods from class "common" to "plurk_api", re-define the config file, and error handling.

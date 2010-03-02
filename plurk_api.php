@@ -210,7 +210,7 @@ Class plurk_api Extends common {
 		if(isset($this->proxy))
 			curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
 
-		if(isset(($this->proxy_auth))
+		if(isset($this->proxy_auth))
 			curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxy_auth);
 
 		$response = curl_exec($ch);
