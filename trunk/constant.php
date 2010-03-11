@@ -12,20 +12,20 @@
 	 *  /API/Users/register
 	 *  /API/Users/login
 	 *  /API/Users/logout
-	 *  /API/Users/update requires login
-	 *  /API/Users/updatePicture requires login
+	 *  /API/Users/update
+	 *  /API/Users/updatePicture
 	 *
 	 */
 
     define('PLURK_REGISTER', 'http://www.plurk.com/API/Users/register');
     define('PLURK_LOGIN', 'http://www.plurk.com/API/Users/login');
     define('PLURK_LOGOUT', 'http://www.plurk.com/API/Users/logout');
-    define('PLURK_UPDATE_PICTURE', 'http://www.plurk.com/API/Users/updatePicture');
     define('PLURK_UPDATE', 'http://www.plurk.com/API/Users/update');
+    define('PLURK_UPDATE_PICTURE', 'http://www.plurk.com/API/Users/updatePicture');
 
 	/**
 	 *  Real time notifications
-	 *  /API/Realtime/getUserChannel requires login
+	 *  /API/Realtime/getUserChannel
 	 *
 	 */
 
@@ -33,8 +33,8 @@
 
 	/**
 	 *  Polling
-	 *  /API/Polling/getPlurks requires login
-	 *  /API/Polling/getUnreadCount requires login
+	 *  /API/Polling/getPlurks
+	 *  /API/Polling/getUnreadCount
 	 *
 	 */
 
@@ -43,35 +43,35 @@
 
     /**
      *  Timeline
-     *  /API/Timeline/getPlurk requires login
-     *  /API/Timeline/getPlurks requires login
-     *  /API/Timeline/getUnreadPlurks requires login
-     *  /API/Timeline/plurkAdd requires login
-     *  /API/Timeline/plurkDelete requires login
-     *  /API/Timeline/plurkEdit requires login
-     *  /API/Timeline/mutePlurks requires login
-     *  /API/Timeline/unmutePlurks requires login
-     *  /API/Timeline/markAsRead requires login
-     *  /API/Timeline/uploadPicture requires login
+     *  /API/Timeline/getPlurk
+     *  /API/Timeline/getPlurks
+     *  /API/Timeline/getUnreadPlurks
+     *  /API/Timeline/plurkAdd
+     *  /API/Timeline/plurkDelete
+     *  /API/Timeline/plurkEdit
+     *  /API/Timeline/mutePlurks
+     *  /API/Timeline/unmutePlurks
+     *  /API/Timeline/markAsRead
+     *  /API/Timeline/uploadPicture
      *
      */
 
     define('PLURK_TIMELINE_GET_PLURK', 'http://www.plurk.com/API/Timeline/getPlurk');
     define('PLURK_TIMELINE_GET_PLURKS', 'http://www.plurk.com/API/Timeline/getPlurks');
     define('PLURK_TIMELINE_GET_UNREAD_PLURKS', 'http://www.plurk.com/API/Timeline/getUnreadPlurks');
+    define('PLURK_TIMELINE_PLURK_ADD', 'http://www.plurk.com/API/Timeline/plurkAdd');
+    define('PLURK_TIMELINE_PLURK_DELETE', 'http://www.plurk.com/API/Timeline/plurkDelete');
+    define('PLURK_TIMELINE_PLURK_EDIT', 'http://www.plurk.com/API/Timeline/plurkEdit');
     define('PLURK_TIMELINE_MUTE_PLURKS', 'http://www.plurk.com/API/Timeline/mutePlurks');
     define('PLURK_TIMELINE_UNMUTE_PLURKS', 'http://www.plurk.com/API/Timeline/unmutePlurks');
     define('PLURK_TIMELINE_MARK_AS_READ', 'http://www.plurk.com/API/Timeline/markAsRead');
-    define('PLURK_TIMELINE_PLURK_ADD', 'http://www.plurk.com/API/Timeline/plurkAdd');
     define('PLURK_TIMELINE_UPLOAD_PICTURE', 'http://www.plurk.com/API/Timeline/uploadPicture');
-    define('PLURK_TIMELINE_PLURK_DELETE', 'http://www.plurk.com/API/Timeline/plurkDelete');
-    define('PLURK_TIMELINE_PLURK_EDIT', 'http://www.plurk.com/API/Timeline/plurkEdit');
 
     /**
      *  Responses
      *  /API/Responses/get
-     *  /API/Responses/responseAdd requires login
-     *  /API/Responses/responseDelete requires login
+     *  /API/Responses/responseAdd
+     *  /API/Responses/responseDelete
      *
      */
 
@@ -81,7 +81,7 @@
 
     /**
      *  Profile
-     *  /API/Profile/getOwnProfile requires login
+     *  /API/Profile/getOwnProfile
      *  /API/Profile/getPublicProfile
      *
      */
@@ -93,12 +93,12 @@
      *  Friends and fans
      *  /API/FriendsFans/getFriendsByOffset
      *  /API/FriendsFans/getFansByOffset
-     *  /API/FriendsFans/getFollowingByOffset requires login
-     *  /API/FriendsFans/becomeFriend requires login
-     *  /API/FriendsFans/removeAsFriend requires login
-     *  /API/FriendsFans/becomeFan requires login
-     *  /API/FriendsFans/setFollowing requires login
-     *  /API/FriendsFans/getCompletion requires login
+     *  /API/FriendsFans/getFollowingByOffset
+     *  /API/FriendsFans/becomeFriend
+     *  /API/FriendsFans/removeAsFriend
+     *  /API/FriendsFans/becomeFan
+     *  /API/FriendsFans/setFollowing
+     *  /API/FriendsFans/getCompletion
      *
      */
 
@@ -114,14 +114,14 @@
 	/**
 	 *  Alerts
 	 *  General data structures
-	 *  /API/Alerts/getActive requires login
-	 *  /API/Alerts/getHistory requires login
-	 *  /API/Alerts/addAsFan requires login
-	 *  /API/Alerts/addAllAsFan requires login
-	 *  /API/Alerts/addAllAsFriends requires login
-	 *  /API/Alerts/addAsFriend requires login
-	 *  /API/Alerts/denyFriendship requires login
-	 *  /API/Alerts/removeNotification requires login
+	 *  /API/Alerts/getActive
+	 *  /API/Alerts/getHistory
+	 *  /API/Alerts/addAsFan
+	 *  /API/Alerts/addAllAsFan
+	 *  /API/Alerts/addAllAsFriends
+	 *  /API/Alerts/addAsFriend
+	 *  /API/Alerts/denyFriendship
+	 *  /API/Alerts/removeNotification
 	 *
 	 */
 
@@ -154,9 +154,9 @@
 
     /**
      *  Blocks
-     *  /API/Blocks/get requires login
-     *  /API/Blocks/block requires login
-     *  /API/Blocks/unblock requires login
+     *  /API/Blocks/get
+     *  /API/Blocks/block
+     *  /API/Blocks/unblock
      *
      */
 
@@ -166,20 +166,19 @@
 
     /**
      *  Cliques
-     *  /API/Cliques/getCliques requires login
-     *  /API/Cliques/getClique requires login
-     *  /API/Cliques/createClique requires login
-     *  /API/Cliques/renameClique requires login
-     *  /API/Cliques/add requires login
+     *  /API/Cliques/getCliques
+     *  /API/Cliques/getClique
+     *  /API/Cliques/createClique
+     *  /API/Cliques/renameClique
+     *  /API/Cliques/add
      *  /API/Cliques/remove
      *
      */
 
-    define('PLURK_GET_CLIQUES','http://www.plurk.com/API/Cliques/get_cliques');
-    define('PLURK_GET_CLIQUE','http://www.plurk.com/API/Cliques/get_clique');
-    define('PLURK_CREATE_CLIQUE','http://www.plurk.com/API/Cliques/create_clique');
-    define('PLURK_RENAME_CLIQUE', 'http://www.plurk.com/API/Cliques/rename_clique');
-    define('PLURK_DELETE_CLIQUE', 'http://www.plurk.com/API/Cliques/delete_clique');
+    define('PLURK_GET_CLIQUES','http://www.plurk.com/API/Cliques/getCliques');
+    define('PLURK_GET_CLIQUE','http://www.plurk.com/API/Cliques/getClique');
+    define('PLURK_CREATE_CLIQUE','http://www.plurk.com/API/Cliques/createClique');
+    define('PLURK_RENAME_CLIQUE', 'http://www.plurk.com/API/Cliques/renameClique');
     define('PLURK_ADD_TO_CLIQUE', 'http://www.plurk.com/API/Cliques/add');
-    define('PLURK_REMOVE_FROM_CLIQUE', 'http://www.plurk.com/API/Cliques/remove');
+    define('PLURK_REMOVE_CLIQUE', 'http://www.plurk.com/API/Cliques/remove');
 ?>
