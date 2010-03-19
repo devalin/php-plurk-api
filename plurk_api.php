@@ -5,7 +5,6 @@
  */
 require('config.php');
 require('constant.php');
-require('common.php');
 
 /**
  * This is a PHP Plurk API.
@@ -80,6 +79,21 @@ Class plurk_api Extends common {
 	protected $proxy_auth = NULL;
 
 	function __construct() {}
+
+	/**
+	 * funciton log
+	 *
+	 * @param $message
+	 */
+	function log($message = NULL)
+	{
+		if( ! file_exists(PLURK_LOG_PATH)) 	touch(PLURK_LOG_PATH);
+
+		$date = date("Y-m-d H:i:s");
+		$username = $this->username;
+		$source = file_get_contents(PLURK_LOG_PATH);
+		file_put_contents(PLURK_LOG_PATH, "$date - $username - $message\n$source");
+	}
 
 	/**
 	 * function plurk
@@ -208,6 +222,8 @@ Class plurk_api Extends common {
 	function login($api_key = '', $username = '', $password = '')
 	{
 
+		$this->username = $username;
+
 		$array = array(
 			'username' => $username,
 			'password' => $password,
@@ -221,8 +237,6 @@ Class plurk_api Extends common {
 		if($this->is_login)
 		{
 			$this->log('Login Success');
-
-			$this->username = $username;
 			$this->password = $password;
 			$this->api_key = $api_key;
 			$this->user_info = $result;
