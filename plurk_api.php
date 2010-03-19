@@ -15,7 +15,7 @@ require('constant.php');
  * @link	  http://code.google.com/p/php-plurk-api
  *
  */
-Class plurk_api Extends common {
+Class plurk_api {
 
 	/**
 	 * User name
