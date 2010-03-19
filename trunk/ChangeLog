@@ -8,8 +8,9 @@
 
 	move RLPlurkAPI compatible functions
 	rename CONSTANT files
-	remove Unnecessary protected variables
+	remove unnecessary protected variables
 	add support Plurk RealTime API
+	remove unnecessary common class
 
 2010-03-11 11:43:57 CST  roga.lin@gmail.com
 
