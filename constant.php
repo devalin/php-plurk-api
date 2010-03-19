@@ -180,5 +180,5 @@
     define('PLURK_CREATE_CLIQUE','http://www.plurk.com/API/Cliques/createClique');
     define('PLURK_RENAME_CLIQUE', 'http://www.plurk.com/API/Cliques/renameClique');
     define('PLURK_ADD_TO_CLIQUE', 'http://www.plurk.com/API/Cliques/add');
-    define('PLURK_REMOVE_CLIQUE', 'http://www.plurk.com/API/Cliques/remove');
+    define('PLURK_REMOVE_FROM_CLIQUE', 'http://www.plurk.com/API/Cliques/remove');
 ?>

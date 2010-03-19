@@ -4,6 +4,17 @@
  *
  */ 
 
+2010-03-19 17:24:57 CST  roga.lin@gmail.com
+
+	move RLPlurkAPI compatible functions
+	rename CONSTANT files
+	remove Unnecessary protected variables
+	add support Plurk RealTime API
+
+2010-03-11 11:43:57 CST  roga.lin@gmail.com
+
+	modify constants for the latest API spec.
+	
 2010-02-26 11:49:46 CST  appleboy.tw@gmail.com
 
 	fixed syntax error on 213 line in plurk_api.php file
