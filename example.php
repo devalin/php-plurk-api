@@ -26,7 +26,7 @@
 	 ******************************************/
 
 	echo "\n\n ----- get plurks ----- \n";
-	print_r($plurk->get_plurks(date('c'), 20);
+	print_r($plurk->get_plurks(date('c'), 20));
 
 	// echo "\n\n ----- get someone's plurk ----- \n";
 	// print_r($plurk->get_plurk(123));
