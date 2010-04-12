@@ -92,7 +92,7 @@ Class plurk_api {
 		$date = date("Y-m-d H:i:s");
 		$username = $this->username;
 		$source = file_get_contents(PLURK_LOG_PATH);
-		file_put_contents(PLURK_LOG_PATH, "$date - $username - $message\n$source");
+		file_put_contents(PLURK_LOG_PATH, "$date: $username:\n$message\n--\n$source");
 	}
 
 	/**
@@ -131,10 +131,18 @@ Class plurk_api {
 
 		$this->http_response = $response;
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+		
+		$response_obj = json_decode($response); 
+		
 		curl_close($ch);
-
-		return json_decode($response);
+		
+		if ($this->http_status != '200')
+		{
+			if(isset($response_obj->error_text))		
+				$this->log($response_obj->error_text);			
+		}
+				
+		return $response_obj;
 	}
 
 	/**
@@ -179,14 +187,16 @@ Class plurk_api {
 	 * @return JSON object
 	 * @see /API/Users/register
 	 */
-	function register($nick_name = '', $full_name = '', $password = '', $gender = 'male', $date_of_birth = '0000-00-00', $email = NULL)
+	function register($nick_name = NULL, $full_name = NULL, $password = '', $gender = 'male', $date_of_birth = '1985-05-13', $email = NULL)
 	{
-		if($full_name == "")
+
+		if( ! isset($nick_name))
+			$this->log('nick name can not be empty.');
+		
+		if( ! isset($full_name))
 			$this->log('full name can not be empty.');
 
-		$gender = strtolower($gender);
-
-		if($gender != 'male' && $gender != 'female')
+		if( ! in_array(strtolower($gender), array('male','female')))
 			$this->log('should be male or female.');
 
 		$array = array(
@@ -201,11 +211,7 @@ Class plurk_api {
 		if(isset($email)) $array['email'] = $email;
 
 		$result = $this->plurk(PLURK_REGISTER, $array);
-
-		if ( !isset($result->id) )
-		{
-			$this->log($result->error_text);
-		}
+			
 		return $result;
 	}
 
@@ -222,8 +228,8 @@ Class plurk_api {
 	function login($api_key = '', $username = '', $password = '')
 	{
 
-		$this->username = $username;
-
+		$this->username  = $username;
+		
 		$array = array(
 			'username' => $username,
 			'password' => $password,
@@ -236,15 +242,10 @@ Class plurk_api {
 
 		if($this->is_login)
 		{
-			$this->log('Login Success');
-			$this->password = $password;
-			$this->api_key = $api_key;
+			$this->password  = $password;
+			$this->api_key   = $api_key;
 			$this->user_info = $result;
-		}
-		else
-		{
-			$this->log('Login Failed! '. $result->error_text);
-		}
+		}		
 
 		return $this->is_login;
 	}
@@ -263,10 +264,10 @@ Class plurk_api {
 		);
 
 		$result = $this->plurk(PLURK_LOGOUT, $array);
+		
 		($this->http_status == '200') ? $this->is_login = FALSE : $this->is_login = TRUE;
 
-		return !$this->is_login;
-
+		return ! $this->is_login;
 	}
 
 	/**
@@ -287,11 +288,14 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
-		if($full_name == "")
+		if( ! isset($full_name))
 			$this->log('full name can not be empty.');
 
-		if($privacy != "world" && $privacy != "only_friends" && $privacy != "only_me")
-			$this->log('User\'s privacy must be world, only_friends or only_me.');
+		if(isset($privacy))
+		{
+			if( ! in_array($privacy, array('world', 'only_friends', 'only_me')))
+				$this->log("User's privacy must be world, only_friends or only_me.");
+		}
 
 		$array = array(
 			'api_key'          => $this->api_key,
@@ -306,11 +310,7 @@ Class plurk_api {
 		if(isset($date_of_birth)) $array['date_of_birth'] = $date_of_birth;
 
 		$result = $this->plurk(PLURK_UPDATE, $array);
-
-		if ( !isset($result->id) )
-		{
-			$this->log($result->error_text);
-		}
+				
 		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
@@ -577,11 +577,7 @@ Class plurk_api {
 		if (isset($limited_to)) $array['limited_to'] = json_encode($limited_to);
 
 		$result = $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
-		if ( !isset($result->plurk_id) )
-		{
-			$this->log($result->error_text);
-		}
-
+		
 		return $result;
 	}
 
@@ -630,11 +626,6 @@ Class plurk_api {
 		);
 
 		$result = $this->plurk(PLURK_TIMELINE_PLURK_EDIT, $array);
-
-		if ( !isset($result->plurk_id) )
-		{
-			$this->log($result->error_text);
-		}
 
 		return $result;
 	}
@@ -790,12 +781,7 @@ Class plurk_api {
 		);
 
 		$result = $this->plurk(PLURK_ADD_RESPONSE, $array);
-
-		if ( !isset($result->id) )
-		{
-			$this->log($result->error_text);
-		}
-
+		
 		return $result;
 	}
 
@@ -836,6 +822,7 @@ Class plurk_api {
 		$array = array('api_key' => $this->api_key);
 
 		$result = $this->plurk(PLURK_GET_OWN_PROFILE, $array);
+		
 		$this->user_info = $result;
 
 		return $result;
