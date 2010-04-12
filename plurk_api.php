@@ -65,6 +65,13 @@ Class plurk_api {
 	 * @var string $cookie_path
 	 */
 	protected $cookie_path = NULL;
+	
+	/**
+	 * log file path.
+	 * set your custom log path.
+	 * @var string $log_path
+	 */
+	protected $log_path = NULL;
 
 	/**
 	 * String contains proxy host and port for CURL connection
@@ -79,7 +86,18 @@ Class plurk_api {
 	protected $proxy_auth = NULL;
 
 	function __construct() {}
-
+	
+	/**
+	 * function set_log_path
+	 * set log path
+	 *
+	 * @param string $log_path
+	 */
+	function set_log_path($log_path = NULL)
+	{
+		$this->log_path = $log_path;
+	}
+	
 	/**
 	 * funciton log
 	 *
@@ -87,12 +105,15 @@ Class plurk_api {
 	 */
 	function log($message = NULL)
 	{
+		(isset($this->log_path)) ? $log_path = $this->log_path : $log_path = PLURK_LOG_PATH;
+		 
 		if( ! file_exists(PLURK_LOG_PATH)) 	touch(PLURK_LOG_PATH);
 
 		$date = date("Y-m-d H:i:s");
+		
 		$username = $this->username;
-		$source = file_get_contents(PLURK_LOG_PATH);
-		file_put_contents(PLURK_LOG_PATH, "$date: $username:\n$message\n--\n$source");
+		
+		error_log("$date: $username:\n$message\n--\n$source", 3, $log_path);		
 	}
 
 	/**
