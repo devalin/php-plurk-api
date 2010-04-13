@@ -120,8 +120,8 @@ Class plurk_api {
 		$class = __CLASS__;
 		$method = __METHOD__;
 		$function = __FUNCTION__;
-						
-		error_log("date: $date\nusername: $username\ndata_dump: $array\nclass: $class\nmethod: $method\nfunction: $function\n", 3, $log_path);
+							
+		error_log("date: $date\nusername: $username\nmessage: $message\ndata_dump: $array\nclass: $class\nmethod: $method\nfunction: $function\n", 3, $log_path);
 				
 	}
 
