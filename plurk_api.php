@@ -36,6 +36,11 @@ Class plurk_api {
 	protected $api_key;
 
 	/**
+	 * the array send to Plurk.com
+	 * @var $post_array
+	 */
+	protected $post_array;
+	/**
 	 * Login status
 	 * @var bool $is_login
 	 */
@@ -109,11 +114,15 @@ Class plurk_api {
 		 
 		if( ! file_exists(PLURK_LOG_PATH)) 	touch(PLURK_LOG_PATH);
 
-		$date = date("Y-m-d H:i:s");
-		
-		$username = $this->username;
-		
-		error_log("$date: $username:\n$message\n--\n$source", 3, $log_path);		
+		$date = date("Y-m-d H:i:s");		
+		$username = $this->username;			
+		$array = print_r($this->post_array, TRUE);
+		$class = __CLASS__;
+		$method = __METHOD__;
+		$function = __FUNCTION__;
+						
+		error_log("date: $date\nusername: $username\ndata_dump: $array\nclass: $class\nmethod: $method\nfunction: $function\n", 3, $log_path);
+				
 	}
 
 	/**
@@ -127,6 +136,8 @@ Class plurk_api {
 	function plurk($url, $array)
 	{
 		$ch = curl_init();
+		
+		$this->post_array = $array;
 
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
