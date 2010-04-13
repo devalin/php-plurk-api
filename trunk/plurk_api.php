@@ -363,9 +363,11 @@ Class plurk_api {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
-		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
+		(isset($this->cookie_path)) ? $cookie_path = $this->cookie_path : $cookie_path = PLURK_COOKIE_PATH;
 
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_path);
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_path);
+		
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -433,9 +435,11 @@ Class plurk_api {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
-		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
+		(isset($this->cookie_path)) ? $cookie_path = $this->cookie_path : $cookie_path = PLURK_COOKIE_PATH;
 
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_path);
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_path);
+		
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -744,9 +748,11 @@ Class plurk_api {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
-		curl_setopt($ch, CURLOPT_COOKIEFILE, PLURK_COOKIE_PATH);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, PLURK_COOKIE_PATH);
+		(isset($this->cookie_path)) ? $cookie_path = $this->cookie_path : $cookie_path = PLURK_COOKIE_PATH;
 
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_path);
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_path);
+		
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);

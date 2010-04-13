@@ -3,6 +3,11 @@
  * @package php-plurk-api
  *
  */ 
+ 
+2010-04-12 15:57:59 CST  roga.lin@gmail.com
+    add set_log_path.
+    fix some methods with set_cookie_path()
+    add error handler
 
 2010-03-19 17:24:57 CST  roga.lin@gmail.com
 
