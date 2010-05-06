@@ -70,7 +70,7 @@ Class plurk_api {
 	 * @var string $cookie_path
 	 */
 	protected $cookie_path = NULL;
-	
+
 	/**
 	 * log file path.
 	 * set your custom log path.
@@ -91,7 +91,7 @@ Class plurk_api {
 	protected $proxy_auth = NULL;
 
 	function __construct() {}
-	
+
 	/**
 	 * function set_log_path
 	 * set log path
@@ -102,7 +102,7 @@ Class plurk_api {
 	{
 		$this->log_path = $log_path;
 	}
-	
+
 	/**
 	 * funciton log
 	 *
@@ -111,18 +111,18 @@ Class plurk_api {
 	function log($message = NULL)
 	{
 		(isset($this->log_path)) ? $log_path = $this->log_path : $log_path = PLURK_LOG_PATH;
-		 
+
 		if( ! file_exists(PLURK_LOG_PATH)) 	touch(PLURK_LOG_PATH);
 
-		$date = date("Y-m-d H:i:s");		
-		$username = $this->username;			
+		$date = date("Y-m-d H:i:s");
+		$username = $this->username;
 		$array = print_r($this->post_array, TRUE);
 		$class = __CLASS__;
 		$method = __METHOD__;
 		$function = __FUNCTION__;
-							
+
 		error_log("date: $date\nusername: $username\nmessage: $message\ndata_dump: $array\nclass: $class\nmethod: $method\nfunction: $function\n", 3, $log_path);
-				
+
 	}
 
 	/**
@@ -136,7 +136,7 @@ Class plurk_api {
 	function plurk($url, $array)
 	{
 		$ch = curl_init();
-		
+
 		$this->post_array = $array;
 
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -163,17 +163,17 @@ Class plurk_api {
 
 		$this->http_response = $response;
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		
-		$response_obj = json_decode($response); 
-		
+
+		$response_obj = json_decode($response);
+
 		curl_close($ch);
-		
+
 		if ($this->http_status != '200')
 		{
-			if(isset($response_obj->error_text))		
-				$this->log($response_obj->error_text);			
+			if(isset($response_obj->error_text))
+				$this->log($response_obj->error_text);
 		}
-				
+
 		return $response_obj;
 	}
 
@@ -224,7 +224,7 @@ Class plurk_api {
 
 		if( ! isset($nick_name))
 			$this->log('nick name can not be empty.');
-		
+
 		if( ! isset($full_name))
 			$this->log('full name can not be empty.');
 
@@ -243,7 +243,7 @@ Class plurk_api {
 		if(isset($email)) $array['email'] = $email;
 
 		$result = $this->plurk(PLURK_REGISTER, $array);
-			
+
 		return $result;
 	}
 
@@ -261,7 +261,7 @@ Class plurk_api {
 	{
 
 		$this->username  = $username;
-		
+
 		$array = array(
 			'username' => $username,
 			'password' => $password,
@@ -277,7 +277,7 @@ Class plurk_api {
 			$this->password  = $password;
 			$this->api_key   = $api_key;
 			$this->user_info = $result;
-		}		
+		}
 
 		return $this->is_login;
 	}
@@ -296,7 +296,7 @@ Class plurk_api {
 		);
 
 		$result = $this->plurk(PLURK_LOGOUT, $array);
-		
+
 		($this->http_status == '200') ? $this->is_login = FALSE : $this->is_login = TRUE;
 
 		return ! $this->is_login;
@@ -342,7 +342,7 @@ Class plurk_api {
 		if(isset($date_of_birth)) $array['date_of_birth'] = $date_of_birth;
 
 		$result = $this->plurk(PLURK_UPDATE, $array);
-				
+
 		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
@@ -378,7 +378,7 @@ Class plurk_api {
 
 		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_path);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_path);
-		
+
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -450,7 +450,7 @@ Class plurk_api {
 
 		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_path);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_path);
-		
+
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -613,7 +613,7 @@ Class plurk_api {
 		if (isset($limited_to)) $array['limited_to'] = json_encode($limited_to);
 
 		$result = $this->plurk(PLURK_TIMELINE_PLURK_ADD, $array);
-		
+
 		return $result;
 	}
 
@@ -763,7 +763,7 @@ Class plurk_api {
 
 		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_path);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_path);
-		
+
 		$result = curl_exec($ch);
 
 		$this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -819,7 +819,7 @@ Class plurk_api {
 		);
 
 		$result = $this->plurk(PLURK_ADD_RESPONSE, $array);
-		
+
 		return $result;
 	}
 
@@ -860,7 +860,7 @@ Class plurk_api {
 		$array = array('api_key' => $this->api_key);
 
 		$result = $this->plurk(PLURK_GET_OWN_PROFILE, $array);
-		
+
 		$this->user_info = $result;
 
 		return $result;
@@ -886,7 +886,7 @@ Class plurk_api {
 	/**
 	 * function get_friends
 	 *
-	 * @param int|string $user_id The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+	 * @param int $user_id The user_id of the public profile. (integer)
 	 * @param int $offset The offset, can be 10, 20, 30 etc.
 	 * @return JSON objects
 	 * @see /API/FriendsFans/getFriendsByOffset
@@ -905,7 +905,7 @@ Class plurk_api {
 	/**
 	 * function get_fans
 	 *
-	 * @param int|string $user_id The user_id of the public profile. Can be integer (like 34) or nick name (like amix).
+	 * @param int $user_id The user_id of the public profile. (integer)
 	 * @param int $offset The offset, can be 10, 20, 30 etc.
 	 * @return JSON object
 	 * @see /API/FriendsFans/getFansByOffset
