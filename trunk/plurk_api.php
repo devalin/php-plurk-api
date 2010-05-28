@@ -970,7 +970,7 @@ Class plurk_api {
 	 * @return boolean
 	 * @see /API/FriendsFans/removeAsFriend
 	 */
-	function remove_Friend($friend_id = 0)
+	function remove_friend($friend_id = 0)
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
