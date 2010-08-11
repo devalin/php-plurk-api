@@ -117,12 +117,8 @@ Class plurk_api {
 		$date = date("Y-m-d H:i:s");
 		$username = $this->username;
 		$array = print_r($this->post_array, TRUE);
-		$class = __CLASS__;
-		$method = __METHOD__;
-		$function = __FUNCTION__;
-
-		error_log("date: $date\nusername: $username\nmessage: $message\ndata_dump: $array\nclass: $class\nmethod: $method\nfunction: $function\n", 3, $log_path);
-
+		
+		error_log("date: $date\nusername: $username\nmessage: $message\ndata_dump: $array\n", 3, $log_path);
 	}
 
 	/**
