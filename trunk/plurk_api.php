@@ -468,7 +468,7 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
-		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c", $offset)));
+		$offset = array_shift(explode("+", date("c", $offset)));
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -490,7 +490,7 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
-		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c", $offset)));
+		$offset = array_shift(explode("+", date("c", $offset)));
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -500,7 +500,7 @@ Class plurk_api {
 	}
 
 	/**
-	 * function get_plurks
+	 * function get_plurk
 	 *
 	 * @param int $plurk_id The unique id of the plurk. Should be passed as a number, and not base 36 encoded.
 	 * @return JSON object
@@ -523,18 +523,19 @@ Class plurk_api {
 	 *
 	 * @param time $offset Return plurks older than offset, use timestamp.
 	 * @param int $limit How many plurks should be returned? Default is 20.
-	 * @param int $only_user The numeric ID of the user who's plurks should be returned.
+	 * @param boolean $only_user Setting it to true will only return user plurks.
 	 * @param boolean $only_responded Setting it to true will only return responded plurks.
 	 * @param boolean $only_private Setting it to true will only return private plurks.
+	 * @param boolean $only_favorite Setting it to true will only return favorite plurks.
 	 * @return JSON object
 	 * @see /API/Timeline/getPlurks
 	 */
-	function get_plurks($offset = NULL, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL)
+	 function get_plurks($offset = NULL, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL, $only_favorite = NULL)
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
-		if( ! isset($offset)) $offset = date('c');
-		/* format 2010-01-18T11:24:43+00:00 */
+		$offset = array_shift(explode("+", date("c", $offset)));;
+		/* format 2010-01-18T11:24:43 */
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -545,6 +546,7 @@ Class plurk_api {
 		if(isset($only_user)) $array['only_user'] = $only_user;
 		if(isset($only_responded)) $array['only_responded'] = $only_responded;
 		if(isset($only_private)) $array['only_private'] = $only_private;
+		if(isset($only_favorite)) $array['only_favorite'] = $only_favorite;
 
 		return $this->plurk(PLURK_TIMELINE_GET_PLURKS, $array);
 	}
