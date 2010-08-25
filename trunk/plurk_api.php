@@ -112,7 +112,7 @@ Class plurk_api {
 	{
 		(isset($this->log_path)) ? $log_path = $this->log_path : $log_path = PLURK_LOG_PATH;
 
-		if( ! file_exists(PLURK_LOG_PATH)) 	touch(PLURK_LOG_PATH);
+		if( ! file_exists(PLURK_LOG_PATH))	touch(PLURK_LOG_PATH);
 
 		$date = date("Y-m-d H:i:s");
 		$username = $this->username;
@@ -705,47 +705,47 @@ Class plurk_api {
 		return ($this->http_status == '200') ? TRUE : FALSE;
 	}
 
-    /**
-     * function favorite_plurk
-     *
-     * @param $ids The plurk ids, eg. array(123,456,789)
-     * @return boolean
-     * @see /API/Timeline/favoritePlurks
-     */
-    function favorite_plurk($ids)
-    {
-        if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+	/**
+	* function favorite_plurk
+	*
+	* @param $ids The plurk ids, eg. array(123,456,789)
+	* @return boolean
+	* @see /API/Timeline/favoritePlurks
+	*/
+	function favorite_plurk($ids)
+	{
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
-        $array = array(
-            'api_key' => $this->api_key,
-            'ids'     => json_encode($ids),
-        );
+		$array = array(
+			'api_key' => $this->api_key,
+			'ids'     => json_encode($ids),
+		);
 
-        $this->plurk(PLURK_TIMELINE_FAVORITE_PLURKS, $array);
+		$this->plurk(PLURK_TIMELINE_FAVORITE_PLURKS, $array);
 
-        return ($this->http_status == '200') ? TRUE : FALSE;
-    }
+		return ($this->http_status == '200') ? TRUE : FALSE;
+	}
 
-    /**
-     * function unfavorite_plurk
-     *
-     * @param $ids The plurk ids, eg. array(123,456,789)
-     * @return boolean
-     * @see /API/Timeline/unfavoritePlurks
-     */
-    function unfavorite_plurk($ids)
-    {
-        if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+	/**
+	* function unfavorite_plurk
+	*
+	* @param $ids The plurk ids, eg. array(123,456,789)
+	* @return boolean
+	* @see /API/Timeline/unfavoritePlurks
+	*/
+	function unfavorite_plurk($ids)
+	{
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
 
-        $array = array(
-            'api_key' => $this->api_key,
-            'ids'     => json_encode($ids),
-        );
+		$array = array(
+			'api_key' => $this->api_key,
+			'ids'     => json_encode($ids),
+		);
 
-        $this->plurk(PLURK_TIMELINE_UNFAVORITE_PLURKS, $array);
+		$this->plurk(PLURK_TIMELINE_UNFAVORITE_PLURKS, $array);
 
-        return ($this->http_status == '200') ? TRUE : FALSE;
-    }
+		return ($this->http_status == '200') ? TRUE : FALSE;
+	}
 
 	/**
 	 * function mark_plurk_as_read
