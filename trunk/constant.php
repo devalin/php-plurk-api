@@ -64,6 +64,8 @@
     define('PLURK_TIMELINE_PLURK_EDIT', 'http://www.plurk.com/API/Timeline/plurkEdit');
     define('PLURK_TIMELINE_MUTE_PLURKS', 'http://www.plurk.com/API/Timeline/mutePlurks');
     define('PLURK_TIMELINE_UNMUTE_PLURKS', 'http://www.plurk.com/API/Timeline/unmutePlurks');
+    define('PLURK_TIMELINE_FAVORITE_PLURKS', 'http://www.plurk.com/API/Timeline/favoritePlurks');
+    define('PLURK_TIMELINE_UNFAVORITE_PLURKS', 'http://www.plurk.com/API/Timeline/unfavoritePlurks');
     define('PLURK_TIMELINE_MARK_AS_READ', 'http://www.plurk.com/API/Timeline/markAsRead');
     define('PLURK_TIMELINE_UPLOAD_PICTURE', 'http://www.plurk.com/API/Timeline/uploadPicture');
 
