@@ -199,6 +199,8 @@ Class plurk_api {
 	 */
 	function set_cookie_path($cookie_path = NULL)
 	{
+		if( ! file_exists($cookie_path))	touch($cookie_path);
+		
 		$this->cookie_path = $cookie_path;
 	}
 
