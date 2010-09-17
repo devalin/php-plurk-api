@@ -10,7 +10,7 @@ require('constant.php');
  * This is a PHP Plurk API.
  * @package   php-plurk-api
  * @category  API
- * @version   php-plurk-api 1.5.0
+ * @version   php-plurk-api 1.5.1
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link	  http://code.google.com/p/php-plurk-api
  *
@@ -117,7 +117,7 @@ Class plurk_api {
 		$date = date("Y-m-d H:i:s");
 		$username = $this->username;
 		$array = print_r($this->post_array, TRUE);
-		
+
 		error_log("date: $date\nusername: $username\nmessage: $message\ndata_dump: $array\n", 3, $log_path);
 	}
 
@@ -200,7 +200,7 @@ Class plurk_api {
 	function set_cookie_path($cookie_path = NULL)
 	{
 		if( ! file_exists($cookie_path))	touch($cookie_path);
-		
+
 		$this->cookie_path = $cookie_path;
 	}
 
@@ -415,33 +415,23 @@ Class plurk_api {
 	 * You won't get notifications on responses that the logged in user adds, but you will get notifications for new plurks.
 	 *
 	 * @param string $comet_server full path with channel name
-	 * @param string $channel_name You get this from /API/Realtime/getUserChannel channel_name parameter.
-	 * @param string $offset The new profile image.
+	 * @param string $new_offset only fetch new messages from a given offset.  .
 	 * @return JSON object
 	 */
-	function realtime_get_commet_channel($comet_server = NULL, $channel_name = NULL, $offset = NULL)
+	function realtime_get_commet_channel($comet_server = NULL, $new_offset = NULL)
 	{
+
+		$comet_url = $comet_server . '&offset=' . $new_offset;
 		/**
-		 *
-		 * the first param "$comet_server" should look like
+		 * the "$comet_url" should look like
 		 * http://comet03.plurk.com/comet/1235515351741/?channel=generic-4-f733d8522327edf87b4d1651e6395a6cca0807a0
-		 *
 		 */
 
-		$array = array(
-			'channel_name' => $channel,
-			'offset'       => $offset
-		);
-
 		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $comet_server);
+		curl_setopt($ch, CURLOPT_URL, $comet_url);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($array));
-
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
 		(isset($this->cookie_path)) ? $cookie_path = $this->cookie_path : $cookie_path = PLURK_COOKIE_PATH;
