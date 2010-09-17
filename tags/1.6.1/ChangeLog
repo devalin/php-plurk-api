@@ -6,7 +6,7 @@
 2010-09-18 00:06:22 CST roga.lin@gmail.com	
 
 	fix realtime_get_commet_channel bug, and report the problem to Plurk.
-	notice, the realtime_get_commet_channel() interface is changed.
+ 	notice, the realtime_get_commet_channel() interface is changed.
  
 2010-08-25 14:23:22 CST appleboy.tw@gmail.com
 
