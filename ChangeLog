@@ -3,6 +3,10 @@
  * @package php-plurk-api
  *
  */ 
+2010-11-11 22:41:12 CST appleboy.tw@gmail.com	
+
+	add new API function: /API/Users/getKarmaStats.
+ 
 2010-09-18 00:06:22 CST roga.lin@gmail.com	
 
 	fix realtime_get_commet_channel bug, and report the problem to Plurk.
