@@ -26,8 +26,8 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="../ric_README.html">README</a></p>
 					<p><a href="../ric_ChangeLog.html">ChangeLog</a></p>
+					<p><a href="../ric_README.html">README</a></p>
 			</div>
 	<div id="todolist">
 			<p><a href="../todolist.html">Todo List</a></p>
@@ -83,23 +83,6 @@ Source Location: /plurk_api.php<br /><br />
         
 </td>
 
-<td valign="top">
-<h3><a href="#class_vars">Variables</a></h3>
-<ul>
-    <li><a href="../php-plurk-api/plurk_api.html#var$api_key">$api_key</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$cookie_path">$cookie_path</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$http_response">$http_response</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$http_status">$http_status</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$is_login">$is_login</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$log_path">$log_path</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$password">$password</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$post_array">$post_array</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$proxy">$proxy</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$proxy_auth">$proxy_auth</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$username">$username</a></li>
-    <li><a href="../php-plurk-api/plurk_api.html#var$user_info">$user_info</a></li>
-  </ul>
-</td>
 
 
 <td valign="top">
@@ -148,6 +131,7 @@ Source Location: /plurk_api.php<br /><br />
     <li><a href="../php-plurk-api/plurk_api.html#methodget_history">get_history</a></li>
     <li><a href="../php-plurk-api/plurk_api.html#methodget_http_response">get_http_response</a></li>
     <li><a href="../php-plurk-api/plurk_api.html#methodget_http_status">get_http_status</a></li>
+    <li><a href="../php-plurk-api/plurk_api.html#methodget_karma_stats">get_karma_stats</a></li>
     <li><a href="../php-plurk-api/plurk_api.html#methodget_login_status">get_login_status</a></li>
     <li><a href="../php-plurk-api/plurk_api.html#methodget_own_profile">get_own_profile</a></li>
     <li><a href="../php-plurk-api/plurk_api.html#methodget_permalink">get_permalink</a></li>
@@ -212,7 +196,7 @@ Source Location: /plurk_api.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 18]<br />
+[line 17]<br />
 This is a PHP Plurk API.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -231,305 +215,6 @@ This is a PHP Plurk API.<br /><br /><br /><br />
 </div><br /><br />
 <div class="top">[ <a href="#top">Top</a> ]</div><br />
 
-<hr />
-<a name="class_vars"></a>
-<h3>Class Variables</h3>
-<div class="tags">
-	<a name="var$api_key"></a>
-	<p></p>
-	<h4>$api_key = <span class="value"></span></h4>
-	<p>[line 36]</p>
-  API KEY<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>$api_key</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$cookie_path"></a>
-	<p></p>
-	<h4>$cookie_path = <span class="value">&nbsp;NULL</span></h4>
-	<p>[line 72]</p>
-  cookie file path.<br /><br /><p>if you must login as multi users, you need to set cookie path for each users.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>string</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$http_response"></a>
-	<p></p>
-	<h4>$http_response = <span class="value"></span></h4>
-	<p>[line 59]</p>
-  Current HTTP Server Response<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>var:</b>&nbsp;&nbsp;</td><td>object $http_response</td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>JSON</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$http_status"></a>
-	<p></p>
-	<h4>$http_status = <span class="value"></span></h4>
-	<p>[line 53]</p>
-  Current HTTP Status Code<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>int</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$is_login"></a>
-	<p></p>
-	<h4>$is_login = <span class="value">&nbsp;FALSE</span></h4>
-	<p>[line 47]</p>
-  Login status<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>bool</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$log_path"></a>
-	<p></p>
-	<h4>$log_path = <span class="value">&nbsp;NULL</span></h4>
-	<p>[line 79]</p>
-  log file path.<br /><br /><p>set your custom log path.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>string</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$password"></a>
-	<p></p>
-	<h4>$password = <span class="value"></span></h4>
-	<p>[line 30]</p>
-  Password<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>string</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$post_array"></a>
-	<p></p>
-	<h4>$post_array = <span class="value"></span></h4>
-	<p>[line 42]</p>
-  the array send to Plurk.com<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>$post_array</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$proxy"></a>
-	<p></p>
-	<h4>$proxy = <span class="value">&nbsp;NULL</span></h4>
-	<p>[line 85]</p>
-  String contains proxy host and port for CURL connection<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>string</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$proxy_auth"></a>
-	<p></p>
-	<h4>$proxy_auth = <span class="value">&nbsp;NULL</span></h4>
-	<p>[line 91]</p>
-  String contains proxy authentication for CURL connection<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>string</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$username"></a>
-	<p></p>
-	<h4>$username = <span class="value"></span></h4>
-	<p>[line 24]</p>
-  User name<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>string</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$user_info"></a>
-	<p></p>
-	<h4>$user_info = <span class="value"></span></h4>
-	<p>[line 65]</p>
-  User infomation<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>var:</b>&nbsp;&nbsp;</td><td>object $user_info</td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>JSON</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-</div><br />
 
 <hr />
 <a name="class_methods"></a>
@@ -538,7 +223,7 @@ This is a PHP Plurk API.<br /><br /><br /><br />
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 93]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 92]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -547,14 +232,23 @@ This is a PHP Plurk API.<br /><br /><br /><br />
     </td></tr></table>
     </td></tr></table><br />
 	
-		<br /><br />
+		String contains proxy authentication for CURL connection<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>var:</b>&nbsp;&nbsp;</td><td>$proxy_auth</td>
+  </tr>
+</table>
+</div>
+<br /><br />
 
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodaddPlurk"></a>
-	<h3>method addPlurk <span class="smalllinenumber">[line 1661]</span></h3>
+	<h3>method addPlurk <span class="smalllinenumber">[line 1681]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -568,7 +262,7 @@ $no_comments = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function addPlurk  Compatible with RLPlurkAPI<br /><br /><br /><br />
+		function addPlurk Compatible with RLPlurkAPI<br /><br /><br /><br />
 
 	
         <h4>Parameters:</h4>
@@ -605,7 +299,7 @@ $no_comments = 0])</code>
   </div>
   <hr />
 	<a name="methodadd_all_as_fan"></a>
-	<h3>method add_all_as_fan <span class="smalllinenumber">[line 1164]</span></h3>
+	<h3>method add_all_as_fan <span class="smalllinenumber">[line 1184]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -614,7 +308,7 @@ $no_comments = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function add_all_as_fan  Accept all friendship requests as fans.<br /><br /><br /><br />
+		function add_all_as_fan Accept all friendship requests as fans.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -630,7 +324,7 @@ $no_comments = 0])</code>
   </div>
   <hr />
 	<a name="methodadd_all_as_friends"></a>
-	<h3>method add_all_as_friends <span class="smalllinenumber">[line 1182]</span></h3>
+	<h3>method add_all_as_friends <span class="smalllinenumber">[line 1202]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -639,7 +333,7 @@ $no_comments = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function add_all_as_friends  Accept all friendship requests as friends.<br /><br /><br /><br />
+		function add_all_as_friends Accept all friendship requests as friends.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -655,7 +349,7 @@ $no_comments = 0])</code>
   </div>
   <hr />
 	<a name="methodadd_as_fan"></a>
-	<h3>method add_as_fan <span class="smalllinenumber">[line 1121]</span></h3>
+	<h3>method add_as_fan <span class="smalllinenumber">[line 1141]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -665,7 +359,7 @@ $user_id = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function add_as_fan  Accept user_id as fan.<br /><br /><br /><br />
+		function add_as_fan Accept user_id as fan.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -691,7 +385,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodadd_as_friend"></a>
-	<h3>method add_as_friend <span class="smalllinenumber">[line 1143]</span></h3>
+	<h3>method add_as_friend <span class="smalllinenumber">[line 1163]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -701,7 +395,7 @@ $user_id = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function add_as_friend  Accept user_id as friend.<br /><br /><br /><br />
+		function add_as_friend Accept user_id as friend.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -727,7 +421,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodadd_plurk"></a>
-	<h3>method add_plurk <span class="smalllinenumber">[line 585]</span></h3>
+	<h3>method add_plurk <span class="smalllinenumber">[line 605]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -796,7 +490,7 @@ $no_commetns)</code>
   </div>
   <hr />
 	<a name="methodadd_response"></a>
-	<h3>method add_response <span class="smalllinenumber">[line 837]</span></h3>
+	<h3>method add_response <span class="smalllinenumber">[line 857]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -847,7 +541,7 @@ $qualifier = 'says'])</code>
   </div>
   <hr />
 	<a name="methodadd_to_clique"></a>
-	<h3>method add_to_clique <span class="smalllinenumber">[line 1472]</span></h3>
+	<h3>method add_to_clique <span class="smalllinenumber">[line 1492]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -858,7 +552,7 @@ $user_id = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function add_to_clique  add friend to clique<br /><br /><br /><br />
+		function add_to_clique add friend to clique<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -889,7 +583,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodbecome_fan"></a>
-	<h3>method become_fan <span class="smalllinenumber">[line 1026]</span></h3>
+	<h3>method become_fan <span class="smalllinenumber">[line 1046]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -925,7 +619,7 @@ $fan_id = 0])</code>
   </div>
   <hr />
 	<a name="methodbecome_friend"></a>
-	<h3>method become_friend <span class="smalllinenumber">[line 984]</span></h3>
+	<h3>method become_friend <span class="smalllinenumber">[line 1004]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -961,7 +655,7 @@ $friend_id = 0])</code>
   </div>
   <hr />
 	<a name="methodbefriend"></a>
-	<h3>method befriend <span class="smalllinenumber">[line 1727]</span></h3>
+	<h3>method befriend <span class="smalllinenumber">[line 1747]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -972,7 +666,7 @@ $bool_befriend = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function befriend  Compatible with RLPlurkAPI<br /><br /><br /><br />
+		function befriend Compatible with RLPlurkAPI<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1003,7 +697,7 @@ $bool_befriend = false])</code>
   </div>
   <hr />
 	<a name="methodblockUser"></a>
-	<h3>method blockUser <span class="smalllinenumber">[line 1792]</span></h3>
+	<h3>method blockUser <span class="smalllinenumber">[line 1812]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1013,7 +707,7 @@ $array_uid = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function blockUser  Compatible with RLPlurkAPI<br /><br /><br /><br />
+		function blockUser Compatible with RLPlurkAPI<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1039,7 +733,7 @@ $array_uid = null])</code>
   </div>
   <hr />
 	<a name="methodblock_user"></a>
-	<h3>method block_user <span class="smalllinenumber">[line 1342]</span></h3>
+	<h3>method block_user <span class="smalllinenumber">[line 1362]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1075,7 +769,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodcreate_clique"></a>
-	<h3>method create_clique <span class="smalllinenumber">[line 1419]</span></h3>
+	<h3>method create_clique <span class="smalllinenumber">[line 1439]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1085,7 +779,7 @@ $clique_name = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function create_clique  create clique<br /><br /><br /><br />
+		function create_clique create clique<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1111,7 +805,7 @@ $clique_name = ''])</code>
   </div>
   <hr />
 	<a name="methoddeletePlurk"></a>
-	<h3>method deletePlurk <span class="smalllinenumber">[line 1674]</span></h3>
+	<h3>method deletePlurk <span class="smalllinenumber">[line 1694]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1121,7 +815,7 @@ $int_plurk_id)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function deletePlurk  Compatible with RLPlurkAPI  delete a plurk<br /><br /><br /><br />
+		function deletePlurk<br /><br /><p>Compatible with RLPlurkAPI delete a plurk</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1147,7 +841,7 @@ $int_plurk_id)</code>
   </div>
   <hr />
 	<a name="methoddelete_plurk"></a>
-	<h3>method delete_plurk <span class="smalllinenumber">[line 617]</span></h3>
+	<h3>method delete_plurk <span class="smalllinenumber">[line 637]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1189,7 +883,7 @@ $plurk_id:)</code>
   </div>
   <hr />
 	<a name="methoddelete_response"></a>
-	<h3>method delete_response <span class="smalllinenumber">[line 867]</span></h3>
+	<h3>method delete_response <span class="smalllinenumber">[line 887]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1231,7 +925,7 @@ $response_id = 0])</code>
   </div>
   <hr />
 	<a name="methoddenyFriendMakeFan"></a>
-	<h3>method denyFriendMakeFan <span class="smalllinenumber">[line 1756]</span></h3>
+	<h3>method denyFriendMakeFan <span class="smalllinenumber">[line 1776]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1241,7 +935,7 @@ $array_uid = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function denyFriendMakeFan  Compatible with RLPlurkAPI<br /><br /><br /><br />
+		function denyFriendMakeFan Compatible with RLPlurkAPI<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1267,7 +961,7 @@ $array_uid = null])</code>
   </div>
   <hr />
 	<a name="methoddeny_friendship"></a>
-	<h3>method deny_friendship <span class="smalllinenumber">[line 1201]</span></h3>
+	<h3>method deny_friendship <span class="smalllinenumber">[line 1221]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1277,7 +971,7 @@ $user_id = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function deny_friendship  Deny friendship to user_id.<br /><br /><br /><br />
+		function deny_friendship Deny friendship to user_id.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1303,7 +997,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodedit_plurk"></a>
-	<h3>method edit_plurk <span class="smalllinenumber">[line 639]</span></h3>
+	<h3>method edit_plurk <span class="smalllinenumber">[line 659]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1348,7 +1042,7 @@ $content = ''])</code>
   </div>
   <hr />
 	<a name="methodfavorite_plurk"></a>
-	<h3>method favorite_plurk <span class="smalllinenumber">[line 709]</span></h3>
+	<h3>method favorite_plurk <span class="smalllinenumber">[line 729]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1384,7 +1078,7 @@ $ids)</code>
   </div>
   <hr />
 	<a name="methodgetAlerts"></a>
-	<h3>method getAlerts <span class="smalllinenumber">[line 1715]</span></h3>
+	<h3>method getAlerts <span class="smalllinenumber">[line 1735]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1393,7 +1087,7 @@ $ids)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getAlerts  Compatible with RLPlurkAPI<br /><br /><br /><br />
+		function getAlerts Compatible with RLPlurkAPI<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1409,7 +1103,7 @@ $ids)</code>
   </div>
   <hr />
 	<a name="methodgetBlockedUsers"></a>
-	<h3>method getBlockedUsers <span class="smalllinenumber">[line 1780]</span></h3>
+	<h3>method getBlockedUsers <span class="smalllinenumber">[line 1800]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1418,7 +1112,7 @@ $ids)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getBlockedUsers  Compatible with RLPlurkAPI  Get my list of blocked users.<br /><br /><br /><br />
+		function getBlockedUsers Compatible with RLPlurkAPI Get my list of blocked users.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1434,7 +1128,7 @@ $ids)</code>
   </div>
   <hr />
 	<a name="methodgetCities"></a>
-	<h3>method getCities <span class="smalllinenumber">[line 1911]</span></h3>
+	<h3>method getCities <span class="smalllinenumber">[line 1931]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1445,7 +1139,7 @@ $int_region_id = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getCities  Compatible with RLPlurkAPI  Get cities.<br /><br /><br /><br />
+		function getCities Compatible with RLPlurkAPI Get cities.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1479,7 +1173,7 @@ $int_region_id = null])</code>
   </div>
   <hr />
 	<a name="methodgetCountries"></a>
-	<h3>method getCountries <span class="smalllinenumber">[line 1940]</span></h3>
+	<h3>method getCountries <span class="smalllinenumber">[line 1960]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1489,7 +1183,7 @@ $int_uid = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getCountries  Compatible with RLPlurkAPI  Get thie list of countries.<br /><br /><br /><br />
+		function getCountries Compatible with RLPlurkAPI Get thie list of countries.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1518,7 +1212,7 @@ $int_uid = null])</code>
   </div>
   <hr />
 	<a name="methodgetPermalink"></a>
-	<h3>method getPermalink <span class="smalllinenumber">[line 1883]</span></h3>
+	<h3>method getPermalink <span class="smalllinenumber">[line 1903]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1528,7 +1222,7 @@ $plurk_id)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getPermalink  Compatible with RLPlurkAPI  Convert a plurk ID to a permalink URL.<br /><br /><br /><br />
+		function getPermalink Compatible with RLPlurkAPI Convert a plurk ID to a permalink URL.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1554,7 +1248,7 @@ $plurk_id)</code>
   </div>
   <hr />
 	<a name="methodgetPlurks"></a>
-	<h3>method getPlurks <span class="smalllinenumber">[line 1606]</span></h3>
+	<h3>method getPlurks <span class="smalllinenumber">[line 1626]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1568,7 +1262,7 @@ $self_plurks_only = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getPlurks  Compatible with RLPlurkAPI  Gets the plurks for the user. Only 25 plurks are fetch at a time as this  is limited on the server.<br /><br /><p>The array returned is ordered most recent post first followed by  previous posts.</p><br /><br /><br />
+		function getPlurks Compatible with RLPlurkAPI Gets the plurks for the user.<br /><br /><p>Only 25 plurks are fetch at a time as this is limited on the server. The array returned is ordered most recent post first followed by previous posts.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1617,7 +1311,7 @@ $self_plurks_only = false])</code>
   </div>
   <hr />
 	<a name="methodgetRegions"></a>
-	<h3>method getRegions <span class="smalllinenumber">[line 1926]</span></h3>
+	<h3>method getRegions <span class="smalllinenumber">[line 1946]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1628,7 +1322,7 @@ $int_country_id = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getRegions  Compatible with RLPlurkAPI  Get the regions in a given country.<br /><br /><br /><br />
+		function getRegions Compatible with RLPlurkAPI Get the regions in a given country.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1662,7 +1356,7 @@ $int_country_id = null])</code>
   </div>
   <hr />
 	<a name="methodgetResponses"></a>
-	<h3>method getResponses <span class="smalllinenumber">[line 1687]</span></h3>
+	<h3>method getResponses <span class="smalllinenumber">[line 1707]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1672,7 +1366,7 @@ $int_plurk_id)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getResponses  Compatible with RLPlurkAPI  Get the responses of a plurk. This method will load &quot;temporary&quot; friends who have responded to the plurk.<br /><br /><br /><br />
+		function getResponses Compatible with RLPlurkAPI Get the responses of a plurk.<br /><br /><p>This method will load &quot;temporary&quot; friends who have responded to the plurk.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1698,7 +1392,7 @@ $int_plurk_id)</code>
   </div>
   <hr />
 	<a name="methodgetUnreadPlurks"></a>
-	<h3>method getUnreadPlurks <span class="smalllinenumber">[line 1620]</span></h3>
+	<h3>method getUnreadPlurks <span class="smalllinenumber">[line 1640]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1708,7 +1402,7 @@ $fetch_responses = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function getUnreadPlurks  Compatible with RLPlurkAPI  Get the unread plurks.<br /><br /><br /><br />
+		function getUnreadPlurks Compatible with RLPlurkAPI Get the unread plurks.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1737,7 +1431,7 @@ $fetch_responses = false])</code>
   </div>
   <hr />
 	<a name="methodget_active"></a>
-	<h3>method get_active <span class="smalllinenumber">[line 1087]</span></h3>
+	<h3>method get_active <span class="smalllinenumber">[line 1107]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1746,7 +1440,7 @@ $fetch_responses = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_active  Return a JSON list of current active alert<br /><br /><br /><br />
+		function get_active Return a JSON list of current active alert<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1765,7 +1459,7 @@ $fetch_responses = false])</code>
   </div>
   <hr />
 	<a name="methodget_blocks"></a>
-	<h3>method get_blocks <span class="smalllinenumber">[line 1322]</span></h3>
+	<h3>method get_blocks <span class="smalllinenumber">[line 1342]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1804,7 +1498,7 @@ $offset = 0])</code>
   </div>
   <hr />
 	<a name="methodget_clique"></a>
-	<h3>method get_clique <span class="smalllinenumber">[line 1399]</span></h3>
+	<h3>method get_clique <span class="smalllinenumber">[line 1419]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1814,7 +1508,7 @@ $clique_name = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_clique  get users from clique<br /><br /><br /><br />
+		function get_clique get users from clique<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1840,7 +1534,7 @@ $clique_name = ''])</code>
   </div>
   <hr />
 	<a name="methodget_cliques"></a>
-	<h3>method get_cliques <span class="smalllinenumber">[line 1382]</span></h3>
+	<h3>method get_cliques <span class="smalllinenumber">[line 1402]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1868,7 +1562,7 @@ $clique_name = ''])</code>
   </div>
   <hr />
 	<a name="methodget_completion"></a>
-	<h3>method get_completion <span class="smalllinenumber">[line 1071]</span></h3>
+	<h3>method get_completion <span class="smalllinenumber">[line 1091]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1877,7 +1571,7 @@ $clique_name = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_completion  Returns a JSON object of the logged in users friends (nick name and full name).<br /><br /><br /><br />
+		function get_completion Returns a JSON object of the logged in users friends (nick name and full name).<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1896,7 +1590,7 @@ $clique_name = ''])</code>
   </div>
   <hr />
 	<a name="methodget_emoticons"></a>
-	<h3>method get_emoticons <span class="smalllinenumber">[line 1304]</span></h3>
+	<h3>method get_emoticons <span class="smalllinenumber">[line 1324]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1905,7 +1599,7 @@ $clique_name = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_emoticons  Emoticons are a big part of Plurk since they make it easy to express feelings.<br /><br /><p>&lt;a href=&quot;http://www.plurk.com/Help/extraSmilies&quot;&gt;Check out current Plurk emoticons.&lt;/a&gt; This call returns a JSON object that looks like:  $link http://www.plurk.com/Help/extraSmilies Check out current Plurk emoticons.</p><br /><br /><br />
+		function get_emoticons Emoticons are a big part of Plurk since they make it easy to express feelings.<br /><br /><p>&lt;a href=&quot;http://www.plurk.com/Help/extraSmilies&quot;&gt;Check out current Plurk emoticons.&lt;/a&gt; This call returns a JSON object that looks like: $link http://www.plurk.com/Help/extraSmilies Check out current Plurk emoticons.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1924,7 +1618,7 @@ $clique_name = ''])</code>
   </div>
   <hr />
 	<a name="methodget_fans"></a>
-	<h3>method get_fans <span class="smalllinenumber">[line 945]</span></h3>
+	<h3>method get_fans <span class="smalllinenumber">[line 965]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1969,7 +1663,7 @@ $offset = 0])</code>
   </div>
   <hr />
 	<a name="methodget_following"></a>
-	<h3>method get_following <span class="smalllinenumber">[line 965]</span></h3>
+	<h3>method get_following <span class="smalllinenumber">[line 985]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2008,7 +1702,7 @@ $offset = 0])</code>
   </div>
   <hr />
 	<a name="methodget_friends"></a>
-	<h3>method get_friends <span class="smalllinenumber">[line 926]</span></h3>
+	<h3>method get_friends <span class="smalllinenumber">[line 946]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2053,16 +1747,17 @@ $offset = 0])</code>
   </div>
   <hr />
 	<a name="methodget_history"></a>
-	<h3>method get_history <span class="smalllinenumber">[line 1104]</span></h3>
+	<h3>method get_history <span class="smalllinenumber">[line 1124]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>JSON get_history(
-)</code>
+
+0)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_history  Return a JSON list of past 30 alerts.<br /><br /><br /><br />
+		function get_history Return a JSON list of past 30 alerts.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2077,11 +1772,21 @@ $offset = 0])</code>
 <br /><br />
 
 	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>0</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodget_http_response"></a>
-	<h3>method get_http_response <span class="smalllinenumber">[line 1539]</span></h3>
+	<h3>method get_http_response <span class="smalllinenumber">[line 1559]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2090,14 +1795,14 @@ $offset = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_http_response  Get HTTP Server Response<br /><br /><br /><br />
+		function get_http_response Get HTTP Server Response<br /><br /><br /><br />
 
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodget_http_status"></a>
-	<h3>method get_http_status <span class="smalllinenumber">[line 1528]</span></h3>
+	<h3>method get_http_status <span class="smalllinenumber">[line 1548]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2106,14 +1811,42 @@ $offset = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_http_status  Get HTTP Status Code<br /><br /><br /><br />
+		function get_http_status Get HTTP Status Code<br /><br /><br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodget_karma_stats"></a>
+	<h3>method get_karma_stats <span class="smalllinenumber">[line 400]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>JSON get_karma_stats(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		function get_karma_stats Returns info about a user's karma, including current karma, karma growth, karma graph and the latest reason why the karma has dropped.<br /><br /><p>karma_trend:     Returns a list of 30 recent karma updates. Each update is a string '[[unixtimestamp]]-[[karma_value]]', e.g. a valid entry is '1282046402-97.85' karma_fall_reason:     Why did karma drop? This value is a string and can be: friends_rejections, inactivity, too_short_responses                                    http://www.plurk.com/API#/API/Users/getKarmaStats</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>object</td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td>/API/Users/getKarmaStats</td>
+  </tr>
+</table>
+</div>
+<br /><br />
 
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodget_login_status"></a>
-	<h3>method get_login_status <span class="smalllinenumber">[line 1517]</span></h3>
+	<h3>method get_login_status <span class="smalllinenumber">[line 1537]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2122,14 +1855,14 @@ $offset = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_login_status  Get login status<br /><br /><br /><br />
+		function get_login_status Get login status<br /><br /><br /><br />
 
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodget_own_profile"></a>
-	<h3>method get_own_profile <span class="smalllinenumber">[line 888]</span></h3>
+	<h3>method get_own_profile <span class="smalllinenumber">[line 908]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2157,7 +1890,7 @@ $offset = 0])</code>
   </div>
   <hr />
 	<a name="methodget_permalink"></a>
-	<h3>method get_permalink <span class="smalllinenumber">[line 1562]</span></h3>
+	<h3>method get_permalink <span class="smalllinenumber">[line 1582]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2167,7 +1900,7 @@ $plurk_id)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_permalink  transfer plurk_id to permalink<br /><br /><br /><br />
+		function get_permalink transfer plurk_id to permalink<br /><br /><br /><br />
 
 	
         <h4>Parameters:</h4>
@@ -2184,7 +1917,7 @@ $plurk_id)</code>
   </div>
   <hr />
 	<a name="methodget_plurk"></a>
-	<h3>method get_plurk <span class="smalllinenumber">[line 501]</span></h3>
+	<h3>method get_plurk <span class="smalllinenumber">[line 521]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2223,7 +1956,7 @@ $plurk_id = 0])</code>
   </div>
   <hr />
 	<a name="methodget_plurks"></a>
-	<h3>method get_plurks <span class="smalllinenumber">[line 525]</span></h3>
+	<h3>method get_plurks <span class="smalllinenumber">[line 545]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2292,7 +2025,7 @@ $only_favorite = NULL])</code>
   </div>
   <hr />
 	<a name="methodget_plurks_polling"></a>
-	<h3>method get_plurks_polling <span class="smalllinenumber">[line 459]</span></h3>
+	<h3>method get_plurks_polling <span class="smalllinenumber">[line 479]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2337,7 +2070,7 @@ $limit = 50])</code>
   </div>
   <hr />
 	<a name="methodget_plurks_polling_unread_count"></a>
-	<h3>method get_plurks_polling_unread_count <span class="smalllinenumber">[line 481]</span></h3>
+	<h3>method get_plurks_polling_unread_count <span class="smalllinenumber">[line 501]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2346,7 +2079,7 @@ $limit = 50])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_plurks_polling_unread_count   Use this call to find out if there are unread plurks on a user's timeline.<br /><br /><br /><br />
+		function get_plurks_polling_unread_count  Use this call to find out if there are unread plurks on a user's timeline.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2362,7 +2095,7 @@ $limit = 50])</code>
   </div>
   <hr />
 	<a name="methodget_plurk_id"></a>
-	<h3>method get_plurk_id <span class="smalllinenumber">[line 1574]</span></h3>
+	<h3>method get_plurk_id <span class="smalllinenumber">[line 1594]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2372,7 +2105,7 @@ $permalink)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_plurk_id  transfer permalink to plurk_id<br /><br /><br /><br />
+		function get_plurk_id transfer permalink to plurk_id<br /><br /><br /><br />
 
 	
         <h4>Parameters:</h4>
@@ -2389,7 +2122,7 @@ $permalink)</code>
   </div>
   <hr />
 	<a name="methodget_public_profile"></a>
-	<h3>method get_public_profile <span class="smalllinenumber">[line 908]</span></h3>
+	<h3>method get_public_profile <span class="smalllinenumber">[line 928]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2428,7 +2161,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodget_responses"></a>
-	<h3>method get_responses <span class="smalllinenumber">[line 815]</span></h3>
+	<h3>method get_responses <span class="smalllinenumber">[line 835]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2485,7 +2218,7 @@ $offset:)</code>
   </div>
   <hr />
 	<a name="methodget_unread_plurks"></a>
-	<h3>method get_unread_plurks <span class="smalllinenumber">[line 554]</span></h3>
+	<h3>method get_unread_plurks <span class="smalllinenumber">[line 574]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2530,7 +2263,7 @@ $limit = 10])</code>
   </div>
   <hr />
 	<a name="methodget_user_info"></a>
-	<h3>method get_user_info <span class="smalllinenumber">[line 1550]</span></h3>
+	<h3>method get_user_info <span class="smalllinenumber">[line 1570]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2539,7 +2272,7 @@ $limit = 10])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function get_user_info  Get user information<br /><br /><br /><br />
+		function get_user_info Get user information<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2555,7 +2288,7 @@ $limit = 10])</code>
   </div>
   <hr />
 	<a name="methodisLoggedIn"></a>
-	<h3>method isLoggedIn <span class="smalllinenumber">[line 1585]</span></h3>
+	<h3>method isLoggedIn <span class="smalllinenumber">[line 1605]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2564,7 +2297,7 @@ $limit = 10])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function isLoggedIn  Compatible with RLPlurkAPI<br /><br /><br /><br />
+		function isLoggedIn Compatible with RLPlurkAPI<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2580,7 +2313,7 @@ $limit = 10])</code>
   </div>
   <hr />
 	<a name="methodlog"></a>
-	<h3>method log <span class="smalllinenumber">[line 111]</span></h3>
+	<h3>method log <span class="smalllinenumber">[line 110]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2607,7 +2340,7 @@ $message = NULL])</code>
   </div>
   <hr />
 	<a name="methodlogin"></a>
-	<h3>method login <span class="smalllinenumber">[line 258]</span></h3>
+	<h3>method login <span class="smalllinenumber">[line 257]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2619,7 +2352,7 @@ $password = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function login  Login an already created user. Login creates a session cookie, which can be used to access the other methods.<br /><br /><br /><br />
+		function login Login an already created user.<br /><br /><p>Login creates a session cookie, which can be used to access the other methods.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2655,7 +2388,7 @@ $password = ''])</code>
   </div>
   <hr />
 	<a name="methodlogout"></a>
-	<h3>method logout <span class="smalllinenumber">[line 290]</span></h3>
+	<h3>method logout <span class="smalllinenumber">[line 289]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2664,7 +2397,7 @@ $password = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function login  Logout current user.<br /><br /><br /><br />
+		function login Logout current user.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2680,7 +2413,7 @@ $password = ''])</code>
   </div>
   <hr />
 	<a name="methodmark_plurk_as_read"></a>
-	<h3>method mark_plurk_as_read <span class="smalllinenumber">[line 751]</span></h3>
+	<h3>method mark_plurk_as_read <span class="smalllinenumber">[line 771]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2716,7 +2449,7 @@ $ids)</code>
   </div>
   <hr />
 	<a name="methodmutePlurk"></a>
-	<h3>method mutePlurk <span class="smalllinenumber">[line 1636]</span></h3>
+	<h3>method mutePlurk <span class="smalllinenumber">[line 1656]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2727,7 +2460,7 @@ $bool_setmute)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function mutePlurk  Compatible with RLPlurkAPI  Mute or unmute plurks<br /><br /><br /><br />
+		function mutePlurk<br /><br /><p>Compatible with RLPlurkAPI Mute or unmute plurks</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2750,7 +2483,7 @@ $bool_setmute)</code>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
         <td><b>$bool_setmute</b>&nbsp;&nbsp;</td>
-        <td>If true, this plurk is to be muted, else,                             unmute it.</td>
+        <td><p>If true, this plurk is to be muted, else,                           unmute it.</p><p></p></td>
       </tr>
         </table>
     </div><br />
@@ -2758,7 +2491,7 @@ $bool_setmute)</code>
   </div>
   <hr />
 	<a name="methodmute_plurks"></a>
-	<h3>method mute_plurks <span class="smalllinenumber">[line 666]</span></h3>
+	<h3>method mute_plurks <span class="smalllinenumber">[line 686]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2794,7 +2527,7 @@ $ids)</code>
   </div>
   <hr />
 	<a name="methodnicknameToUid"></a>
-	<h3>method nicknameToUid <span class="smalllinenumber">[line 1856]</span></h3>
+	<h3>method nicknameToUid <span class="smalllinenumber">[line 1876]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2804,7 +2537,7 @@ $string_nick_name)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function nicknameToUid  Compatible with RLPlurkAPI  Retrieve a user's uid from given his/her plurk nick name.<br /><br /><br /><br />
+		function nicknameToUid Compatible with RLPlurkAPI Retrieve a user's uid from given his/her plurk nick name.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2833,7 +2566,7 @@ $string_nick_name)</code>
   </div>
   <hr />
 	<a name="methodpermalinkToPlurkID"></a>
-	<h3>method permalinkToPlurkID <span class="smalllinenumber">[line 1896]</span></h3>
+	<h3>method permalinkToPlurkID <span class="smalllinenumber">[line 1916]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2843,7 +2576,7 @@ $string_permalink)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function permalinkToPlurkID  Compatible with RLPlurkAPI  Convert a plurk permalink URL address to a plurk ID.<br /><br /><br /><br />
+		function permalinkToPlurkID Compatible with RLPlurkAPI Convert a plurk permalink URL address to a plurk ID.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2869,7 +2602,7 @@ $string_permalink)</code>
   </div>
   <hr />
 	<a name="methodplurk"></a>
-	<h3>method plurk <span class="smalllinenumber">[line 132]</span></h3>
+	<h3>method plurk <span class="smalllinenumber">[line 131]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2880,7 +2613,7 @@ $array)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function plurk  Connect to Plurk<br /><br /><br /><br />
+		function plurk Connect to Plurk<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2911,7 +2644,7 @@ $array)</code>
   </div>
   <hr />
 	<a name="methodrealtime_get_commet_channel"></a>
-	<h3>method realtime_get_commet_channel <span class="smalllinenumber">[line 421]</span></h3>
+	<h3>method realtime_get_commet_channel <span class="smalllinenumber">[line 441]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2922,7 +2655,7 @@ $new_offset = NULL])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function realtime_get_commet_channel<br /><br /><p>You'll get an URL from /API/Realtime/getUserChannel and you do GET requests to this URL to get new data.  Your request will sleep for about 50 seconds before returning a response if there is no new data added to your channel.  You won't get notifications on responses that the logged in user adds, but you will get notifications for new plurks.</p><br /><br /><br />
+		function realtime_get_commet_channel<br /><br /><p>You'll get an URL from /API/Realtime/getUserChannel and you do GET requests to this URL to get new data. Your request will sleep for about 50 seconds before returning a response if there is no new data added to your channel. You won't get notifications on responses that the logged in user adds, but you will get notifications for new plurks.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2953,7 +2686,7 @@ $new_offset = NULL])</code>
   </div>
   <hr />
 	<a name="methodrealtime_get_user_channel"></a>
-	<h3>method realtime_get_user_channel <span class="smalllinenumber">[line 401]</span></h3>
+	<h3>method realtime_get_user_channel <span class="smalllinenumber">[line 421]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2962,7 +2695,7 @@ $new_offset = NULL])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function realtime_get_user_channel<br /><br /><p>Return's a JSON object with an URL that you should listen to, e.g.  {&quot;comet_server&quot;: &quot;http://comet03.plurk.com/comet/1235515351741/?channel=generic-4-f733d8522327edf87b4d1651e6395a6cca0807a0&quot;,  &quot;channel_name&quot;: &quot;generic-4-f733d8522327edf87b4d1651e6395a6cca0807a0&quot;}</p><p>for Comet channel specification:  http://www.plurk.com/API#/API/Realtime/getUserChannel</p><br /><br /><br />
+		function realtime_get_user_channel<br /><br /><p>Return's a JSON object with an URL that you should listen to, e.g. {&quot;comet_server&quot;: &quot;http://comet03.plurk.com/comet/1235515351741/?channel=generic-4-f733d8522327edf87b4d1651e6395a6cca0807a0&quot;, &quot;channel_name&quot;: &quot;generic-4-f733d8522327edf87b4d1651e6395a6cca0807a0&quot;}</p><p>for Comet channel specification: http://www.plurk.com/API#/API/Realtime/getUserChannel</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2981,7 +2714,7 @@ $new_offset = NULL])</code>
   </div>
   <hr />
 	<a name="methodregister"></a>
-	<h3>method register <span class="smalllinenumber">[line 220]</span></h3>
+	<h3>method register <span class="smalllinenumber">[line 219]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2996,7 +2729,7 @@ $email = NULL])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function register  Register a new Plurk account. Should be HTTPS<br /><br /><br /><br />
+		function register Register a new Plurk account.<br /><br /><p>Should be HTTPS</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3050,7 +2783,7 @@ $email = NULL])</code>
   </div>
   <hr />
 	<a name="methodremove_friend"></a>
-	<h3>method remove_friend <span class="smalllinenumber">[line 1005]</span></h3>
+	<h3>method remove_friend <span class="smalllinenumber">[line 1025]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3086,7 +2819,7 @@ $friend_id = 0])</code>
   </div>
   <hr />
 	<a name="methodremove_from_clique"></a>
-	<h3>method remove_from_clique <span class="smalllinenumber">[line 1496]</span></h3>
+	<h3>method remove_from_clique <span class="smalllinenumber">[line 1516]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3097,7 +2830,7 @@ $user_id = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function remove_from_clique  remove friend from clique<br /><br /><br /><br />
+		function remove_from_clique remove friend from clique<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3128,7 +2861,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodremove_notification"></a>
-	<h3>method remove_notification <span class="smalllinenumber">[line 1223]</span></h3>
+	<h3>method remove_notification <span class="smalllinenumber">[line 1243]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3138,7 +2871,7 @@ $user_id = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function remove_notification  Remove notification to user with id user_id.<br /><br /><br /><br />
+		function remove_notification Remove notification to user with id user_id.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3164,7 +2897,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodrename_clique"></a>
-	<h3>method rename_clique <span class="smalllinenumber">[line 1448]</span></h3>
+	<h3>method rename_clique <span class="smalllinenumber">[line 1468]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3175,7 +2908,7 @@ $new_name = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function rename_clique  rename clique<br /><br /><br /><br />
+		function rename_clique rename clique<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3206,7 +2939,7 @@ $new_name = ''])</code>
   </div>
   <hr />
 	<a name="methodrespondToPlurk"></a>
-	<h3>method respondToPlurk <span class="smalllinenumber">[line 1704]</span></h3>
+	<h3>method respondToPlurk <span class="smalllinenumber">[line 1724]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3220,7 +2953,7 @@ $string_qualifier)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function respondToPlurk  Compatible with RLPlurkAPI  Respond to a plurk.<br /><br /><br /><br />
+		function respondToPlurk Compatible with RLPlurkAPI Respond to a plurk.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3253,7 +2986,7 @@ $string_qualifier)</code>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$string_content</b>&nbsp;&nbsp;</td>
-        <td>The content to be posted as a reply.</td>
+        <td><p>The content to be posted as a reply.</p><p></p></td>
       </tr>
           <tr>
         <td class="type">&nbsp;&nbsp;</td>
@@ -3266,7 +2999,7 @@ $string_qualifier)</code>
   </div>
   <hr />
 	<a name="methodsearch_plurk"></a>
-	<h3>method search_plurk <span class="smalllinenumber">[line 1246]</span></h3>
+	<h3>method search_plurk <span class="smalllinenumber">[line 1266]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3277,7 +3010,7 @@ $offset = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function search_plurk  Returns the latest 20 plurks on a search term.<br /><br /><br /><br />
+		function search_plurk Returns the latest 20 plurks on a search term.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3311,7 +3044,7 @@ $offset = 0])</code>
   </div>
   <hr />
 	<a name="methodsearch_user"></a>
-	<h3>method search_user <span class="smalllinenumber">[line 1275]</span></h3>
+	<h3>method search_user <span class="smalllinenumber">[line 1295]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3322,7 +3055,7 @@ $offset = 0])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function search_user  Returns 10 users that match query, users are sorted by karma.<br /><br /><br /><br />
+		function search_user Returns 10 users that match query, users are sorted by karma.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3356,7 +3089,7 @@ $offset = 0])</code>
   </div>
   <hr />
 	<a name="methodset_cookie_path"></a>
-	<h3>method set_cookie_path <span class="smalllinenumber">[line 200]</span></h3>
+	<h3>method set_cookie_path <span class="smalllinenumber">[line 199]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3366,7 +3099,7 @@ $cookie_path = NULL])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function set_cookie_path  set curl cookie path<br /><br /><br /><br />
+		function set_cookie_path set curl cookie path<br /><br /><br /><br />
 
 	
         <h4>Parameters:</h4>
@@ -3383,7 +3116,7 @@ $cookie_path = NULL])</code>
   </div>
   <hr />
 	<a name="methodset_following"></a>
-	<h3>method set_following <span class="smalllinenumber">[line 1049]</span></h3>
+	<h3>method set_following <span class="smalllinenumber">[line 1069]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3394,7 +3127,7 @@ $follow = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function set_following  Update following of user_id. A user can befriend someone, but can unfollow them. This request is also used to stop following someone as a fan.<br /><br /><br /><br />
+		function set_following Update following of user_id. A user can befriend someone, but can unfollow them.<br /><br /><p>This request is also used to stop following someone as a fan.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3425,7 +3158,7 @@ $follow = false])</code>
   </div>
   <hr />
 	<a name="methodset_log_path"></a>
-	<h3>method set_log_path <span class="smalllinenumber">[line 101]</span></h3>
+	<h3>method set_log_path <span class="smalllinenumber">[line 100]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3435,7 +3168,7 @@ $log_path = NULL])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function set_log_path  set log path<br /><br /><br /><br />
+		function set_log_path set log path<br /><br /><br /><br />
 
 	
         <h4>Parameters:</h4>
@@ -3452,7 +3185,7 @@ $log_path = NULL])</code>
   </div>
   <hr />
 	<a name="methodset_proxy"></a>
-	<h3>method set_proxy <span class="smalllinenumber">[line 185]</span></h3>
+	<h3>method set_proxy <span class="smalllinenumber">[line 184]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3465,7 +3198,7 @@ $password = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function set_proxy  Set proxy server options while connecting to Plurk API<br /><br /><br /><br />
+		function set_proxy Set proxy server options while connecting to Plurk API<br /><br /><br /><br />
 
 	
         <h4>Parameters:</h4>
@@ -3497,7 +3230,7 @@ $password = ''])</code>
   </div>
   <hr />
 	<a name="methoduidToNickname"></a>
-	<h3>method uidToNickname <span class="smalllinenumber">[line 1842]</span></h3>
+	<h3>method uidToNickname <span class="smalllinenumber">[line 1862]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3507,7 +3240,7 @@ $uid)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function uidToNickname  Compatible with RLPlurkAPI  Translates a uid to the corresponding nickname.<br /><br /><br /><br />
+		function uidToNickname Compatible with RLPlurkAPI Translates a uid to the corresponding nickname.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3536,7 +3269,7 @@ $uid)</code>
   </div>
   <hr />
 	<a name="methoduidToUserinfo"></a>
-	<h3>method uidToUserinfo <span class="smalllinenumber">[line 1870]</span></h3>
+	<h3>method uidToUserinfo <span class="smalllinenumber">[line 1890]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3546,7 +3279,7 @@ $int_uid)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function uidToUserinfo  Compatible with RLPlurkAPI  Retrieve a user's information given a plurk uid.<br /><br /><br /><br />
+		function uidToUserinfo Compatible with RLPlurkAPI Retrieve a user's information given a plurk uid.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3575,7 +3308,7 @@ $int_uid)</code>
   </div>
   <hr />
 	<a name="methodunblockUser"></a>
-	<h3>method unblockUser <span class="smalllinenumber">[line 1816]</span></h3>
+	<h3>method unblockUser <span class="smalllinenumber">[line 1836]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3585,7 +3318,7 @@ $array_uid = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function unblockUser  Compatible with RLPlurkAPI<br /><br /><br /><br />
+		function unblockUser Compatible with RLPlurkAPI<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3611,7 +3344,7 @@ $array_uid = null])</code>
   </div>
   <hr />
 	<a name="methodunblock_user"></a>
-	<h3>method unblock_user <span class="smalllinenumber">[line 1362]</span></h3>
+	<h3>method unblock_user <span class="smalllinenumber">[line 1382]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3647,7 +3380,7 @@ $user_id = 0])</code>
   </div>
   <hr />
 	<a name="methodunfavorite_plurk"></a>
-	<h3>method unfavorite_plurk <span class="smalllinenumber">[line 730]</span></h3>
+	<h3>method unfavorite_plurk <span class="smalllinenumber">[line 750]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3683,7 +3416,7 @@ $ids)</code>
   </div>
   <hr />
 	<a name="methodunmute_plurks"></a>
-	<h3>method unmute_plurks <span class="smalllinenumber">[line 688]</span></h3>
+	<h3>method unmute_plurks <span class="smalllinenumber">[line 708]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3719,7 +3452,7 @@ $ids)</code>
   </div>
   <hr />
 	<a name="methodupdate"></a>
-	<h3>method update <span class="smalllinenumber">[line 317]</span></h3>
+	<h3>method update <span class="smalllinenumber">[line 316]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3735,7 +3468,7 @@ $date_of_birth = NULL])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function update  Update a user's information (such as email, password or privacy). Should be HTTPS<br /><br /><br /><br />
+		function update Update a user's information (such as email, password or privacy).<br /><br /><p>Should be HTTPS</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3791,7 +3524,7 @@ $date_of_birth = NULL])</code>
   </div>
   <hr />
 	<a name="methodupdate_picture"></a>
-	<h3>method update_picture <span class="smalllinenumber">[line 355]</span></h3>
+	<h3>method update_picture <span class="smalllinenumber">[line 354]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3801,7 +3534,7 @@ $profile_image = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function update_picture  update a user's profile picture. You can read more about how to render an avatar via user data.<br /><br /><br /><br />
+		function update_picture update a user's profile picture.<br /><br /><p>You can read more about how to render an avatar via user data.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3830,7 +3563,7 @@ $profile_image = ''])</code>
   </div>
   <hr />
 	<a name="methodupload_picture"></a>
-	<h3>method upload_picture <span class="smalllinenumber">[line 776]</span></h3>
+	<h3>method upload_picture <span class="smalllinenumber">[line 796]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -3840,7 +3573,7 @@ $upload_image = ''])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		function upload_picture<br /><br /><p>to upload a picture to Plurk, you should do a multipart/form-data POST request  to /API/Timeline/uploadPicture. This will add the picture to Plurk's CDN network  and return a image link that you can add to /API/Timeline/plurkAdd</p><br /><br /><br />
+		function upload_picture to upload a picture to Plurk, you should do a multipart/form-data POST request to /API/Timeline/uploadPicture.<br /><br /><p>This will add the picture to Plurk's CDN network and return a image link that you can add to /API/Timeline/plurkAdd</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -3872,7 +3605,7 @@ $upload_image = ''])</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Thu, 23 Sep 2010 11:39:43 +0800 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Tue, 16 Nov 2010 14:39:43 +0800 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 	      </div>
       </td></tr></table>
     </td>
