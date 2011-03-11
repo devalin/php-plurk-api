@@ -146,8 +146,10 @@ Class plurk_api {
 		if( ! isset($this->cookie_path)) 
 			$this->cookie_path = PLURK_COOKIE_PATH;
 
-		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie_path);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookie_path);
+		if($url == PLURK_LOGIN)
+				curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookie_path);
+		else
+				curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie_path);
 
 		if(isset($this->proxy))
 			curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
@@ -167,7 +169,7 @@ Class plurk_api {
 		if ($this->http_status != '200')
 		{
 			if(isset($response_obj->error_text))
-				$this->log($response_obj->error_text);
+				$this->log($response_obj->error_text, __METHOD__);
 		}
 
 		return $response_obj;
