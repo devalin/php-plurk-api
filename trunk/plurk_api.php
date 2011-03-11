@@ -547,7 +547,7 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
-		$offset = array_shift(explode("+", date("c", $offset)));;
+		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c", time())));
 		/* format 2010-01-18T11:24:43 */
 
 		$array = array(
