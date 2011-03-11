@@ -108,7 +108,7 @@ Class plurk_api {
 	 *
 	 * @param $message
 	 */
-	function log($message = NULL)
+	function log($message = NULL, $method = NULL)
 	{
 		if( ! isset($this->log_path)) $this->log_path = PLURK_LOG_PATH;
 		if( ! file_exists($this->log_path))  touch($this->log_path);
@@ -117,7 +117,7 @@ Class plurk_api {
 		$username = $this->username;
 		$array = print_r($this->post_array, TRUE);
 
-		error_log("date: $date\nusername: $username\nmessage: $message\ndata_dump: $array\n", 3, $this->log_path);
+		error_log("date: $date\nmethod: $method\nusername: $username\nmessage: $message\ndata_dump: $array\n", 3, $this->log_path);
 	}
 
 	/**
@@ -316,7 +316,7 @@ Class plurk_api {
 	 */
 	function update($current_password = NULL, $full_name = NULL, $new_password = NULL, $email = NULL, $display_name = NULL, $privacy = NULL, $date_of_birth = NULL)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		if( ! isset($full_name))
 			$this->log('full name can not be empty.');
@@ -356,7 +356,7 @@ Class plurk_api {
 	{
 		//  RFC 1867
 
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array['api_key'] = $this->api_key;
 		$array['profile_image'] = "@" . $profile_image;
@@ -479,7 +479,7 @@ Class plurk_api {
 	 */
 	function get_plurks_polling($offset = NULL, $limit = 50)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$offset = array_shift(explode("+", date("c", $offset)));
 
@@ -501,7 +501,7 @@ Class plurk_api {
 	 */
 	function get_plurks_polling_unread_count()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$offset = array_shift(explode("+", date("c", $offset)));
 
@@ -521,7 +521,7 @@ Class plurk_api {
 	 */
 	function get_plurk($plurk_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'   => $this->api_key,
@@ -545,7 +545,7 @@ Class plurk_api {
 	 */
 	 function get_plurks($offset = NULL, $limit = 20, $only_user = NULL, $only_responded = NULL, $only_private = NULL, $only_favorite = NULL)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$offset = array_shift(explode("+", date("c", $offset)));;
 		/* format 2010-01-18T11:24:43 */
@@ -574,7 +574,7 @@ Class plurk_api {
 	 */
 	function get_unread_plurks($offset = null ,$limit = 10)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		// $offset seens it's not working now. by whatup.tw
 		if( ! isset($offset)) $offset = time();
@@ -605,7 +605,7 @@ Class plurk_api {
 	 */
 	function add_plurk($lang = 'en', $qualifier = 'says', $content = 'test from plurk-api', $limited_to = NULL, $no_comments = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		if (mb_strlen($content, 'utf8') > 140)
 		{
@@ -637,7 +637,7 @@ Class plurk_api {
 	 */
 	function delete_plurk($plurk_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -659,7 +659,7 @@ Class plurk_api {
 	 */
 	function edit_plurk($plurk_id = 0, $content = '')
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		if (mb_strlen($content, 'utf8') > 140)
 		{
@@ -686,7 +686,7 @@ Class plurk_api {
 	 */
 	function mute_plurks($ids)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -708,7 +708,7 @@ Class plurk_api {
 	 */
 	function unmute_plurks($ids)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -729,7 +729,7 @@ Class plurk_api {
 	*/
 	function favorite_plurk($ids)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -750,7 +750,7 @@ Class plurk_api {
 	*/
 	function unfavorite_plurk($ids)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -771,7 +771,7 @@ Class plurk_api {
 	 */
 	function mark_plurk_as_read($ids)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -796,7 +796,7 @@ Class plurk_api {
 	 */
 	function upload_picture($upload_image = '')
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array['api_key'] = $this->api_key;
 		$array['image'] = "@" . $upload_image;
@@ -835,7 +835,7 @@ Class plurk_api {
 	 */
 	function get_responses($plurk_id = 0, $offset = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'  => $this->api_key,
@@ -857,7 +857,7 @@ Class plurk_api {
 	 */
 	function add_response($plurk_id = 0, $content = '', $qualifier = 'says')
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		if (mb_strlen($content, 'utf8') > 140)
 		{
@@ -887,7 +887,7 @@ Class plurk_api {
 	 */
 	function delete_response($plurk_id = 0, $response_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'	 => $this->api_key,
@@ -908,7 +908,7 @@ Class plurk_api {
 	 */
 	function get_own_profile()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -965,7 +965,7 @@ Class plurk_api {
 	 */
 	function get_fans($user_id = 0, $offset = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -985,7 +985,7 @@ Class plurk_api {
 	 */
 	function get_following($offset = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1004,7 +1004,7 @@ Class plurk_api {
 	 */
 	function become_friend($friend_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'   => $this->api_key,
@@ -1025,7 +1025,7 @@ Class plurk_api {
 	 */
 	function remove_friend($friend_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'   => $this->api_key,
@@ -1046,7 +1046,7 @@ Class plurk_api {
 	 */
 	function become_fan($fan_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1069,7 +1069,7 @@ Class plurk_api {
 	 */
 	function set_following($user_id = 0, $follow = false)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1091,7 +1091,7 @@ Class plurk_api {
 	 */
 	function get_completion()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1107,7 +1107,7 @@ Class plurk_api {
 	 */
 	function get_active()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1124,7 +1124,7 @@ Class plurk_api {
 	 */
 	function get_history()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1141,7 +1141,7 @@ Class plurk_api {
 	 */
 	function add_as_fan($user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1163,7 +1163,7 @@ Class plurk_api {
 	 */
 	function add_as_friend($user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1184,7 +1184,7 @@ Class plurk_api {
 	 */
 	function add_all_as_fan()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1202,7 +1202,7 @@ Class plurk_api {
 	 */
 	function add_all_as_friends()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1221,7 +1221,7 @@ Class plurk_api {
 	 */
 	function deny_friendship($user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1243,7 +1243,7 @@ Class plurk_api {
 	 */
 	function remove_notification($user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1266,7 +1266,7 @@ Class plurk_api {
 	 */
 	function search_plurk($query = '', $offset = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		/* offset: A plurk_id of the oldest Plurk in the last search result.  */
 
@@ -1295,7 +1295,7 @@ Class plurk_api {
 	 */
 	function search_user($query = '', $offset = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		/* offset: Page offset, like 10, 20, 30 etc. */
 
@@ -1324,7 +1324,7 @@ Class plurk_api {
 	 */
 	function get_emoticons()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1342,7 +1342,7 @@ Class plurk_api {
 	 */
 	function get_blocks($offset = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 		  'api_key' => $this->api_key,
@@ -1362,7 +1362,7 @@ Class plurk_api {
 	 */
 	function block_user($user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 		
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1382,7 +1382,7 @@ Class plurk_api {
 	 */
 	function unblock_user($user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -1402,7 +1402,7 @@ Class plurk_api {
 	 */
 	function get_cliques()
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array('api_key' => $this->api_key);
 
@@ -1419,7 +1419,7 @@ Class plurk_api {
 	 */
 	function get_clique($clique_name = '')
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'	 => $this->api_key,
@@ -1439,7 +1439,7 @@ Class plurk_api {
 	 */
 	function create_clique($clique_name = '')
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		if ($clique_name == "")
 		{
@@ -1468,7 +1468,7 @@ Class plurk_api {
 	 */
 	function rename_clique($clique_name = '', $new_name = '')
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'	 => $this->api_key,
@@ -1492,7 +1492,7 @@ Class plurk_api {
 	 */
 	function add_to_clique($clique_name = '', $user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'	 => $this->api_key,
@@ -1516,7 +1516,7 @@ Class plurk_api {
 	 */
 	function remove_from_clique($clique_name = '', $user_id = 0)
 	{
-		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN);
+		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$array = array(
 			'api_key'	 => $this->api_key,
