@@ -481,8 +481,8 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
-		$offset = array_shift(explode("+", date("c", $offset)));
-
+		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c")));
+		
 		$array = array(
 			'api_key' => $this->api_key,
 			'offset'  => $offset,
@@ -547,7 +547,7 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
-		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c", time())));
+		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c")));
 		/* format 2010-01-18T11:24:43 */
 
 		$array = array(
@@ -572,15 +572,12 @@ Class plurk_api {
 	 * @return JSON object
 	 * @see /API/Timeline/getUnreadPlurks
 	 */
-	function get_unread_plurks($offset = null ,$limit = 10)
+	function get_unread_plurks($offset = NULL ,$limit = 10)
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
-		// $offset seens it's not working now. by whatup.tw
-		if( ! isset($offset)) $offset = time();
-
-		$date = array_shift(explode("+", date("c", $offset)));
-
+		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c")));
+		
 		$array = array(
 			'api_key'  => $this->api_key,
 			'offset'   => $date,
