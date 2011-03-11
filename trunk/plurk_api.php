@@ -223,13 +223,13 @@ Class plurk_api {
 	{
 
 		if( ! isset($nick_name))
-			$this->log('nick name can not be empty.');
+			$this->log('nick name can not be empty.', __METHOD__);
 
 		if( ! isset($full_name))
-			$this->log('full name can not be empty.');
+			$this->log('full name can not be empty.', __METHOD__);
 
 		if( ! in_array(strtolower($gender), array('male','female')))
-			$this->log('should be male or female.');
+			$this->log('should be male or female.', __METHOD__);
 
 		$array = array(
 			'api_key'	   => $this->api_key,
@@ -321,7 +321,7 @@ Class plurk_api {
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		if( ! isset($full_name))
-			$this->log('full name can not be empty.');
+			$this->log('full name can not be empty.', __METHOD__);
 
 		if(isset($privacy))
 		{
@@ -606,9 +606,9 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
-		if (mb_strlen($content, 'utf8') > 140)
+		if (mb_strlen($content, 'UTF-8') > 140)
 		{
-			$this->log('this message should shorter than 140 characters.');
+			$this->log('this message should shorter than 140 characters.', __METHOD__);
 		}
 
 		$array = array(
@@ -660,9 +660,9 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
-		if (mb_strlen($content, 'utf8') > 140)
+		if (mb_strlen($content, 'UTF-8') > 140)
 		{
-			$this->log('this message should shorter than 140 characters.');
+			$this->log('this message should shorter than 140 characters.', __METHOD__);
 		}
 
 		$array = array(
@@ -858,9 +858,9 @@ Class plurk_api {
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
-		if (mb_strlen($content, 'utf8') > 140)
+		if (mb_strlen($content, 'UTF-8') > 140)
 		{
-			$this->log('this message should shorter than 140 characters.');
+			$this->log('this message should shorter than 140 characters.', __METHOD__);
 		}
 
 		$array = array(
@@ -1271,7 +1271,7 @@ Class plurk_api {
 
 		if ($query == "")
 		{
-			$this->log('query message can not be empty.');
+			$this->log('query message can not be empty.', __METHOD__);
 		}
 
 		$array = array(
@@ -1300,7 +1300,7 @@ Class plurk_api {
 
 		if ($query == "")
 		{
-			$this->log('query message can not be empty.');
+			$this->log('query message can not be empty.', __METHOD__);
 		}
 
 		$array = array(
@@ -1442,7 +1442,7 @@ Class plurk_api {
 
 		if ($clique_name == "")
 		{
-			$this->log('clique_name can not be empty.');
+			$this->log('clique_name can not be empty.', __METHOD__);
 		}
 
 		$array = array(
