@@ -143,7 +143,7 @@ Class plurk_api {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
 
-		if( ! isset($this->cookie_path)) 
+		if( ! isset($this->cookie_path))
 			$this->cookie_path = PLURK_COOKIE_PATH;
 
 		if($url == PLURK_LOGIN)
@@ -386,7 +386,7 @@ Class plurk_api {
 
 		return json_decode($response);
 	}
-	
+
 	/**
 	 * function get_karma_stats
 	 * Returns info about a user's karma, including current karma, karma growth, karma graph and the latest reason why the karma has dropped.
@@ -395,11 +395,11 @@ Class plurk_api {
 	 *	 Returns a list of 30 recent karma updates. Each update is a string '[[unixtimestamp]]-[[karma_value]]', e.g. a valid entry is '1282046402-97.85'
 	 * karma_fall_reason:
 	 *	 Why did karma drop? This value is a string and can be: friends_rejections, inactivity, too_short_responses
-	 *								   
-	 * http://www.plurk.com/API#/API/Users/getKarmaStats	 
+	 *
+	 * http://www.plurk.com/API#/API/Users/getKarmaStats
 	 * @return JSON object
 	 * @see /API/Users/getKarmaStats
-	 */ 
+	 */
 	function get_karma_stats()
 	{
 		$array = array(
@@ -407,7 +407,7 @@ Class plurk_api {
 		);
 		return $this->plurk(PLURK_GET_KARMASTATS, $array);
 	}
-	
+
 	/**
 	 * function realtime_get_user_channel
 	 *
@@ -484,7 +484,7 @@ Class plurk_api {
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c")));
-		
+
 		$array = array(
 			'api_key' => $this->api_key,
 			'offset'  => $offset,
@@ -504,8 +504,6 @@ Class plurk_api {
 	function get_plurks_polling_unread_count()
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
-
-		$offset = array_shift(explode("+", date("c", $offset)));
 
 		$array = array(
 			'api_key' => $this->api_key,
@@ -579,7 +577,7 @@ Class plurk_api {
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
 
 		$offset = (isset($offset)) ? $offset : array_shift(explode("+", date("c")));
-		
+
 		$array = array(
 			'api_key'  => $this->api_key,
 			'offset'   => $date,
@@ -1362,7 +1360,7 @@ Class plurk_api {
 	function block_user($user_id = 0)
 	{
 		if( ! $this->is_login) $this->log(PLURK_NOT_LOGIN, __METHOD__);
-		
+
 		$array = array(
 			'api_key' => $this->api_key,
 			'user_id' => $user_id,
