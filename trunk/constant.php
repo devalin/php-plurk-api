@@ -185,4 +185,16 @@
     define('PLURK_RENAME_CLIQUE', 'http://www.plurk.com/API/Cliques/renameClique');
     define('PLURK_ADD_TO_CLIQUE', 'http://www.plurk.com/API/Cliques/add');
     define('PLURK_REMOVE_FROM_CLIQUE', 'http://www.plurk.com/API/Cliques/remove');
+
+    /**
+     *  PlurkTop
+     *  /API/PlurkTop/getCollections
+     *  /API/PlurkTop/getDefaultCollection
+     *  /API/PlurkTop/getPlurks
+     *
+     */
+
+    define('PLURK_GET_COLLECTIONS','http://www.plurk.com/API/PlurkTop/getCollections');
+    define('PLURK_GET_DEFAULT_COLLECTION','http://www.plurk.com/API/PlurkTop/getDefaultCollection');
+    define('PLURK_GET_PLURKS','http://www.plurk.com/API/PlurkTop/getPlurks');
 ?>
