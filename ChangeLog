@@ -2,7 +2,15 @@
  * This is a PHP Plurk API.
  * @package php-plurk-api
  *
- */ 
+ */
+
+2011-10-26 12:42:12 CST appleboy.tw@gmail.com	
+
+	add new API function: 
+    /API/PlurkTop/getCollections.
+    /API/PlurkTop/getDefaultCollection.
+    /API/PlurkTop/getPlurks. 
+ 
 2010-11-11 22:41:12 CST appleboy.tw@gmail.com	
 
 	add new API function: /API/Users/getKarmaStats.
