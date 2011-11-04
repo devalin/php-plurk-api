@@ -444,7 +444,11 @@ Class plurk_api {
     function realtime_get_commet_channel($comet_server = NULL, $new_offset = NULL)
     {
 
-        $comet_url = $comet_server . '&offset=' . $new_offset;
+    	if(isset($new_offset))
+	        $comet_url = $comet_server . '&offset=' . $new_offset;
+    	else
+    		$comet_url = $comet_server;
+
         /**
          * the "$comet_url" should look like
          * http://comet03.plurk.com/comet/1235515351741/?channel=generic-4-f733d8522327edf87b4d1651e6395a6cca0807a0
@@ -467,7 +471,8 @@ Class plurk_api {
         $this->http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $this->http_response = $response;
 
-        return json_decode($response);
+        // return raw response, cause plurk server will return "CometChannel.scriptCallback({"new_offset": 5090486,"data": ... "new_plurk", "owner_id": 5320351}]});"
+        return $response;
 
     }
 
