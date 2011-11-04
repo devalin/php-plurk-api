@@ -4,6 +4,14 @@
  *
  */
 
+r163 | roga.lin@gmail.com | 2011-11-05 03:02:16 CST
+
+realtime_get_commet_channel should use HTTP GET Method.
+----------------------------------------------------------------------------
+r162 | roga.lin@gmail.com | 2011-11-05 02:45:52 CST
+
+update ChangeLog
+----------------------------------------------------------------------------
 r161 | roga.lin@gmail.com | 2011-11-05 02:42:17 CST
 
 return raw response for realtime_get_commet_channel.
