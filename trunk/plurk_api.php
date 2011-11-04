@@ -456,7 +456,6 @@ Class plurk_api {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $comet_url);
-        curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
         curl_setopt($ch, CURLOPT_USERAGENT, PLURK_AGENT);
