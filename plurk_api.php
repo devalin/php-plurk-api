@@ -89,6 +89,18 @@ Class plurk_api {
      */
     protected $proxy_auth = NULL;
 
+    /**
+     * The number of seconds to wait while trying to connect. Use 0 to wait indefinitely.
+     * @var int $connect_timeout
+     */
+    protected $connect_timeout = 30;
+
+    /**
+     * The maximum number of seconds to allow cURL functions to execute.
+     * @var int $timeout
+     */
+    protected $timeout = 30;
+
     function __construct() {}
 
     /**
@@ -156,6 +168,9 @@ Class plurk_api {
         if(isset($this->proxy_auth))
             curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxy_auth);
 
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->connect_timeout);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
+
         $response = curl_exec($ch);
 
         $this->http_response = $response;
@@ -203,6 +218,28 @@ Class plurk_api {
         if( ! file_exists($cookie_path))    touch($cookie_path);
 
         $this->cookie_path = $cookie_path;
+    }
+
+    /**
+     * function set_timeout
+     * The maximum number of seconds to allow cURL functions to execute.
+     *
+     * @param type $timeout
+     */
+    function set_timeout($timeout = 30)
+    {
+        $this->timeout = $timeout;
+    }
+
+    /**
+     * function set_connect_timeout
+     * The number of seconds to wait while trying to connect. Use 0 to wait indefinitely.
+     *
+     * @param type $connect_timeout
+     */
+    function set_connect_timeout($connect_timeout = 30)
+    {
+        $this->connect_timeout = $connect_timeout;
     }
 
     /**
@@ -294,7 +331,7 @@ Class plurk_api {
             'api_key'   => $this->api_key,
         );
 
-        $result = $this->plurk(PLURK_LOGOUT, $array);
+        $this->plurk(PLURK_LOGOUT, $array);
 
         ($this->http_status == '200') ? $this->is_login = FALSE : $this->is_login = TRUE;
 
